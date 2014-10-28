@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mein Profil</title>
+</head>
+<body>
+	<h1>My Tutor HTWG</h1>
+	<nav>
+		<a href="./home.html">Startseite</a> |
+		 <a href="./profil.html">Mein Profil</a> | 
+		 <a href="./suchen.html">Tutor suchen</a> | 
+		 <a	href="./ueberUns.html">Über uns</a>
+	</nav>
+	<h3>Persönliche Daten</h3>
+	<!-- PROFILBILD -->
+	<table>
+				<tr>
+					<td>Vorname:</td>
+					<td><input name="vorname" type="text" /></td>
+				</tr>
+				<tr>
+					<td>Nachname:</td>
+					<td><input name="nachname" type="text" /></td>
+				</tr>
+				<tr>
+					<td>Geburtsdatum:</td>
+					<td><input name="bday" type="date" /></td>
+				</tr>
+				<tr>
+					<td>E-Mail:</td>
+					<td><input name="email" type="email" /></td>
+				</tr>
+		</table>
+	<input type="submit" name="email" value="kontaktieren">
+	<!-- Nach dem drücken auf KONTAKTIEREN erscheint das Formular -->
+	<form action="mailto:XXXXXXXXXX@htwg-konstanz.de">
+  		<table>
+	 	 <tr>
+    	  <td>Vorname:</td>
+      	<td><input name="Vorname" type="text"></td>
+    	</tr>
+    	<tr>
+    	  <td>Zuname:</td>
+   	   <td><input name="Zuname" type="text"></td>
+   	 </tr>
+   	 
+   	  <tr>
+      <td>Kommentar:</td>
+      <!-- zur besseren darstellung habe ich hier schonmal das Feld vergrößert -->
+      <td><textarea name="Text" class="Bereich" rows="10" cols="50"></textarea></td>
+    </tr>
+    <tr>
+      <td>Formular:</td>
+      <td>
+        <input type="submit" class="Button" value="Absenden">
+        <input type="reset" class="Button" value="Abbrechen">
+      </td>
+    </tr>
+	</table>
+	<br>
+	<input type="submit" value="Profil ändern">
+	<h3>Du studierst</h3>
+	<table>
+				<tr>
+					<td>Fakultät:</td>
+				</tr>
+				<tr>
+					<td>Studiengang:</td>
+				</tr>
+				<tr>
+					<td>Semester:</td>
+				</tr>
+				<tr>
+				     <td><textarea name="Text" class="Bereich"></textarea></td>
+				</tr>
+		</table>	
+	<input type="submit" value="Tutorium anbieten">
+	<h3>Deine angebotenen Stellen</h3>
+		<table border=1>
+			<tr>
+				<th>Studiengang</th>
+				<th>Fach</th>
+				<th>Zeiten</th>
+				<th>Geld</th>
+			</tr>
+			<tr>
+				<td>Wirtschaftsinformatik</td>
+				<td>Web Technologien</td>
+				<td>Mo 8.00 - 9.30</td>
+				<td>30 EUR</td>
+			</tr>
+			<tr>
+				<td>Angewandte Informatik</td>
+				<td>Mathe 1</td>
+				<td>Di 10.00 - 12.30</td>
+				<td>50 EUR</td>
+			</tr>
+			<tr>
+				<td>Gesundheitsinformatik</td>
+				<td>Betriebssysteme</td>
+				<td>Freitag 15.00 -18.30</td>
+				<td>30 EUR</td>
+			</tr>
+		</table>
+</body>
+</html>

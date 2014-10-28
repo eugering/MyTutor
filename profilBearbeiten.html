@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profil Bearbeiten</title>
+</head>
+<body>
+	<h1>My Tutor HTWG</h1>
+	<nav>
+		<a href="./home.html">Startseite</a> |
+		 <a href="./profil.html">Mein Profil</a> | 
+		 <a href="./suchen.html">Tutor suchen</a> | 
+		 <a	href="./ueberUns.html">Über uns</a>
+	</nav>
+	<h3>Persönliche Daten</h3>
+	<!-- PROFILBILD -->
+		<input type="submit" name="bildBearbeiten value="Bild bearbeiten">
+	
+	<table>
+				<tr>
+					<td>Vorname:</td>
+					<td><input name="vorname" type="text" /></td>
+				</tr>
+				<tr>
+					<td>Nachname:</td>
+					<td><input name="nachname" type="text" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Geburtsdatum eingeben<input type="date"name="gebutsdatum"></p>
+					</td>
+				</tr>
+				<tr>
+		</table>
+	<input type="submit" value="Profil änderung bestätigen">
+	<h3>Du studierst</h3>
+	
+	<table>
+			<tbody>
+				
+				<tr>
+					<td><h3>Du studierst</h3></td>
+				</tr>
+				<tr>
+					<td><select name="fakultät">
+							<option>-Fakultät wählen-</option>
+							<option>Architektur und Gestaltung</option>
+							<option>Bauingenieurwesen</option>
+							<option>Elektrotechnik und Informationstechnik</option>
+							<option>Informatik</option>
+							<option>Maschinenbau</option>
+							<option>Wirtschafts- und Sozialwissenschaften</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><select name="sg">
+							<option>-Studiengang wählen-</option>
+							<option>Angewandte Informatik</option>
+							<option>Architektur</option>
+							<option>Automobilinformationstechnik</option>
+							<option>Bauingenieurwesen</option>
+							<option>Betriebswirtschaftslehre</option>
+							<option>Wirtschafts- und Sozialwissenschaften</option>
+							<option>Elektrotechnik und Informationstechnik</option>
+							<option>Gesundheitsinformatik</option>
+							<option>Kommunikationsdesign</option>
+							<option>Maschinenbau Konstruktion und Entwicklung</option>
+							<option>Maschinenbau Entwicklung und Produktion</option>
+							<option>Umwelttechnik und Ressourcenmanagement</option>
+							<option>Verfahrens- und Umwelttechnik</option>
+							<option>Wirtschaftsinformatik</option>
+							<option>Wirtschaftsingenieurwesen Bau</option>
+							<option>Wirtschaftsingenieurwesen Elektro-
+								undInformationstechnik</option>
+							<option>Wirtschaftsingenieurwesen Maschinenbau</option>
+							<option>Wirtschaftsrecht</option>
+							<option>Wirtschaftssprachen Asien und Management China</option>
+							<option>Wirtschaftssprache Deutsch und
+								Tourismusmanagement</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><select name="Semester">
+							<option>-Semester wählen-</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+					</select></td>
+				</tr>
+				<tr>
+    				<td>Kurzbeschreibung:</td>
+     				<td><textarea name="Text" class="Bereich"></textarea></td>
+   				</tr>
+			</tbody>
+		</table>
+
+	<input type="submit" value="Tutorium anbieten">
+	<h3>Deine angebotenen Stellen</h3>
+		<table border=1>
+			<tr>
+				<th>Studiengang</th>
+				<th>Fach</th>
+				<th>Zeiten</th>
+				<th>Geld</th>
+				<th>Status</th>
+				<th>Löschen</th>
+			</tr>
+			<tr>
+				<td>Wirtschaftsinformatik</td>
+				<td>Web Technologien<input type="button" value="ändern"></td>
+				<td>Mo 8.00 - 9.30<input type="button" value="ändern"></td>
+				<td>30 EUR<input type="button" value="ändern"></td>
+				<td>Online<input type="radio" value="on" name="status">
+					Offline<input type="radio" value="of" name="status"</td>
+				<td>lösche<input type="button" value="löschen"></td>
+			</tr>
+			<tr>
+				<td>Angewandte Informatik</td>
+				<td>Mathe 1<input type="button" value="ändern"></td>
+				<td>Di 10.00 - 12.30<input type="button" value="ändern"></td>
+				<td>50 EUR<input type="button" value="ändern"></td>
+				<td>Online<input type="radio" value="on" name="status">
+					Offline<input type="radio" value="of" name="status"</td>
+				<td>lösche<input type="button" value="löschen"></td>
+			</tr>
+			<tr>
+				<td>Gesundheitsinformatik</td>
+				<td>Betriebssysteme<input type="button" value="ändern"></td>
+				<td>Freitag 15.00 -18.30<input type="button" value="ändern"></td>
+				<td>30 EUR<input type="button" value="ändern"></td>
+				<td>Online<input type="radio" value="on" name="status">
+					Offline<input type="radio" value="of" name="status"</td>
+				<td><input type="button" value="löschen"></td>
+			</tr>
+		</table>
+	
+</body>
+</html>
