@@ -3,18 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Über uns</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+        <style type="text/css">h1{background:#2D94E4;}</style>
 </head>
 <body>
-	<h1>My Tutor HTWG</h1>
-	<nav>
-		<a href="./home.html">Startseite</a> |
-		 <a href="./profil.html">Mein Profil</a> | 
-		 <a href="./suchen.html">Tutor suchen</a> | 
-		 <a	href="./ueberUns.html">Über uns</a>
-	</nav>
+ 	<h1>My Tutor HTWG</h1>
+		<nav class="navbar navbar-default" role="navigation">
+		  <div class="container-fluid">
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		      <li class="dropdown">
+		          <a href="./profil.html" class="dropdown-toggle">Mein Profil <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="./profilBearbeiten.html">Profil bearbeiten</a></li>
+		            <li class="divider"></li>
+		            <li><a href="./tutorWerden.html">Tutor werden</a></li>
+		          </ul>
+		        </li>
+		    <li><a href="./suchen.html">Tutor Suchen</a></li>
+		    <li><a href="./ueberUns">Über uns</a></li>       
+		  </ul>
+		 </div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+		</nav>
+
 	<h3>Web Technologien</h3>
 	<p>An diesem Projekt hat gearbeitet</p>
-	<p>Eugen Gerin</p>
+	<p>Eugen Gering</p>
 	<p>Metehan Kilin</p>
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
