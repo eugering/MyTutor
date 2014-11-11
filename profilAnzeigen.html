@@ -42,19 +42,19 @@
 </head>
 <body>
 
-   	<h1>My Tutor HTWG</h1>
-
-	<nav class="navbar navbar-default" role="navigation">
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		  <div class="container-fluid">
 		  <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+    
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
+	  <a class="navbar-brand" href="./home.html">My Tutor HTWG</a>
+    </div>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
@@ -75,100 +75,102 @@
 		</div><!-- /.container-fluid -->
 		</nav>
 
-
+<div class="col-xs-12">
+	<div class="container">
+      <div class="jumbotron">  
+      
+      
+      
+<img src="./Bilder/brand.jpg" alt="Bild" class="img-rounded">
 
 <h3>Persönliche Daten</h3>
 	<!-- PROFILBILD -->
-	<table>
+	<table class="table table-hover">
 				<tr>
 					<td>Vorname:</td>
-					<td><input name="vorname" type="text" /></td>
+					<td>Eugen Gering</td>
 				</tr>
 				<tr>
 					<td>Nachname:</td>
-					<td><input name="nachname" type="text" /></td>
+					<td>Gering</td>
 				</tr>
 				<tr>
 					<td>Geburtsdatum:</td>
-					<td><input name="bday" type="date" /></td>
+					<td>22.11.1992</td>
 				</tr>
 				<tr>
 					<td>E-Mail:</td>
-					<td><input name="email" type="email" /></td>
+					<td>gering.eugen@gmail.com</td>
 				</tr>
 		</table>
-	<input type="submit" name="email" value="kontaktieren">
-	<!-- Nach dem drücken auf KONTAKTIEREN erscheint das Formular -->
-	<form action="mailto:XXXXXXXXXX@htwg-konstanz.de">
-  		<table>
-	 	 <tr>
-    	  <td>Vorname:</td>
-      	<td><input name="Vorname" type="text"></td>
-    	</tr>
-    	<tr>
-    	  <td>Zuname:</td>
-   	   <td><input name="Zuname" type="text"></td>
-   	 </tr>
-   	 
-   	  <tr>
-      <td>Kommentar:</td>
-      <!-- zur besseren darstellung habe ich hier schonmal das Feld vergrößert -->
-      <td><textarea name="Text" class="Bereich" rows="10" cols="50"></textarea></td>
-    </tr>
-    <tr>
-      <td>Formular:</td>
-      <td>
-        <input type="submit" class="Button" value="Absenden">
-        <input type="reset" class="Button" value="Abbrechen">
-      </td>
-    </tr>
-	</table>
+	
+	<a href="profilBearbeiten.html" class="btn btn-primary btn-sm" role="button">Profil ändern</a>
+	<div>
 	<br>
-	<input type="submit" value="Profil ändern">
+	</div>
+	
+	<form action="mailto:gering.eugen@gmail.com">
+  		<button type="submit" class="btn btn-primary btn-sm">Kontakt aufnehmen</button>
+  		<br>
 	<h3>Du studierst</h3>
-	<table>
+	<table class="table-hover">
 				<tr>
 					<td>Fakultät:</td>
+					<td>Informatik</td>
 				</tr>
 				<tr>
 					<td>Studiengang:</td>
+					<td>Wirtschaftsinformatik</td>
 				</tr>
 				<tr>
 					<td>Semester:</td>
+					<td>6</td>
 				</tr>
 				<tr>
-				     <td><textarea name="Text" class="Bereich"></textarea></td>
+					<td></td>
+				</tr>
+				<tr>
+				     <td>
+				     	<ul>
+				     		<li>--Deine Infos--</li>
+
+				     	</ul>
+				     </td>
 				</tr>
 		</table>	
-	<input type="submit" value="Tutorium anbieten">
+	<a href="profilBearbeiten.html" class="btn btn-primary btn-sm" role="button">Stelle anbieten</a>
+	
 	<h3>Deine angebotenen Stellen</h3>
-		<table border=1>
+	
+		<div class="table-responsive">
+		<table class="table table-hover">
 			<tr>
 				<th>Studiengang</th>
 				<th>Fach</th>
 				<th>Zeiten</th>
 				<th>Geld</th>
+				
 			</tr>
 			<tr>
-				<td>Wirtschaftsinformatik</td>
-				<td>Web Technologien</td>
-				<td>Mo 8.00 - 9.30</td>
-				<td>30 EUR</td>
+				<td>Wirschaftsinformatik</td>
+				<td>Web-Technologien</td>
+				<td>9:00 - 10:30</td>
+				<td>15,- €</td>
 			</tr>
 			<tr>
-				<td>Angewandte Informatik</td>
-				<td>Mathe 1</td>
-				<td>Di 10.00 - 12.30</td>
-				<td>50 EUR</td>
+				<td>Wirschaftsinformatik</td>
+				<td>BWL Seminar</td>
+				<td>17:30 - 19:00</td>
+				<td>18,-€</td>
+
 			</tr>
-			<tr>
-				<td>Gesundheitsinformatik</td>
-				<td>Betriebssysteme</td>
-				<td>Freitag 15.00 -18.30</td>
-				<td>30 EUR</td>
-			</tr>
+			
 		</table>
-		
+      </div>
+		</table>
+	</div>
+	</div>
+	</div>	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
