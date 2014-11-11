@@ -72,7 +72,7 @@
 		 </div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 		</nav>
-	
+	<div class="col-xs-12">
 	<div class="container">
       <div class="jumbotron">    
         <h3>Suche</h3>
@@ -114,27 +114,20 @@
 			<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
 		  </select>
 		</div>
-		
-		<div class="form-group">
-		  <select class="form-control" id="sel1">
-			<option>-Semester wählen-</option>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
-		  </select>
-		</div>
-	</br>
+		<div class="col-xs">
+			<input type="text" class="form-control" id="Fach" placeholder="Fach">
+		</div>	
+		</br>
         <a href="#" class="btn btn-info btn-lg">Suche starten</a>
+      </div>
+		
       </div>
     </div>
 	<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
+	<div class="col-xs-12">
 	<div class="container">
       <div class="jumbotron"> 
+      <div class="table-responsive">
 		<table class="table table-hover">
 			<tr>
 				<th>Tutor</th>
@@ -142,6 +135,7 @@
 				<th>Fach</th>
 				<th>Zeiten</th>
 				<th>Geld</th>
+				<th></th>
 			</tr>
 			<tr>
 				<td>Eugen Gering</td>
@@ -149,17 +143,22 @@
 				<td>Web-Technologien</td>
 				<td>9:00 - 10:30</td>
 				<td>15,- €</td>
+				<td><a href="profilAnzeigen.html" class="btn btn-info btn-sm">anzeigen</a>
 			</tr>
 			<tr>
 				<td>Metehan Kilin</td>
 				<td>Wirschaftsinformatik</td>
 				<td>BWL Seminar</td>
 				<td>17:30 - 19:00</td>
-				<td>18,- €</td>
+				<td>18,-€</td>
+				<td><a href="profilAnzeigen.html" class="btn btn-info btn-sm">anzeigen</a>
+
 			</tr>
 			
 		</table>
       </div>
+      </div>
+	</div>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
