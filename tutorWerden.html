@@ -75,31 +75,13 @@
 		</div><!-- /.container-fluid -->
 		</nav>
 
-
-
-
-
-
-
 	<div class="container">
       <div class="jumbotron">    
 		  <h3>Trage hier ein was du anbieten möchtest</h3>
 		  	</br>
-			<div class="form-group">
-		  <label for="sel1">Select list:</label>
-		  <select class="form-control" id="sel1">
-		    <option>-Fakultät wählen-</option>
-			<option>Architektur und Gestaltung</option>
-			<option>Bauingenieurwesen</option>
-			<option>Elektrotechnik und Informationstechnik</option>
-			<option>Informatik</option>
-			<option>Maschinenbau</option>
-			<option>Wirtschafts- und Sozialwissenschaften</option>
-		  </select>
-		</div>
 		
 		<div class="form-group">
-		  <label for="sel1">Studiengang wählen :</label>
+		  <label for="sel1"></label>
 		  <select class="form-control" id="sel1">
 		   	<option>-Studiengang wählen-</option>
 			<option>Angewandte Informatik</option>
@@ -126,7 +108,7 @@
 		</div>
 		
 		<div class="form-group">
-		  <label for="sel1">Semester wählen :</label>
+		  <label for="sel1"></label>
 		  <select class="form-control" id="sel1">
 			<option>-Semester wählen-</option>
 			<option>1</option>
@@ -139,7 +121,9 @@
 			<option>8</option>
 		  </select>
 		</div>
-		
+</br>
+</br>
+	
 		<div class="form-group">
 		  <label class="col-lg-3 control-label ">Geld :</label>
 		  <div class="col-lg-9">
@@ -153,23 +137,35 @@
 		    </div>
 		  </div>
 		</div>
+</br>
+</br>
 
-		<div class="form-group">
-		  <label for="sel1">Tag auswählen :</label>
-		  <select class="form-control" id="sel1">
-			  <option>-Tag auswählen-</option>
-			  <option>Montag</option>
-			  <option>Dienstag</option>
-			  <option>Mittwoch</option>
-			  <option>Donnerstag</option>
-			  <option>Freitag</option>
-			  <option>Samstag</option>		  </select>
-		</div>
+   <div class="container">
+      <p>Tag auswählen</p>
+      <form role="form">
+        <label class="radio-inline">
+          <input type="radio" name="Tag">Montag</label>
+        <label class="radio-inline">
+          <input type="radio" name="Tag">Dienstag</label>
+        <label class="radio-inline">
+          <input type="radio" name="Tag">Mittwoch</label>
+		  <label class="radio-inline">
+          <input type="radio" name="Tag">Donnerstag</label>
+          <label class="radio-inline">
+          <input type="radio" name="Tag">Freitag</label>
+          <label class="radio-inline">
+          <input type="radio" name="Tag">Samstag</label>
+          <label class="radio-inline">
+          <input type="radio" name="Tag">Sonntag</label>          
+      </form>
+    </div>
+
+
 		
 		<div class="form-group">
-		  <label for="sel1">Zeiten auswählen :</label>
+		  <label for="sel1"></label>
 		  <select class="form-control" id="sel1">
-			  	<option>-Zeiten auswählen-</option>
+			  	<option>-Zeit auswählen-</option>
 				<option>08.00 - 09.30 Uhr</option>
 				<option>09.45 - 11.15 Uhr</option>
 				<option>11.30 - 13.00 Uhr</option>
@@ -179,8 +175,8 @@
 		  </select>
 		</div>
 		<div class="form-group">
-			<label for="comment">weitere Informationen :</label>
-			<textarea class="form-control" rows="5" id="comment"></textarea>
+			<label for="comment"></label>
+			<textarea class="form-control" rows="5" id="comment" placeholder="weite Informationen..."></textarea>
 		</div>
 		
 	</br>
