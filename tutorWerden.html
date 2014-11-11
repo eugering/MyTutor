@@ -15,10 +15,15 @@
     
     <link rel="stylesheet" type="text/css" href="./style.css">    
     <style type="text/css">
-    	.page-header{
-    		background:#2D94E4; 
-		  }
-		  
+    h1 { 
+			 background:#2D94E4; 
+			 font-style:italic;
+			 line-height:200%;
+			 text-align:center;
+
+			 }
+
+				  
 		html {
             background: url(./Bilder/BG1.jpg) no-repeat center center fixed; 
             -webkit-background-size: cover;
@@ -32,13 +37,13 @@
         }
 		
     
-    </style>
-
+    
+</style>
 </head>
 <body>
-	<div class="page-header">
+	
  	<h1>My Tutor HTWG</h1>
-	</div>
+
 		<nav class="navbar navbar-default" role="navigation">
 		  <div class="container-fluid">
 		  <!-- Brand and toggle get grouped for better mobile display -->
@@ -70,100 +75,119 @@
 		</div><!-- /.container-fluid -->
 		</nav>
 
+
+
+
+
+
+
+	<div class="container">
+      <div class="jumbotron">    
+		  <h3>Trage hier ein was du anbieten möchtest</h3>
+		  	</br>
+			<div class="form-group">
+		  <label for="sel1">Select list:</label>
+		  <select class="form-control" id="sel1">
+		    <option>-Fakultät wählen-</option>
+			<option>Architektur und Gestaltung</option>
+			<option>Bauingenieurwesen</option>
+			<option>Elektrotechnik und Informationstechnik</option>
+			<option>Informatik</option>
+			<option>Maschinenbau</option>
+			<option>Wirtschafts- und Sozialwissenschaften</option>
+		  </select>
+		</div>
 		
-	<h3>Trage hier ein was du anbieten möchtest</h3>
-	<table>
-			<tbody>
-				<tr>
-					<td><select name="fakultät">
-							<option>-Fakultät wählen-</option>
-							<option>Architektur und Gestaltung</option>
-							<option>Bauingenieurwesen</option>
-							<option>Elektrotechnik und Informationstechnik</option>
-							<option>Informatik</option>
-							<option>Maschinenbau</option>
-							<option>Wirtschafts- und Sozialwissenschaften</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td><select name="sg">
-							<option>-Studiengang wählen-</option>
-							<option>Angewandte Informatik</option>
-							<option>Architektur</option>
-							<option>Automobilinformationstechnik</option>
-							<option>Bauingenieurwesen</option>
-							<option>Betriebswirtschaftslehre</option>
-							<option>Wirtschafts- und Sozialwissenschaften</option>
-							<option>Elektrotechnik und Informationstechnik</option>
-							<option>Gesundheitsinformatik</option>
-							<option>Kommunikationsdesign</option>
-							<option>Maschinenbau Konstruktion und Entwicklung</option>
-							<option>Maschinenbau Entwicklung und Produktion</option>
-							<option>Umwelttechnik und Ressourcenmanagement</option>
-							<option>Verfahrens- und Umwelttechnik</option>
-							<option>Wirtschaftsinformatik</option>
-							<option>Wirtschaftsingenieurwesen Bau</option>
-							<option>Wirtschaftsingenieurwesen Elektro-
-								undInformationstechnik</option>
-							<option>Wirtschaftsingenieurwesen Maschinenbau</option>
-							<option>Wirtschaftsrecht</option>
-							<option>Wirtschaftssprachen Asien und Management China</option>
-							<option>Wirtschaftssprache Deutsch und
-								Tourismusmanagement</option>
+		<div class="form-group">
+		  <label for="sel1">Studiengang wählen :</label>
+		  <select class="form-control" id="sel1">
+		   	<option>-Studiengang wählen-</option>
+			<option>Angewandte Informatik</option>
+			<option>Architektur</option>
+			<option>Automobilinformationstechnik</option>
+			<option>Bauingenieurwesen</option>
+			<option>Betriebswirtschaftslehre</option>
+			<option>Wirtschafts- und Sozialwissenschaften</option>
+			<option>Elektrotechnik und Informationstechnik</option>
+			<option>Gesundheitsinformatik</option>
+			<option>Kommunikationsdesign</option>
+			<option>Maschinenbau Konstruktion und Entwicklung</option>
+			<option>Maschinenbau Entwicklung und Produktion</option>
+			<option>Umwelttechnik und Ressourcenmanagement</option>
+			<option>Verfahrens- und Umwelttechnik</option>
+			<option>Wirtschaftsinformatik</option>
+			<option>Wirtschaftsingenieurwesen Bau</option>
+			<option>Wirtschaftsingenieurwesen Elektro- undInformationstechnik</option>
+			<option>Wirtschaftsingenieurwesen Maschinenbau</option>
+			<option>Wirtschaftsrecht</option>
+			<option>Wirtschaftssprachen Asien und Management China</option>
+			<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
+		  </select>
+		</div>
+		
+		<div class="form-group">
+		  <label for="sel1">Semester wählen :</label>
+		  <select class="form-control" id="sel1">
+			<option>-Semester wählen-</option>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+		  </select>
+		</div>
+		
+		<div class="form-group">
+		  <label class="col-lg-3 control-label ">Geld :</label>
+		  <div class="col-lg-9">
+		    <div class="form-inline">
+		      <div class="form-group ">
+		        <div class="col-lg-12">
+		          <label class="sr-only" for="city">City</label> 
+		          <input type="text" id="city" name="city" class="form-control " placeholder="Euro" >
+		        </div>
+		      </div> 
+		    </div>
+		  </div>
+		</div>
 
-					</select></td>
-				<tr>
-					<td><select name="Semester">
-							<option>-Semester wählen-</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Geld:</td>
-					<td><input name="Geld" type="text" /></td>
-				</tr>
-				<tr>
-					<td><select name="Tag">
-							<option>-Tag auswählen-</option>
-							<option>Montag</option>
-							<option>Dienstag</option>
-							<option>Mittwoch</option>
-							<option>Donnerstag</option>
-							<option>Freitag</option>
-							<option>Samstag</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td><select name="Zeiten">
-							<option>-Zeiten auswählen-</option>
-							<option>08.00 - 09.30 Uhr</option>
-							<option>09.45 - 11.15 Uhr</option>
-							<option>11.30 - 13.00 Uhr</option>
-							<option>14.00 - 15.30 Uhr</option>
-							<option>15.45 - 17.15 Uhr</option>
-							<option>17.30 - 19.00 Uhr</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>
-						<textarea name="Text" class="Bereich" rows="10" cols="50">
-							Hier können noch weitere Infos stehen...
-						</textarea></td>
+		<div class="form-group">
+		  <label for="sel1">Tag auswählen :</label>
+		  <select class="form-control" id="sel1">
+			  <option>-Tag auswählen-</option>
+			  <option>Montag</option>
+			  <option>Dienstag</option>
+			  <option>Mittwoch</option>
+			  <option>Donnerstag</option>
+			  <option>Freitag</option>
+			  <option>Samstag</option>		  </select>
+		</div>
+		
+		<div class="form-group">
+		  <label for="sel1">Zeiten auswählen :</label>
+		  <select class="form-control" id="sel1">
+			  	<option>-Zeiten auswählen-</option>
+				<option>08.00 - 09.30 Uhr</option>
+				<option>09.45 - 11.15 Uhr</option>
+				<option>11.30 - 13.00 Uhr</option>
+				<option>14.00 - 15.30 Uhr</option>
+				<option>15.45 - 17.15 Uhr</option>
+				<option>17.30 - 19.00 Uhr</option>
+		  </select>
+		</div>
+		<div class="form-group">
+			<label for="comment">weitere Informationen :</label>
+			<textarea class="form-control" rows="5" id="comment"></textarea>
+		</div>
+		
+	</br>
+        <a href="#" class="btn btn-info btn-lg">Deine Stelle online stellen</a>
+      </div>
+    </div>
 
-				</tr>
-				<tr>
-					<td><input type="submit" value="Deine Stelle online stellen" /></td>
-				</tr>
-
-			</tbody>
-		</table>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
