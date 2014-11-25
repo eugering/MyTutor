@@ -1,4 +1,4 @@
-#ignore Play! working directory #
+# Ignore Play! working directory #
 bin/
 /db
 .eclipse
@@ -16,5 +16,5 @@ server.pid
 /dist/
 .cache
 
-# Mac OS X
+# Ignore Mac OS X
 .DS_Store
