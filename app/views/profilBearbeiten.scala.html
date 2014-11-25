@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Profil Bearbeiten</title>
     <!-- Bootstrap -->
-    <link href= @routes.Assets.at("stylesheets/bootstrap.min.css") rel="stylesheet">
+    <link href= @routes.Assets.at("Bootstrap-3.3.1/css/bootstrap.min.css") rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -14,7 +14,10 @@
     <![endif]-->
      
     <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/style.css")>    
-    <style type="text/css">
+    <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/bootstrap-themeDatePicker.min.css")>    
+    <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/jquery-uiDatePicker.min.css")>    
+
+   <style type="text/css">
     h1 { 
 			 background:#2D94E4; 
 			 font-style:italic;
@@ -261,9 +264,9 @@ background: url(@routes.Assets.at("images/BG1.jpg")) no-repeat center center fix
     </div>
 </div>
 	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src= @routes.Assets.at("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")></script>
+    <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
+    <script src= @routes.Assets.at("Bootstrap-3.3.1/js/bootstrap.min.js")></script>
     <!--DatePicker-->
         <script src= @routes.Assets.at("javascripts/jqueryDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/jquery-uiDatePicker.min.js")></script>
