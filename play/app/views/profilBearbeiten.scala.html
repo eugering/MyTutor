@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Profil Bearbeiten</title>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href= @routes.Assets.at("stylesheets/bootstrap.min.css") rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -13,7 +13,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
      
-    <link rel="stylesheet" type="text/css" href="./style.css">    
+    <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/style.css")>    
     <style type="text/css">
     h1 { 
 			 background:#2D94E4; 
@@ -25,7 +25,7 @@
 
 				  
 		html {
-            background: url(./Bilder/BG1.jpg) no-repeat center center fixed; 
+background: url(@routes.Assets.at("images/BG1.jpg")) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -45,8 +45,7 @@
     
 </head>
 <body>
- 	
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		  <div class="container-fluid">
 		  <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -57,7 +56,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="./home.html">My Tutor HTWG</a>
+	  <a class="navbar-brand" href=@routes.Application.home>My Tutor HTWG</a>
     </div>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -65,15 +64,15 @@
 		      <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mein Profil <span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
-		          	<li><a href="./profilAnzeigen.html">Profil anzeigen</a></li>
+		          	<li><a href=@routes.Application.profilAnzeigen>Profil anzeigen</a></li>
 		            <li class="divider"></li>
-		            <li><a href="./profilBearbeiten.html">Profil bearbeiten</a></li>
+		            <li><a href=@routes.Application.profilBearbeiten>Profil bearbeiten</a></li>
 		            <li class="divider"></li>
-		            <li><a href="./tutorWerden.html">Tutor werden</a></li>
+		            <li><a href=@routes.Application.tutorWerden>Tutor werden</a></li>
 		          </ul>
 		        </li>
-		    <li><a href="./suchen.html">Tutor Suchen</a></li>
-		    <li><a href="./ueberUns.html">Über uns</a></li>       
+		    <li><a href=@routes.Application.suchen>Tutor Suchen</a></li>
+		    <li><a href=@routes.Application.ueberUns>Über uns</a></li>       
 		  </ul>
 		 </div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -262,13 +261,13 @@
     </div>
 </div>
 	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src= @routes.Assets.at("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
     <!--DatePicker-->
-        <script src="js/jqueryDatePicker.min.js"></script>
-    <script src="js/jquery-uiDatePicker.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+        <script src= @routes.Assets.at("javascripts/jqueryDatePicker.min.js")></script>
+    <script src= @routes.Assets.at("javascripts/jquery-uiDatePicker.min.js")></script>
+    <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
     <!--DatePicker mit Jquery -->
     <script>
      $( "#dp" ).datepicker({

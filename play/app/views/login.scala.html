@@ -5,8 +5,8 @@
     <title>login</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet" type="text/css">
+    <link href= @routes.Assets.at("stylesheets/bootstrap.min.css") rel="stylesheet">
+    <link href= @routes.Assets.at("stylesheets/login.css") rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +33,7 @@
 		}
 		  
 		html {
-            background: url(./Bilder/BG2.jpg) no-repeat center center fixed; 
+            background: url(@routes.Assets.at("images/BG2.jpg")) no-repeat center center fixed; 
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -70,7 +70,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="./login.html">My Tutor HTWG</a>
+	  <a class="navbar-brand" href=@routes.Application.login>My Tutor HTWG</a>
     </div>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -104,7 +104,7 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </form>
             </div>
-            <a href="./registrierung.html" class="text-center new-account">Noch nicht registriert ? </a>
+            <a href=@routes.Application.registrierung class="text-center new-account">Noch nicht registriert ? </a>
         </div>
     </div>
 </div>	
@@ -112,8 +112,8 @@
 </div>		
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src= @routes.Assets.at("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
   </body>
 </html>
