@@ -1,3 +1,4 @@
+@(vorname: String, nachname: String, bday: String, email: String)
 @Main1() {
 
 
@@ -14,19 +15,19 @@
 	<table class="table table-hover">
 				<tr>
 					<td>Vorname:</td>
-					<td>Eugen Gering</td>
+					<td>@vorname</td>
 				</tr>
 				<tr>
 					<td>Nachname:</td>
-					<td>Gering</td>
+					<td>@nachname</td>
 				</tr>
 				<tr>
 					<td>Geburtsdatum:</td>
-					<td>22.11.1992</td>
+					<td>@bday</td>
 				</tr>
 				<tr>
 					<td>E-Mail:</td>
-					<td>gering.eugengmail.com</td>
+					<td>@email</td>
 				</tr>
 		</table>
 	
