@@ -1,101 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>login</title>
-
-    <!-- Bootstrap -->
-    <link href= @routes.Assets.at("Bootstrap-3.3.1/css/bootstrap.min.css") rel="stylesheet">
-    <link href= @routes.Assets.at("stylesheets/login.css") rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-        
-    <style type="text/css">
-        
-        h1{
-        	background:#2D94E4;
-        }
-        
-        body {
-            padding-top: 20px;
-            font-size: 16px;
-            font-family: "Open Sans",serif;
-            background: transparent;
-        }
-        
-    	.page-header{
-    		background:#2D94E4; 
-		}
-		  
-		html {
-            background: url(@routes.Assets.at("images/BG2.jpg")) no-repeat center center fixed; 
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-		}
-		
-		
-       /* Override B3 .panel adding a subtly transparent background */
-        .panel {
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-		.form-signin
-		{
-		    max-width: 330px;
-		    padding: 15px;
-		    margin: 0 auto;
-		}
-		
-		
-	</style>
-  </head>
-  <body>
+@Main2() {
+</br>
+</br>
+</br>
   
-  
-  
-  	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		  <div class="container-fluid">
-		  <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-    
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-	  <a class="navbar-brand" href=@routes.Application.login>My Tutor HTWG</a>
-    </div>
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		 </div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-		</nav>
-
-		<div class="col-xs-12">
-		
-  
-  
-  
-  
-  </br>
-            </br>
-            </br>
-  
-  		<div class= container-fluid container-fixed-top>
-  		</div>
-	<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h2 class="text-center login-title">Anmelden zum Fortfahren</h1>
-            
-            <div class="account-wall">
+<div class= container-fluid container-fixed-top>
+<div class="container">
+	<div class="row">
+    	<div class="col-sm-6 col-md-4 col-md-offset-4">
+        	<h2 class="text-center login-title">Anmelden zum Fortfahren</h1>
+            	<div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
                 <form class="form-signin">
@@ -103,17 +16,10 @@
                 <input type="password" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </form>
-            </div>
-            <a href=@routes.Application.registrierung class="text-center new-account">Noch nicht registriert ? </a>
+            	</div>
+            	<a href=@routes.Application.registrierung class="text-center new-account">Noch nicht registriert ? </a>
         </div>
-    </div>
+	</div>
 </div>	
-
 </div>		
-	
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src= @routes.Assets.at("Bootstrap-3.3.1/js/bootstrap.min.js")></script>
-  </body>
-</html>
+}
