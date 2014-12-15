@@ -1,3 +1,4 @@
+
 @Main2() {
 <div class="col-xs-12">	
 <div class="container">
@@ -5,64 +6,68 @@
     	<h2 align="center">-Registrierung-</h2>
       </br>
 	  	<h3>Deine Daten</h3>
-	
 	 			<div class="bs-example">
-				<form class="form-horizontal">
+				<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.addStudent()>
 					<div class="form-group">
 						<div class="col-xs-10">
-								<input type="text" class="form-control" id="vorname" placeholder="Vorname">
+								<input type="text" class="form-control" id="vorname" placeholder="Vorname" name="vorname" required>
 							</div>
 							</div>
 							<div class="form-group">
 			            	<div class="col-xs-10">
-			               		 <input type="text" class="form-control" id="nachname" placeholder="Nachname">
+			               		 <input type="text" class="form-control" id="nachname" placeholder="Nachname" name="nachname" required>
+						   	</div>
+						   	</div>
+						   	<div class="form-group">
+			            	<div class="col-xs-10">
+			               		 <input type="text" class="form-control" id="email" placeholder="E-Mail" name="mail" required>
+			               		 <!-- jquery webtech ueberpruefung abchecken -->
 						   	</div>
 						   	</div>
 						   	<div class="form-group">
 							<div class="col-xs-10">
-								<input type="password" class="form-control" id="password" placeholder="Passwort">
+								<input type="password" class="form-control" id="password" placeholder="Passwort" name="passwort" required>
 							</div>
 							</div>
 							<div class="form-group">
 							<div class="col-xs-10">
-								<input type="password" class="form-control" id="password" placeholder="Passwort wiederholen">
+								<input type="password" class="form-control" id="passwordWiederholen" placeholder="PasswortWiederholen" name="passwortWiederholen" required>
 							</div>
 						</div>
+	
+				<label for="sel1"></label> 
+				<select class="form-control" id="studiengang"method="post" name="form">
+					<option>-Studiengang wählen-</option>
+					<option>Angewandte Informatik</option>
+					<option>Architektur</option>
+					<option>Automobilinformationstechnik</option>
+					<option>Bauingenieurwesen</option>
+					<option>Betriebswirtschaftslehre</option>
+					<option>Wirtschafts- und Sozialwissenschaften</option>
+					<option>Elektrotechnik und Informationstechnik</option>
+					<option>Gesundheitsinformatik</option>
+					<option>Kommunikationsdesign</option>
+					<option>Maschinenbau Konstruktion und Entwicklung</option>
+					<option>Maschinenbau Entwicklung und Produktion</option>
+					<option>Umwelttechnik und Ressourcenmanagement</option>
+					<option>Verfahrens- und Umwelttechnik</option>
+					<option>Wirtschaftsinformatik</option>
+					<option>Wirtschaftsingenieurwesen Bau</option>
+					<option>Wirtschaftsingenieurwesen Elektro-
+						undInformationstechnik</option>
+					<option>Wirtschaftsingenieurwesen Maschinenbau</option>
+					<option>Wirtschaftsrecht</option>
+					<option>Wirtschaftssprachen Asien und Management China</option>
+					<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
+				</select>
+		</br>
+						<input type="submit" class="btn btn-primary btn-md" name="name" value="registrieren" />
     				</form>
 	 			</div>
+	 			
 			</br>
-        <h3>Was studierst du ?</h3>
-			</br>
-		
-		<div class="form-group">
-		  <label for="sel1"></label>
-		  <select class="form-control" id="sel1">
-		   	<option>-Studiengang wählen-</option>
-			<option>Angewandte Informatik</option>
-			<option>Architektur</option>
-			<option>Automobilinformationstechnik</option>
-			<option>Bauingenieurwesen</option>
-			<option>Betriebswirtschaftslehre</option>
-			<option>Wirtschafts- und Sozialwissenschaften</option>
-			<option>Elektrotechnik und Informationstechnik</option>
-			<option>Gesundheitsinformatik</option>
-			<option>Kommunikationsdesign</option>
-			<option>Maschinenbau Konstruktion und Entwicklung</option>
-			<option>Maschinenbau Entwicklung und Produktion</option>
-			<option>Umwelttechnik und Ressourcenmanagement</option>
-			<option>Verfahrens- und Umwelttechnik</option>
-			<option>Wirtschaftsinformatik</option>
-			<option>Wirtschaftsingenieurwesen Bau</option>
-			<option>Wirtschaftsingenieurwesen Elektro- undInformationstechnik</option>
-			<option>Wirtschaftsingenieurwesen Maschinenbau</option>
-			<option>Wirtschaftsrecht</option>
-			<option>Wirtschaftssprachen Asien und Management China</option>
-			<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
-		  </select>
-		</div>
-		
-	</br>
-        <a href="#" class="btn btn-info btn-lg">registrieren</a>
+			
       </div>
     </div>
 </div>
