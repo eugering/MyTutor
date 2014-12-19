@@ -13,9 +13,9 @@
                 <img class="profile-img" src=@routes.Assets.at("images/login.jpg")
                     alt="">
                 <form class="form-signin" method="POST"
-					action="#">
+					action=@routes.Application.einloggen()>
                 <input type="text" class="form-control" name="mail" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="password" class="form-control" name="passwort" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </form>
             	</div>

@@ -21,7 +21,10 @@ public class Student  {
 		super();
 	}
 
-
+	public boolean mailCheck(String email) {
+		return email.matches("\\w*\\-*\\w*\\.*\\w*@\\D+\\w*\\-?\\w*\\.*\\w*\\-*\\w*\\.(de|info|org|com|net)");
+	}
+	
 	public String getVorname() {
 		if (!(vorname.equals(null))) {
 			return vorname;

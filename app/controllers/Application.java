@@ -34,44 +34,48 @@ public class Application extends Controller {
 
 			Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 			// Parameteruebergaben werden ueberprueft
-//			if (!(parameters != null && parameters.containsKey("vorname")
-//					&& parameters.containsKey("nachname")
-//					&& parameters.containsKey("email")
-//					&& parameters.containsKey("password")
-//					&& parameters.containsKey("passwordWiederholen")
-//					&& parameters.containsKey("Studiengang")
-//					)) {
-//				Logger.warn("bad login request");
-//				return redirect(routes.Application.addStudent());
-//			}else{
+			if ((parameters != null && parameters.containsKey("vorname")
+					&& parameters.containsKey("nachname")
+					&& parameters.containsKey("email")
+					&& parameters.containsKey("password")
+					&& parameters.containsKey("passwordWiederholen")
+					&& parameters.containsKey("Studiengang")
+					)) {
+				
+				return redirect(routes.Application.registrierung());
+			}else{
 			// Parameterwerte werden ausgelesen
 			String vorname = parameters.get("vorname")[0];
 			String nachname = parameters.get("nachname")[0];
 			String email = parameters.get("mail")[0];
 			String passwort = parameters.get("passwort")[0];
 			String passwortWiederholen = parameters.get("passwortWiederholen")[0];
-			String studiengang = parameters.get("form")[0];
+			String studiengang = parameters.get("studiengang")[0];
 			 student = new Student();
-			 student.setVorname(vorname);
-			 student.setNachname(nachname);
-			 student.setPass(passwort);
-			 student.setStudiengang(studiengang);
-			 studenten.add(student);
 
-			// passwort == passwortWiederhlen & regex fuer die mail
-			if (passwort.equals(passwortWiederholen)) {
-					// Daten befüllen
-					Student student = new Student();
-					student.setVorname(vorname);
-					student.setNachname(nachname);
-					student.setEmail(email);
-					student.setPass(passwort);
-					studenten.add(student);
-					return ok(login.render());
+			 //Email ueberpruefung
+			 if (student.mailCheck(email)) {
+				 if (passwort.equals(passwortWiederholen)) {
+						// Daten befüllen
+						student.setVorname(vorname);
+						student.setNachname(nachname);
+						student.setEmail(email);
+						student.setPass(passwort);
+						student.setStudiengang(studiengang);
+						studenten.add(student);
+						
+						return ok(login.render());
+				}else {
+					return redirect(routes.Application.registrierung());	
+				}
+
 			}else {
 				return redirect(routes.Application.registrierung());	
-			}
+			}			
+		}
 	}
+			
+			
 
 		// Rendert die login Seite
 		public static Result login() {
@@ -83,23 +87,21 @@ public class Application extends Controller {
 	public static Result einloggen() {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 	
-		String mail = parameters.get("mail")[0];
+		String email = parameters.get("mail")[0];
+		String passwort = parameters.get("passwort")[0];
+		String vorname;
+		String nachname;
+		String studiengang;
 		
 		//Student wird aus der ArrayList rausgefunden
 		for (Student student : studenten) {
-			if (mail.equals(student.getEmail())) {
-				
-				String vorname = null;
-				String nachname = null;	
-				String fakultaet = null;
-				String studiengang =null;
-				
+			if (email.equals(student.getEmail())&&student.getPass().equals(passwort)) {
 					 vorname = student.getVorname();
 					 nachname = student.getNachname();
-					 mail = student.getEmail();
+					 email = student.getEmail();
 					 studiengang = student.getStudiengang();
 
-				return ok(profilAnzeigen.render(vorname,nachname,mail,studiengang));
+				return ok(profilAnzeigen.render(vorname,nachname,email,studiengang));
 				
 			}else{
 				return redirect(routes.Application.login());	
@@ -195,6 +197,9 @@ public class Application extends Controller {
 	// gebotenen Stellen (Löschen, Aendern?)
 	// aendern => POST an ProfilAnzeigen
 
+	
+	
+	
 	// Rendert die TutorWerden Seite
 	public static Result tutorWerden() {
 		return ok(tutorWerden.render());
