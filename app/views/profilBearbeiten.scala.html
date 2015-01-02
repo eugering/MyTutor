@@ -4,49 +4,25 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h2 align="center">-Profil bearbeiten-</h2>
-			</br> <img src=@routes.Assets.at( "images/login.jpg") alt="Bild"
+			</br> 
+			<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.bearbeiten()>
+			<img src=@routes.Assets.at( "images/login.jpg") alt="Bild"
 				class="img-rounded"> </br> </br> <a href="#" class="btn btn-primary btn-xs">Profilbild
 				ändern</a>
 
 			<h3>Persönliche Daten</h3>
-			<div class="form-group">
-				<label class="col-lg-3 control-label ">Vorname :</label>
-				<div class="col-lg-9">
-					<div class="form-inline">
-						<div class="form-group ">
-							<div class="col-lg-12">
-								<input type="text" id="vorname" name="vorname"
-									class="form-control ">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			</br> </br>
-			<div class="form-group">
-				<label class="col-lg-3 control-label ">Nachname :</label>
-				<div class="col-lg-9">
-					<div class="form-inline">
-						<div class="form-group ">
-							<div class="col-lg-12">
-								<input type="text" id="nachname" name="nachname"
-									class="form-control ">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			</br> </br>
+			</br>
 			<!--Datepicker mit Jquery-->
 
 			<div class="form-group">
-				<label class="col-lg-3 control-label " for="dp">Geburtsdatum:</label>
+				<label class="col-lg-3 control-label" for="dp"><p>Geburtsdatum:</p></label>
 				<div class="col-lg-9">
 					<div class="form-inline">
 						<div class="form-group ">
 							<div class="col-lg-12">
 
-								<input type="date" class="form-control" id="dp" />
+								<input type="date" class="form-control" name="bday" id="datepicker" />
 							</div>
 						</div>
 					</div>
@@ -55,11 +31,9 @@
 
 			</br>
 			<h3>Du studierst</h3>
-
 			
-
 			<div class="form-group">
-				<label for="sel1"></label> <select class="form-control"
+				<label for="sel1"></label> <select class="form-control" name="studiengang"
 					id="studiengang">
 					<option>-Studiengang wählen-</option>
 					<option>Angewandte Informatik</option>
@@ -85,17 +59,21 @@
 					<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
 				</select>
 			</div>
-
 			<div class="form-group">
 				<label for="comment"></label>
-				<textarea class="form-control" rows="5" id="comment"
+				<textarea class="form-control" type="text" rows="5" id="comment" name="textField"
 					placeholder="weite Informationen..."></textarea>
 			</div>
-
 			</br>
+		<input type="submit" class="btn btn-primary btn-lg" name="name" value="Änderung Speichern" />
+				</form>
+			</br>
+				
+				<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
 			<h3>Deine angebotenen Stellen</h3>
-
-			<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
+			<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.stelleLoeschen()>
+		
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<tr>
@@ -108,36 +86,29 @@
 					</tr>
 					<tr>
 						<td>Wirschaftsinformatik</td>
-						<td>BWL Seminar</td>
+						<td>mathe</td>
 						<td>9:00 - 10:30 </br>
-						<a href=@routes.Application.tutorWerden
-							class="btn btn-primary btn-xs">ändern</a></td>
+						</td>
 						<td>15,-€ </br>
-						<a href=@routes.Application.tutorWerden
-							class="btn btn-primary btn-xs">ändern</a></td>
+						</td>
 						<!-- Lösch Button -->
-						<td><a href="#" class="btn btn-primary btn-xs">löschen</a></td>
+						<td><input type="submit" class="btn btn-primary btn-xs" name="1" value="löschen" />
 					</tr>
-
 					<tr>
 						<td>Wirschaftsinformatik</td>
 						<td>BWL Seminar</td>
 						<td>17:30 - 19:00 </br>
-						<a href=@routes.Application.tutorWerden
-							class="btn btn-primary btn-xs">ändern</a></td>
+						</td>
 						<td>18,-€ </br>
-						<a href=@routes.Application.tutorWerden
-							class="btn btn-primary btn-xs">ändern</a></td>
+						</td>
 						<!-- Lösch Button -->
-						<td><a href="#" class="btn btn-primary btn-xs">löschen</a></td>
+						<td><input type="submit" class="btn btn-primary btn-xs" name="2" value="löschen" />
 					</tr>
-
+				
 				</table>
 			</div>
-
-
-			</br> </br> </br> <a href=@routes.Application.profilAnzeigen
-				class="btn btn-primary btn-lg">Änderung speichern</a>
+			</form>
+			</br>			
 		</div>
 	</div>
 </div>

@@ -12,9 +12,19 @@ POST	 /registrierung/addStudent			controllers.Application.addStudent()
 GET     /login								controllers.Application.login()
 POST	/login/einloggen					controllers.Application.einloggen()
 
-GET     /profilAnzeigen						controllers.Application.profilAnzeigen()
+#bearbeiten
 GET     /profilBearbeiten					controllers.Application.profilBearbeiten()
+POST	/profilBearbeiten/bearbeiten		controllers.Application.bearbeiten()
+
+GET     /profilAnzeigen						controllers.Application.profilAnzeigen()
+
+#tutorWerden
 GET     /tutorWerden						controllers.Application.tutorWerden()
+POST     /tutorWerden/addTutor				controllers.Application.addTutor()
+
+#Löschen
+POST	/tutorWerden/loeschen				controllers.Application.stelleLoeschen()
+
 GET     /suchen								controllers.Application.suchen()
 
 GET     /ueberUns							controllers.Application.ueberUns()

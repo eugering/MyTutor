@@ -5,7 +5,8 @@
 		<div class="jumbotron">
 			<h3>Trage hier ein was du anbieten möchtest</h3>
 			</br>
-
+			<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.bearbeiten()>
 			<div class="form-group">
 				<label for="sel1"></label> <select class="form-control" id="sel1">
 					<option>-Studiengang wählen-</option>
@@ -35,11 +36,7 @@
 			<div class="form-group">
 				<input class="form-control" id="fach" placeholder="Fach"></input>
 			</div>
-			<div class="form-group">
-				<input class="form-control" id="Geld" placeholder="Stundenlohn"></input>
-			</div>
 			</br>
-
 			<div class="container">
 				<p>Tag auswählen</p>
 				<form role="form">
@@ -55,20 +52,27 @@
 					</label> <label class="radio-inline"> <input type="radio"
 						name="Tag">Samstag
 					</label>
-				</form>
 			</div>
 			</br>
 			<div class="form-group">
 				<input class="form-control" id="Zeit" placeholder="Zeiten"></input>
 			</div>
 			<div class="form-group">
-				<label for="comment"></label>
-				<textarea class="form-control" rows="5" id="comment"
-					placeholder="weite Informationen..."></textarea>
+				<input class="form-control" id="Geld" placeholder="Stundenlohn"></input>
 			</div>
+			
+			
+			
 
-			</br> <a href=@routes.Application.profilAnzeigen
-				class="btn btn-info btn-lg">Deine Stelle online stellen</a>
+
+			
+			
+			
+			
+
+			</br> 
+			<input type="submit" class="btn btn-primary btn-lg" name="tutorWerdenButton" value="Deine Stelle online stellen" />
+			</form>
 		</div>
 	</div>
 </div>

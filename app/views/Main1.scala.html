@@ -18,7 +18,11 @@
      
     <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/style.css")>    
     <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/bootstrap-themeDatePicker.min.css")>    
-    <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/jquery-uiDatePicker.min.css")>    
+    <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/jquery-uiDatePicker.min.css")>   
+    <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script> 
+    
+    <!-- DatePicker -->
+    <link rel="stylesheet" type="text/css" href= @routes.Assets.at("DatePicker/css/theme.css")>    
 
    <style type="text/css">
     h1 { 
@@ -78,7 +82,8 @@ background: url(@routes.Assets.at("images/BG1.jpg")) no-repeat center center fix
 		          </ul>
 		        </li>
 		    <li><a href=@routes.Application.suchen>Tutor Suchen</a></li>
-		    <li><a href=@routes.Application.ueberUns>Über uns</a></li>       
+		    <li><a href=@routes.Application.ueberUns>Über uns</a></li> 
+		    <li><a href=@routes.Application.login>logout</a></li>         
 		  </ul>
 		 </div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -92,18 +97,21 @@ background: url(@routes.Assets.at("images/BG1.jpg")) no-repeat center center fix
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src= @routes.Assets.at("Bootstrap-3.3.1/js/bootstrap.min.js")></script>
     <!--DatePicker-->
+    <script src= @routes.Assets.at("Datepicker/js/jquery-ui-1.10.4.custom.js")></script>
+	<script src= @routes.Assets.at("Datepicker/js/jquery-1.11.js")></script>
+    <script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			maxDate: "-216M"
+		});
+	});
+	</script>
     <script src= @routes.Assets.at("javascripts/jqueryDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/jquery-uiDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
-    <!--DatePicker mit Jquery -->
-    <script>
-     $( "#dp" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		format: 'mm/dd/yyyy',
-		startDate: '01/01/1986'
-	});
-    </script>
+    
+    
 </body>
 </html>
-	
