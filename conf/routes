@@ -13,7 +13,7 @@ POST	/login/einloggen					controllers.Application.einloggen()
 
 #bearbeiten
 GET     /profilBearbeiten					controllers.Application.profilBearbeiten()
-POST	/profilBearbeiten/bearbeiten		controllers.Application.bearbeiten()
+POST	/bearbeiten							controllers.Application.bearbeiten()
 
 GET     /profilAnzeigen						controllers.Application.profilAnzeigen()
 
@@ -21,8 +21,10 @@ GET     /profilAnzeigen						controllers.Application.profilAnzeigen()
 GET     /tutorWerden						controllers.Application.tutorWerden()
 POST     /tutorWerden/addTutor				controllers.Application.addTutor()
 
-#Löschen
-POST	/tutorWerden/loeschen				controllers.Application.stelleLoeschen()
+#Löschen/anbieten
+POST	/loeschen							controllers.Application.stelleLoeschen()
+POST	/stelleAnbieten						controllers.Application.stelleAnbieten()
+
 
 GET     /suchen								controllers.Application.suchen()
 

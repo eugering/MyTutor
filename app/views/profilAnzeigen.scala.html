@@ -23,6 +23,7 @@
 				<tr>
 					<td>E-Mail:</td>
 					<td>@s.getEmail</td>
+					
 				</tr>
 			</table>
 
@@ -52,75 +53,48 @@
 				</div>
 				</br>
 				</br>
-				<a href=@routes.Application.tutorWerden
-					class="btn btn-primary btn-sm" role="button">Stelle anbieten</a>
-					<input type="button" class="btn btn-primary btn-lg" onclick="angeboteneStellen()" value="Suche starten JSON/JS" />
+
 		</div>
 	</div>
 </div>
-
-
-
-
-<script type="text/javascript">
-	function angeboteneStellen() {
-
-		document.getElementById("stellenListe").innerHTML = "<div class='col-xs-12'>"+"<div class='container'>"+"<div class='jumbotron'>"+"<div class='table-responsive'>"+"<h3>"+"Deine angebotenen Stellen"+"</h3>"+"<table class='table table-hover'>"+
-						"<tr>"+"<th>"+"Fach"+"</th>"+"<th>"+"Tag"+"</th>"+"<th>"+"Zeiten"+"</th>"+"<th>"+"Geld"+"</th>"+"<th>"+"</th>"+"</tr>"+
-						
-						
-						for (var stelle in @s.getStellen) {
-							"<tr>"+
-							"<td>"+stelle.getFach+"</td>"+"<td>"+stelle.getTag+"</td>"+"<td>"+stelle.getZeiten+"</td>"+"<td>"+stelle.getStundenLohn+"</td>"+
-							"</tr>"+
-						}						
-						"</table>"+"</div>"+"</div>"+"</div>"+"</div>";
-				
-	}
-</script>
-
-<div id="stellenListe">
-</div>
-
-<!-- 
-
-"<tr>"+"<td>"+tutor1+"</td>"+"<td>"+nachname1+"</td>"+"<td>"+studiengang1+"</td>"+"<td>"+fach1+"</td>"+"<td>"+tag1+"</td>"+"<td>"+zeiten2+"</td>"+
-						"<td>"+geld1+"</td>"+
-						"<td>"+
-					"</tr>"+
-
 
 
 
 <div class="col-xs-12">
 	<div class="container">	
 		<div class="jumbotron">
+		<a href=@routes.Application.tutorWerden
+				class="btn btn-primary btn-sm" role="button">Tutorium anbieten</a>
 		<h3>Deine angebotenen Stellen</h3>
 		</br>
+			
 			<table class="table table-hover">
+	
 				<tr>
 					<th>Studiengang</th>
 					<th>Fach</th>
+					<th>Tag</th>
 					<th>Zeiten</th>
-					<th>Geld</th>
+					<th>Stundenlohn</th>
+					
 
 				</tr>
+				@for(stelle <- s.getStellen){
 				<tr>
-					<td>Wirschaftsinformatik</td>
-					<td>Web-Technologien</td>
-					<td>9:00 - 10:30</td>
-					<td>15,- €</td>
+					<td>@s.getStudiengang()</td>
+					<td>@stelle.getFach()</td>
+					<td>@stelle.getTag()</td>
+					<td>@stelle.getZeiten()</td>
+					<td>@stelle.getStundenLohn() €</td>
+
 				</tr>
-				<tr>
-					<td>Wirschaftsinformatik</td>
-					<td>BWL Seminar</td>
-					<td>17:30 - 19:00</td>
-					<td>18,-€</td>
-				</tr>
+				
+				}
+				
 
 			</table>
 		</div>
 	</div>
 </div>
--->
+
 }

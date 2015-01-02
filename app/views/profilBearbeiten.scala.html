@@ -1,3 +1,4 @@
+@(s: Student)
 @Main1() {
 
 <div class="col-xs-12">
@@ -79,36 +80,30 @@
 		
 			<div class="table-responsive">
 				<table class="table table-hover">
-					<tr>
-						<th>Studiengang</th>
-						<th>Fach</th>
-						<th>Zeiten</th>
-						<th>Geld</th>
-						<th></th>
+	
+				<tr>
+					<th>Studiengang</th>
+					<th>Fach</th>
+					<th>Tag</th>
+					<th>Zeiten</th>
+					<th>Stundenlohn</th>
+					
 
-					</tr>
-					<tr>
-						<td>Wirschaftsinformatik</td>
-						<td>mathe</td>
-						<td>9:00 - 10:30 </br>
-						</td>
-						<td>15,-€ </br>
-						</td>
-						<!-- Lösch Button -->
-						<td><input type="submit" class="btn btn-primary btn-xs" name="1" value="löschen" />
-					</tr>
-					<tr>
-						<td>Wirschaftsinformatik</td>
-						<td>BWL Seminar</td>
-						<td>17:30 - 19:00 </br>
-						</td>
-						<td>18,-€ </br>
-						</td>
-						<!-- Lösch Button -->
-						<td><input type="submit" class="btn btn-primary btn-xs" name="2" value="löschen" />
-					</tr>
+				</tr>
+				@for(stelle <- s.getStellen){
+				<tr>
+					<td>@s.getStudiengang()</td>
+					<td>@stelle.getFach()</td>
+					<td>@stelle.getTag()</td>
+					<td>@stelle.getZeiten()</td>
+					<td>@stelle.getStundenLohn() €</td>
+
+				</tr>
 				
-				</table>
+				}
+				
+
+			</table>
 			</div>
 			</form>
 			</br>			

@@ -3,41 +3,42 @@
 <div class="col-xs-12">
 	<div class="container">
 		<div class="jumbotron">
-			<h3>Trage hier ein was du anbieten möchtest</h3>
+			<h3>-Trage hier ein was du anbieten möchtest-</h3>
 			</br>
 			<form class="form-horizontal" role="form" method="post" name="form"
-					action=@routes.Application.bearbeiten()>
+					action=@routes.Application.stelleAnbieten()>
 			<div class="form-group">
-				<input class="form-control" id="fach" placeholder="Fach"></input>
-			</div>
-			</br>
-			<div class="container">
-				<p>Tag auswählen</p>
-				<form role="form">
-					<label class="radio-inline"> <input type="radio" name="Tag">Montag
-					</label> <label class="radio-inline"> <input type="radio"
-						name="Tag">Dienstag
-					</label> <label class="radio-inline"> <input type="radio"
-						name="Tag">Mittwoch
-					</label> <label class="radio-inline"> <input type="radio"
-						name="Tag">Donnerstag
-					</label> <label class="radio-inline"> <input type="radio"
-						name="Tag">Freitag
-					</label> <label class="radio-inline"> <input type="radio"
-						name="Tag">Samstag
-					</label>
+				<input class="form-control" id="fach" name = "fach" placeholder="Fach"></input>
 			</div>
 			</br>
 			<div class="form-group">
-				<input class="form-control" id="Zeit" placeholder="Zeiten"></input>
-			</div>
+							
+							<select class="form-control " name="tag" id="sel1" required>
+								<option>Nach Vereinbarung</option>
+								<option selected>Montag</option>
+								<option>Dienstag</option>
+								<option>Mittwoch</option>
+								<option>Donnerstag</option>
+								<option>Freitag</option>
+								<option>Samstag</option>
+								<option>Sonntag</option>
+							</select>
+					
+					</div>
+			</br>
 			<div class="form-group">
-				<input class="form-control" id="Geld" placeholder="Stundenlohn"></input>
+				<input class="form-control" id="Zeit" name = "zeit" placeholder="Zeiten"></input>
+			</div>
+			</br>
+			<div class="form-group">
+				<input class="form-control" id="Geld" name= "geld" placeholder="Stundenlohn"></input>
 			</div>
 			
 
 			</br> 
+			<div class = "form-group">
 			<input type="submit" class="btn btn-primary btn-lg" name="tutorWerdenButton" value="Deine Stelle online stellen" />
+			</div>
 			</form>
 		</div>
 	</div>

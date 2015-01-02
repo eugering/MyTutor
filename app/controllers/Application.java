@@ -49,9 +49,6 @@ public class Application extends Controller {
 			String passwortWiederholen = parameters.get("passwortWiederholen")[0];
 			String studiengang = parameters.get("studiengang")[0];
 			
-			
-
-			
 			// Email ueberpruefung
 			if (mailCheck(email)) {
 				if (passwort.equals(passwortWiederholen)) {
@@ -107,7 +104,12 @@ public class Application extends Controller {
 
 	// Rendert die ProfilBearbeiten Seite
 	public static Result profilBearbeiten() {
-		return ok(profilBearbeiten.render());
+		for (Student student : studenten) {
+			if (temp.equals(student.getEmail()))
+
+				return ok(profilBearbeiten.render(student));
+		}
+		return ok(profilBearbeiten.render(student));
 
 	}
 
@@ -145,7 +147,6 @@ public class Application extends Controller {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		for (Student student : studenten) {
 			if (temp.equals(student.getEmail())) {
-				student = student;
 				// Parameterwerte werden ausgelesen
 				String bday = parameters.get("bday")[0];
 				String studiengang = parameters.get("studiengang")[0];
@@ -159,18 +160,14 @@ public class Application extends Controller {
 
 	// TutorenStelle Löschen
 	public static Result stelleLoeschen() {
-
-		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		for (Student student : studenten) {
 			if (temp.equals(student.getEmail())) {
-				student = student;
-				// Parameterwerte werden ausgelesen
-				String bday = parameters.get("bday")[0];
-
+			
+				
 				return ok(profilAnzeigen.render(student));
-			}
+			} 
 		}
-		return redirect(routes.Application.tutorWerden());
+		return TODO;
 	}
 
 	// Rendert die Suchen Seite
@@ -193,5 +190,34 @@ public class Application extends Controller {
 	public static boolean mailCheck(String email) {
 		return email.matches("\\w*\\-*\\w*\\.*\\w*@\\D+\\w*\\-?\\w*\\.*\\w*\\-*\\w*\\.(de|info|org|com|net)");
 	}
+	
+	public static Result stelleAnbieten() {
+
+		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
+		// Parameteruebergaben werden ueberprueft
+		if (parameters.get("fach")[0].isEmpty()
+				||parameters.get("tag")[0].isEmpty()
+				||parameters.get("zeit")[0].isEmpty()
+				||parameters.get("geld")[0].isEmpty()) {
+			return redirect(routes.Application.tutorWerden());
+		} else {
+			// Parameterwerte werden ausgelesen
+			String fach = parameters.get("fach")[0];
+			String tag = parameters.get("tag")[0];
+			String zeit = parameters.get("zeit")[0];
+			String geld = parameters.get("geld")[0];
+		
+			for (Student student : studenten) {
+				if (temp.equals(student.getEmail())) {
+					student.addStelle(new Stelle(fach, tag, zeit, geld));
+					
+					return ok(profilAnzeigen.render(student));
+				} 
+			}
+
+				return redirect(routes.Application.tutorWerden());
+		
+			}
+		}
 
 }

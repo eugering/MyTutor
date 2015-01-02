@@ -101,6 +101,8 @@ public class Student  {
 
 
 
-	
+	public void addStelle(Stelle s){
+		stellen.add(s);
+	}
 
 }
