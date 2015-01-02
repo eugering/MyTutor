@@ -1,15 +1,14 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
-# Home
-GET     /									controllers.Application.home()
+# index
+GET     /									controllers.Application.login()
 
 #Registrierung
 GET      /registrierung                 	controllers.Application.registrierung()
 POST	 /registrierung/addStudent			controllers.Application.addStudent()
 
 #Login
-GET     /login								controllers.Application.login()
 POST	/login/einloggen					controllers.Application.einloggen()
 
 #bearbeiten
@@ -28,6 +27,8 @@ POST	/tutorWerden/loeschen				controllers.Application.stelleLoeschen()
 GET     /suchen								controllers.Application.suchen()
 
 GET     /ueberUns							controllers.Application.ueberUns()
+
+GET     /home								controllers.Application.home()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

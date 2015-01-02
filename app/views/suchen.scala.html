@@ -6,7 +6,7 @@
 			<h3>Suche</h3>
 			<div class="form-group">
 				<select class="form-control" id="sel1">
-					<option>-Studiengang wählen-</option>
+					<option>-Tutoren im Bereich-</option>
 					<option>Angewandte Informatik</option>
 					<option>Architektur</option>
 					<option>Automobilinformationstechnik</option>
@@ -50,91 +50,12 @@
 			
 			<input type="Button" onclick="slideup()" class="btn btn-primary btn-lg" id="suche" value="Suche starten">-->
 			
-			<input type="button" class="btn btn-primary btn-lg" onclick="suchenStarten()" value="Suche starten JSON/JS" />
-			<input type="button" id="ergebnis" class="btn btn-primary btn-lg" value="Suche starten JSON/AJX" />
+			<input type="button" id="ergebnis" class="btn btn-primary btn-lg" value="Suche starten" />
 			
 		</div>
 
 	</div>
 </div>
-
-
- 
-<script type="text/javascript">
-	function suchenStarten() {
-		var t ={
-				"Tutoren":[	{
-					"vorname": "Metty",
-					"nachname": "Kilin",
-					"studiengang": "Wirtschaftsinformatik",
-					"fach": "Mathe",
-			  		"stundenLohn": "13 EUR",
-			    	"zeiten": "9:00 - 10:30",
-				  	"tag": "Montag"
-				}, 
-				{
-					"vorname": "Eugen",
-					"nachname": "Gering",
-					"studiengang":"Wirtschaftsinformatik",
-					"fach": "Web",
-			  		"stundenLohn": "14 EUR",
-			    	"zeiten": "10:45 - 12:15",
-			    	"tag": "Mittwoch"
-				}]
-				};
-			
-			
-
-			var tutor1 = "";
-			var tutor2 = "";
-			var nachname1 ="";
-			var nachname2 ="";
-			var studiengang1 = "";
-			var studiengang2 = "";
-			var fach1 = "";
-			var fach2 = "";
-			var geld1 = "";
-			var geld2 = "";
-			var zeiten1 = "";
-			var zeiten2 = "";
-			var tag1 = "";
-			var tag2 = "";
-
-			tutor1 += t.Tutoren[0].vorname;
-			tutor2 += t.Tutoren[1].vorname;
-			nachname1 += t.Tutoren[0].nachname;
-			nachname2 += t.Tutoren[1].nachname;
-			studiengang1 += t.Tutoren[0].studiengang;
-			studiengang2 += t.Tutoren[1].studiengang;
-			fach1 += t.Tutoren[0].fach;
-			fach2 += t.Tutoren[1].fach;
-			geld1 += t.Tutoren[0].stundenLohn;
-			geld2 += t.Tutoren[1].stundenLohn;
-			zeiten1 += t.Tutoren[0].zeiten;
-			zeiten2 += t.Tutoren[1].zeiten;
-			tag1 += t.Tutoren[0].tag;
-			tag2 += t.Tutoren[1].tag;
-		
-
-
-
-		document.getElementById("tabelle").innerHTML = "<div class='col-xs-12'>"+"<div class='container'>"+"<div class='jumbotron'>"+"<div class='table-responsive'>"+"<h3>"+"Tutoren"+"</h3>"+"<table class='table table-hover'>"+"<tr>"+
-							"<th>"+"Vorname"+"</th>"+"<th>"+"Nachname"+"</th>"+"<th>"+"Studiengang"+"</th>"+"<th>"+"Fach"+"</th>"+"<th>"+"Tag"+"</th>"+"<th>"+"Zeiten"+"</th>"+"<th>"+"Geld"+"</th>"+"<th>"+"</th>"+
-						"</tr>"+"<tr>"+
-						"<td>"+tutor1+"</td>"+"<td>"+nachname1+"</td>"+"<td>"+studiengang1+"</td>"+"<td>"+fach1+"</td>"+"<td>"+tag1+"</td>"+"<td>"+zeiten2+"</td>"+
-						"<td>"+geld1+"</td>"+
-						"<td>"+
-					"</tr>"+
-					"<tr>"+
-						"<td>"+tutor2+"</td>"+"<td>"+nachname2+"</td>"+"<td>"+studiengang2+"</td>"+"<td>"+fach2+"</td>"+"<td>"+tag2+"</td>"+"<td>"+zeiten2+"</td>"+
-						"<td>"+geld2+"</td>"+
-						"<td>"+
-					"</tr>"+"</table>"+"</div>"+"</div>"+"</div>"+"</div>";
-				
-	}
-</script>
-
-
 
 	<!-- Hier wird JSON Geladen -->
 	<script>
@@ -145,7 +66,7 @@
 					dataType: "json",
 					success: function(json) {
 						var html = "<div class='col-xs-12'>"+"<div class='container'>"+"<div class='jumbotron'>"+"<div class='table-responsive'>"+"<h3>"+"Tutoren"+"</h3>"+"<table class='table table-hover'>"+"<tr>"+
-						"<th>"+"Vorname"+"</th>"+"<th>"+"Nachname"+"</th>"+"<th>"+"Studiengang"+"</th>"+"<th>"+"Fach"+"</th>"+"<th>"+"Tag"+"</th>"+"<th>"+"Zeiten"+"</th>"+"<th>"+"Geld"+"</th>"+"<th>"+"</th>"+
+						"<th>"+"Vorname"+"</th>"+"<th>"+"Nachname"+"</th>"+"<th>"+"studiert"+"</th>"+"<th>"+"Fach"+"</th>"+"<th>"+"Tag"+"</th>"+"<th>"+"Zeiten"+"</th>"+"<th>"+"Geld"+"</th>"+"<th>"+"</th>"+
 						"</tr>"+"<tr>";
 						$.each(json.Tutoren, function(){
 							html += "<td>" + this['vorname'] + "</td>";
@@ -169,42 +90,5 @@
 
 <div id="tabelle">
 </div>
-<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse
-<div class="col-xs-12">
-	<div class="container">
-		<div class="jumbotron">
-			<div class="table-responsive">
-			<div id="austausch">
-			</div>
-				<table class="table table-hover">
-					<tr>
-						<th >Tutor</th>
-						<th>Studiengang</th>
-						<th>Fach</th>
-						<th>Zeiten</th>
-						<th>Geld</th>
-						<th></th>
-					</tr>
-					<tr>
-						<td>Eugen Gering</td>
-						<td>Wirschaftsinformatik</td>
-						<td>Web-Technologien</td>
-						<td>9:00 - 10:30</td>
-						<td>15,- €</td>
-						<td><a href=@routes.Application.profilAnzeigen class="btn btn-primary btn-sm">Profil anzeigen</a>
-					</tr>
-					<tr>
-						<td>Metehan Kilin</td>
-						<td>Wirschaftsinformatik</td>
-						<td>BWL Seminar</td>
-						<td>17:30 - 19:00</td>
-						<td>18,-€</td>
-						<td><a href=@routes.Application.profilAnzeigen class="btn btn-primary btn-sm">Profil anzeigen</a>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-</div> -->
 
 }
