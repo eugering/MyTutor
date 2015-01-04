@@ -28,11 +28,7 @@
 					<td>Geburtsdatum:</td>
 					<td><div class="col-lg-6"><input type="date" class="form-control" placeholder="Geburtsdatum" name="bday" id="datepicker" /></div></td>
 				</tr>
-				<tr>
-					<td>E-Mail:</td>
-					<td>@s.getEmail</td>
-					
-				</tr>
+				
 			</table>
 			
 			
@@ -83,8 +79,6 @@
 				
 				<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
 			<h3>Deine angebotenen Stellen</h3>
-			<form class="form-horizontal" role="form" method="post" name="form"
-					action=@routes.Application.stelleLoeschen()>
 		
 			<div class="table-responsive">
 				<table class="table table-hover">
@@ -95,19 +89,27 @@
 					<th>Tag</th>
 					<th>Zeiten</th>
 					<th>Stundenlohn</th>
+					<th></th>
 					
 
 				</tr>
+				</table>
+				
 				@for(stelle <- s.getStellen){
-				<tr>
+					<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.stelleLoeschen()>
+					<table>
+					<tr>
 					<td>@s.getStudiengang()</td>
 					<td>@stelle.getFach()</td>
 					<td>@stelle.getTag()</td>
 					<td>@stelle.getZeiten()</td>
 					<td>@stelle.getStundenLohn() €</td>
-
-				</tr>
-				
+					<td><input type="submit" class="btn btn-primary btn-xs" name="loeschen" value="Löschen" /></td>
+									
+					</tr>
+					</table>
+					</form>
 				}
 				
 

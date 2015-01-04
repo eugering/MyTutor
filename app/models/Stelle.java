@@ -4,7 +4,7 @@ public class Stelle {
 	private String fach;
 	private String tag;
 	private String zeiten;
-	private String stundenLohn;
+	private String stundenLohn; 
 	
 	public Stelle(String fach, String tag, String zeiten, String stundenLohn) {
 		this.fach = fach;

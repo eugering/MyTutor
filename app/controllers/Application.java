@@ -19,7 +19,6 @@ import models.Student;
 public class Application extends Controller {
 
 	private static ArrayList<Student> studenten = new ArrayList<Student>();
-	private static ArrayList<Student> tutoren = new ArrayList<Student>();
 	static Student student;
 	static String temp = "";
 
@@ -35,22 +34,25 @@ public class Application extends Controller {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		// Parameteruebergaben werden ueberprueft
 		if (parameters.get("vorname")[0].isEmpty()
-				||parameters.get("nachname")[0].isEmpty()
-				||parameters.get("mail")[0].isEmpty()
-				||parameters.get("passwort")[0].isEmpty()
-				||parameters.get("passwortWiederholen")[0].isEmpty()) {
+				|| parameters.get("nachname")[0].isEmpty()
+				|| parameters.get("mail")[0].isEmpty()
+				|| parameters.get("passwort")[0].isEmpty()
+				|| parameters.get("passwortWiederholen")[0].isEmpty()) {
 			return redirect(routes.Application.registrierung());
 		} else {
 			// Parameterwerte werden ausgelesen
 			// Email ueberpruefung
 			if (mailCheck(parameters.get("mail")[0])) {
-				if (parameters.get("passwort")[0].equals(parameters.get("passwortWiederholen")[0])) {
-				// Daten befüllen
-				student = new Student(parameters.get("vorname")[0], parameters.get("nachname")[0], 
-				parameters.get("mail")[0], parameters.get("passwortWiederholen")[0], 
-				parameters.get("studiengang")[0]);
-				temp = parameters.get("mail")[0];
-				studenten.add(student);
+				if (parameters.get("passwort")[0].equals(parameters
+						.get("passwortWiederholen")[0])) {
+					// Daten befüllen
+					student = new Student(parameters.get("vorname")[0],
+							parameters.get("nachname")[0],
+							parameters.get("mail")[0],
+							parameters.get("passwortWiederholen")[0],
+							parameters.get("studiengang")[0]);
+					temp = parameters.get("mail")[0];
+					studenten.add(student);
 
 					return ok(login.render());
 				} else {
@@ -115,7 +117,7 @@ public class Application extends Controller {
 		for (Student student : studenten) {
 			if (temp.equals(student.getEmail())) {
 				// Parameterwerte werden ausgelesen
-				
+
 				if (!(parameters.get("vorname")[0].isEmpty())) {
 					student.setVorname(parameters.get("vorname")[0]);
 				}
@@ -146,34 +148,6 @@ public class Application extends Controller {
 		return ok(tutorWerden.render());
 	}
 
-	// Student wird zum Tutor
-	public static Result addTutor() {
-
-		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
-		for (Student student : studenten) {
-			if (temp.equals(student.getEmail())) {
-				// Parameterwerte werden ausgelesen
-				String bday = parameters.get("bday")[0];
-				String studiengang = parameters.get("studiengang")[0];
-				String infos = parameters.get("textField")[0];
-
-				return ok(profilAnzeigen.render(student));
-			}
-		}
-		return redirect(routes.Application.tutorWerden());
-	}
-
-	// TutorenStelle Löschen
-	public static Result stelleLoeschen() {
-		for (Student student : studenten) {
-			if (temp.equals(student.getEmail())) {
-			
-				
-				return ok(profilAnzeigen.render(student));
-			} 
-		}
-		return TODO;
-	}
 
 	// Rendert die Suchen Seite
 	public static Result suchen() {
@@ -192,33 +166,59 @@ public class Application extends Controller {
 	public static Result ueberUns() {
 		return ok(ueberUns.render());
 	}
+
 	public static boolean mailCheck(String email) {
-		return email.matches("\\w*\\-*\\w*\\.*\\w*@\\D+\\w*\\-?\\w*\\.*\\w*\\-*\\w*\\.(de|info|org|com|net)");
+		return email
+				.matches("\\w*\\-*\\w*\\.*\\w*@\\D+\\w*\\-?\\w*\\.*\\w*\\-*\\w*\\.(de|info|org|com|net)");
 	}
-	
+
 	public static Result stelleAnbieten() {
 
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		// Parameteruebergaben werden ueberprueft
 		if (parameters.get("fach")[0].isEmpty()
-				||parameters.get("tag")[0].isEmpty()
-				||parameters.get("zeit")[0].isEmpty()
-				||parameters.get("geld")[0].isEmpty()) {
+				|| parameters.get("tag")[0].isEmpty()
+				|| parameters.get("zeit")[0].isEmpty()
+				|| parameters.get("geld")[0].isEmpty()) {
 			return redirect(routes.Application.tutorWerden());
 		} else {
 			// Parameterwerte werden ausgelesen
-		
+
 			for (Student student : studenten) {
 				if (temp.equals(student.getEmail())) {
-					student.addStelle(new Stelle(parameters.get("fach")[0], parameters.get("tag")[0], parameters.get("zeit")[0], parameters.get("geld")[0]));
-					
+					student.addStelle(new Stelle(parameters.get("fach")[0],
+							parameters.get("tag")[0],
+							parameters.get("zeit")[0],
+							parameters.get("geld")[0]));
+
 					return ok(profilAnzeigen.render(student));
-				} 
+				}
 			}
 
-				return redirect(routes.Application.tutorWerden());
-		
-			}
+			return redirect(routes.Application.tutorWerden());
+
 		}
+	}
+	
+	public static Result stelleLoeschen() {
+		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
+		for (Student student : studenten) {
+			if (temp.equals(student.getEmail()))
+				for (Stelle stelle : student.getStellen()) {
+					if (parameters.get("fach")[0] == stelle.getFach()
+						&& parameters.get("tag")[0] == stelle.getTag()
+						&& parameters.get("zeit")[0] == stelle.getZeiten()){
+						student.getStellen().remove(stelle);
+						return ok(profilAnzeigen.render(student));
+					}
+				}
+				return ok(profilAnzeigen.render(student));
+		}
+		return ok(profilBearbeiten.render(student));
+
+		
+
+		
+	}
 
 }

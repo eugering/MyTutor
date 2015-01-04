@@ -19,7 +19,6 @@ GET     /profilAnzeigen						controllers.Application.profilAnzeigen()
 
 #tutorWerden
 GET     /tutorWerden						controllers.Application.tutorWerden()
-POST     /tutorWerden/addTutor				controllers.Application.addTutor()
 
 #Löschen/anbieten
 POST	/loeschen							controllers.Application.stelleLoeschen()
