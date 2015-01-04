@@ -24,31 +24,45 @@
     <!-- DatePicker -->
     <link rel="stylesheet" type="text/css" href= @routes.Assets.at("DatePicker/css/theme.css")>    
 
-   <style type="text/css">
-    h1 { 
-			 background:#2D94E4; 
-			 font-style:italic;
-			 line-height:200%;
-			 text-align:center;
-
-			 }
-
-				  
+    <style type="text/css">
+        
+        h1{
+        	background:#2D94E4;
+        }
+        
+        body {
+            padding-top: 20px;
+            font-size: 16px;
+            font-family: "Open Sans",serif;
+            background: transparent;
+        }
+        
+    	.page-header{
+    		background:#2D94E4; 
+		}
+		  
 		html {
-background: url(@routes.Assets.at("images/BG1.jpg")) no-repeat center center fixed;
+            background: url(@routes.Assets.at("images/BG1.jpg")) no-repeat center center fixed; 
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-       }
+		}
+		
+		
        /* Override B3 .panel adding a subtly transparent background */
         .panel {
             background-color: rgba(255, 255, 255, 0.9);
         }
+		.form-signin
+		{
+		    max-width: 330px;
+		    padding: 15px;
+		    margin: 0 auto;
+		}
 		
-    
-    
-    </style>
+		
+	</style>
     <!--DatePicker-->
 	<link href="css/bootstrapDatePicker.min.css" rel="stylesheet">
     <link href="css/jquery-uiDatePicker.min.css" rel="stylesheet">

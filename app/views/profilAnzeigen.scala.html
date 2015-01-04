@@ -25,28 +25,34 @@
 					<td>@s.getEmail</td>
 					
 				</tr>
-			</table>
-
-			<a href=@routes.Application.profilBearbeiten
-				class="btn btn-primary btn-sm" role="button">Profil bearbeiten</a>
-			<div>
-				<br>
-			</div>
-
-			<form action="mailto:@s.getEmail">
-				<button type="submit" class="btn btn-primary btn-sm">Kontakt
-					aufnehmen</button>
-			</form>
-				<br>
-				<h3>Du studierst</h3>
-
-				<table class="table table-hover">
-					<tr>
+				<tr>
 						<td>Studiengang:</td>
 						<td>@s.getStudiengang</td>
-					</tr>
+				</tr>
+			</table>
+
+	
+	<div class="row">
+		<div class="col-xs-2">
+			<form action="mailto:@s.getEmail">
+				<button type="submit" class="btn btn-primary btn-sm">
+					<span class="glyphicon glyphicon-envelope"></span>
+						e-Mail</button>
+					</form>
+					</div>
 					
-				</table>
+					
+					<div class="col-xs-2 col-xs-offset-8">
+					<a href=@routes.Application.profilBearbeiten
+						class="btn btn-primary btn-sm" role="button">Profil bearbeiten</a>
+				<div>
+			</div>
+		<br>
+		</div>
+	</div>
+			
+				</br>
+				</br>
 				<h3>Weitere Informationen</h3>
 				<div>
 					 @s.getInfos
