@@ -42,20 +42,15 @@ public class Application extends Controller {
 			return redirect(routes.Application.registrierung());
 		} else {
 			// Parameterwerte werden ausgelesen
-			String vorname = parameters.get("vorname")[0];
-			String nachname = parameters.get("nachname")[0];
-			String email = parameters.get("mail")[0];
-			String passwort = parameters.get("passwort")[0];
-			String passwortWiederholen = parameters.get("passwortWiederholen")[0];
-			String studiengang = parameters.get("studiengang")[0];
-			
 			// Email ueberpruefung
-			if (mailCheck(email)) {
-				if (passwort.equals(passwortWiederholen)) {
-					// Daten befüllen
-					student = new Student(vorname, nachname, email, passwort, studiengang);
-					temp = email;
-					studenten.add(student);
+			if (mailCheck(parameters.get("mail")[0])) {
+				if (parameters.get("passwort")[0].equals(parameters.get("passwortWiederholen")[0])) {
+				// Daten befüllen
+				student = new Student(parameters.get("vorname")[0], parameters.get("nachname")[0], 
+				parameters.get("mail")[0], parameters.get("passwortWiederholen")[0], 
+				parameters.get("studiengang")[0]);
+				temp = parameters.get("mail")[0];
+				studenten.add(student);
 
 					return ok(login.render());
 				} else {
@@ -120,12 +115,22 @@ public class Application extends Controller {
 		for (Student student : studenten) {
 			if (temp.equals(student.getEmail())) {
 				// Parameterwerte werden ausgelesen
-				String bday = parameters.get("bday")[0];
-				String studiengang = parameters.get("studiengang")[0];
-				String infos = parameters.get("textField")[0];
-				student.setBday(bday);
-				student.setStudiengang(studiengang);
-				student.setInfos(infos);
+				
+				if (!(parameters.get("vorname")[0].isEmpty())) {
+					student.setVorname(parameters.get("vorname")[0]);
+				}
+				if (!(parameters.get("nachname")[0].isEmpty())) {
+					student.setNachname(parameters.get("nachname")[0]);
+				}
+				if (!(parameters.get("bday")[0].isEmpty())) {
+					student.setBday(parameters.get("bday")[0]);
+				}
+				if (!(parameters.get("studiengang")[0].isEmpty())) {
+					student.setStudiengang(parameters.get("studiengang")[0]);
+				}
+				if (!(parameters.get("infos")[0].isEmpty())) {
+					student.setInfos(parameters.get("infos")[0]);
+				}
 				return ok(profilAnzeigen.render(student));
 			}
 		}
@@ -202,14 +207,10 @@ public class Application extends Controller {
 			return redirect(routes.Application.tutorWerden());
 		} else {
 			// Parameterwerte werden ausgelesen
-			String fach = parameters.get("fach")[0];
-			String tag = parameters.get("tag")[0];
-			String zeit = parameters.get("zeit")[0];
-			String geld = parameters.get("geld")[0];
 		
 			for (Student student : studenten) {
 				if (temp.equals(student.getEmail())) {
-					student.addStelle(new Stelle(fach, tag, zeit, geld));
+					student.addStelle(new Stelle(parameters.get("fach")[0], parameters.get("tag")[0], parameters.get("zeit")[0], parameters.get("geld")[0]));
 					
 					return ok(profilAnzeigen.render(student));
 				} 

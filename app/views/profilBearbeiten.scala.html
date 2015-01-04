@@ -15,8 +15,18 @@
 			<h3>Persönliche Daten</h3>
 			</br>
 			<!--Datepicker mit Jquery-->
-
-			<div class="form-group">
+			<table class="table table-hover">
+				<tr>
+					<td>Vorname:</td>
+					<td><input type = "text" class="form-control col-md-10 col-md-offset-1" name ="vorname" placeholder = "@s.getVorname"></td>
+				</tr>
+				<tr>
+					<td>Nachname:</td>
+					<td><input type = "text" name="nachname" placeholder = "@s.getNachname"></td>
+				</tr>
+				<tr>
+					<td>Geburtsdatum:</td>
+					<td><div class="form-group">
 				<div class="col-lg-9">
 					<div class="form-inline">
 						<div class="form-group ">
@@ -26,45 +36,53 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div></td>
+				</tr>
+				<tr>
+					<td>E-Mail:</td>
+					<td>@s.getEmail</td>
+					
+				</tr>
+			</table>
+			
 			
 
 			</br>
-			<h3>Du studierst</h3>
+			<h3>Studiengang ändern</h3>
 			
 			<div class="form-group" >
 				<div class="col-md-12">
-				<label for="sel1"></label> <select class="form-control" name="studiengang"
-					id="studiengang">
-					<option>-Studiengang wählen-</option>
-					<option>Angewandte Informatik</option>
-					<option>Architektur</option>
-					<option>Automobilinformationstechnik</option>
-					<option>Bauingenieurwesen</option>
-					<option>Betriebswirtschaftslehre</option>
-					<option>Wirtschafts- und Sozialwissenschaften</option>
-					<option>Elektrotechnik und Informationstechnik</option>
-					<option>Gesundheitsinformatik</option>
-					<option>Kommunikationsdesign</option>
-					<option>Maschinenbau Konstruktion und Entwicklung</option>
-					<option>Maschinenbau Entwicklung und Produktion</option>
-					<option>Umwelttechnik und Ressourcenmanagement</option>
-					<option>Verfahrens- und Umwelttechnik</option>
-					<option>Wirtschaftsinformatik</option>
-					<option>Wirtschaftsingenieurwesen Bau</option>
-					<option>Wirtschaftsingenieurwesen Elektro-
-						undInformationstechnik</option>
-					<option>Wirtschaftsingenieurwesen Maschinenbau</option>
-					<option>Wirtschaftsrecht</option>
-					<option>Wirtschaftssprachen Asien und Management China</option>
-					<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
-				</select>
+				<label for="sel1"></label> 
+				<select class="form-control " name="studiengang" id="sel1" >
+								<option selected>@s.getStudiengang</option>
+								<option>Angewandte Informatik</option>
+								<option>Architektur</option>
+								<option>Automobilinformationstechnik</option>
+								<option>Bauingenieurwesen</option>
+								<option>Betriebswirtschaftslehre</option>
+								<option>Wirtschafts- und Sozialwissenschaften</option>
+								<option>Elektrotechnik und Informationstechnik</option>
+								<option>Gesundheitsinformatik</option>
+								<option>Kommunikationsdesign</option>
+								<option>Maschinenbau Konstruktion und Entwicklung</option>
+								<option>Maschinenbau Entwicklung und Produktion</option>
+								<option>Umwelttechnik und Ressourcenmanagement</option>
+								<option>Verfahrens- und Umwelttechnik</option>
+								<option>Wirtschaftsinformatik</option>
+								<option>Wirtschaftsingenieurwesen Bau</option>
+								<option>Wirtschaftsingenieurwesen Elektro-
+									undInformationstechnik</option>
+								<option>Wirtschaftsingenieurwesen Maschinenbau</option>
+								<option>Wirtschaftsrecht</option>
+								<option>Wirtschaftssprachen Asien und Management China</option>
+								<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
+							</select>
 			</div>
 			</div>
 			<div class="form-group">
 				<div class="col-md-12">
 				<label for="comment"></label>
-				<textarea class="form-control" type="text" rows="6" id="comment" name="textField"
+				<textarea class="form-control" type="text" rows="6" id="comment" name="infos"
 					placeholder="weite Informationen..."></textarea>
 			</div>
 			</div>
