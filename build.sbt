@@ -10,5 +10,9 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  javaWs
+  javaWs,
+  jdbc,
+  cache,
+  ws,
+  "org.xerial" % "sqlite-jdbc" % "3.7.15-M1"
 )

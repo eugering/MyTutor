@@ -24,7 +24,6 @@ public class Application extends Controller {
 
 	// Rendert die Registrierung Seite
 	public static Result registrierung() {
-
 		return ok(registrierung.render());
 	}
 
@@ -139,9 +138,6 @@ public class Application extends Controller {
 		return redirect(routes.Application.profilBearbeiten());
 	}
 
-	// POST empfangen :GET
-	// gebotenen Stellen (Löschen, Aendern?)
-	// aendern => POST an ProfilAnzeigen
 
 	// Rendert die TutorWerden Seite
 	public static Result tutorWerden() {
@@ -159,7 +155,12 @@ public class Application extends Controller {
 
 	// Rendert die Home Seite
 	public static Result home() {
-		return ok(home.render());
+		String user = session("connected"); 
+		if(user != null) {
+			return ok(home.render());
+		     } else {
+		    	 return redirect(routes.Application.login());
+		     }
 	}
 
 	// Rendert die UeberUns Seite
