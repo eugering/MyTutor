@@ -85,7 +85,7 @@
 					
 
 				</tr>
-				@for(stelle <- s.getStellen){
+				@for((key, stelle) <- s.getStellen()){
 				<tr>
 					<td>@s.getStudiengang()</td>
 					<td>@stelle.getFach()</td>

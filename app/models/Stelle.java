@@ -6,11 +6,13 @@ public class Stelle {
 	private String zeiten;
 	private String stundenLohn; 
 	
+	
 	public Stelle(String fach, String tag, String zeiten, String stundenLohn) {
 		this.fach = fach;
 		this.tag = tag;
 		this.zeiten = zeiten;
 		this.stundenLohn = stundenLohn;
+		
 	}
 
 	public String getFach() {
@@ -44,6 +46,9 @@ public class Stelle {
 	public void setStundenLohn(String stundenLohn) {
 		this.stundenLohn = stundenLohn;
 	}
+
+
+	
 	
 	
 }

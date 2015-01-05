@@ -11,6 +11,7 @@
 			<img src=@routes.Assets.at( "images/login.jpg") alt="Bild"
 				class="img-rounded"> </br> </br> <a href="#" class="btn btn-primary btn-xs">Profilbild
 				ändern</a>
+			
 
 			<h3>Persönliche Daten</h3>
 			</br>
@@ -79,6 +80,9 @@
 				
 				<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
 			<h3>Deine angebotenen Stellen</h3>
+			
+			<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.stelleLoeschen()>
 		
 			<div class="table-responsive">
 				<table class="table table-hover">
@@ -90,26 +94,23 @@
 					<th>Zeiten</th>
 					<th>Stundenlohn</th>
 					<th></th>
-					
-
 				</tr>
-				</table>
 				
-				@for(stelle <- s.getStellen){
-					<form class="form-horizontal" role="form" method="post" name="form"
-					action=@routes.Application.stelleLoeschen()>
-					<table>
+				
+				@for((key, stelle) <- s.getStellen){
+					
+					
 					<tr>
 					<td>@s.getStudiengang()</td>
 					<td>@stelle.getFach()</td>
 					<td>@stelle.getTag()</td>
 					<td>@stelle.getZeiten()</td>
 					<td>@stelle.getStundenLohn() €</td>
-					<td><input type="submit" class="btn btn-primary btn-xs" name="loeschen" value="Löschen" /></td>
-									
+					<input type="hidden" name="stelle" value="@key" />
+					<td><input type="submit" class="btn btn-primary btn-xs" name="buttonlöschen" value="Löschen" /></td>
 					</tr>
-					</table>
-					</form>
+					
+					
 				}
 				
 

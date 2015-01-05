@@ -186,11 +186,11 @@ public class Application extends Controller {
 
 			for (Student student : studenten) {
 				if (temp.equals(student.getEmail())) {
-					student.addStelle(new Stelle(parameters.get("fach")[0],
+					student.getStellen().put(student.getCountStellen(), new Stelle(parameters.get("fach")[0],
 							parameters.get("tag")[0],
 							parameters.get("zeit")[0],
 							parameters.get("geld")[0]));
-
+					student.setCountStellen(student.getCountStellen()+1);
 					return ok(profilAnzeigen.render(student));
 				}
 			}
@@ -203,22 +203,14 @@ public class Application extends Controller {
 	public static Result stelleLoeschen() {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		for (Student student : studenten) {
-			if (temp.equals(student.getEmail()))
-				for (Stelle stelle : student.getStellen()) {
-					if (parameters.get("fach")[0] == stelle.getFach()
-						&& parameters.get("tag")[0] == stelle.getTag()
-						&& parameters.get("zeit")[0] == stelle.getZeiten()){
-						student.getStellen().remove(stelle);
-						return ok(profilAnzeigen.render(student));
-					}
+			if (temp.equals(student.getEmail())){
+				
+				student.getStellen().remove(Integer.parseInt(parameters.get("stelle")[0]));
+			}
+				
 				}
 				return ok(profilAnzeigen.render(student));
 		}
-		return ok(profilBearbeiten.render(student));
-
 		
-
-		
-	}
 
 }

@@ -11,14 +11,17 @@ public class Student  {
 	private String nachname;
 	private String pass;
 	private String email;
+	private String studiengang;
+	private int countStellen;
 	
 	//ProfilBearbeiten
-	private String studiengang;
+	
 	private String bday="---";
 	private String infos="---";
 	
 	//Tutor
-	private List<Stelle> stellen = new LinkedList<Stelle>();
+	private SortedMap<Integer, Stelle> stellen = new TreeMap<Integer, Stelle>();
+	
 	
 	
 
@@ -85,6 +88,16 @@ public class Student  {
 	}
 
 	
+	public int getCountStellen() {
+		return countStellen;
+	}
+
+
+
+	public void setCountStellen(int countStellen) {
+		this.countStellen = countStellen;
+	}
+
 	public String getInfos() {
 		return infos;
 	}
@@ -95,14 +108,16 @@ public class Student  {
 
 
 
-	public List<Stelle> getStellen() {
+	public SortedMap<Integer, Stelle> getStellen() {
 		return stellen;
 	}
 
 
 
-	public void addStelle(Stelle s){
-		stellen.add(s);
+	public void setStellen(SortedMap<Integer, Stelle> stellen) {
+		this.stellen = stellen;
 	}
 
+
+	
 }
