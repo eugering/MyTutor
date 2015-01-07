@@ -52,8 +52,15 @@ public class Application extends Controller {
 							parameters.get("studiengang")[0]);
 					temp = parameters.get("mail")[0];
 					studenten.add(student);
-
-					return ok(login.render());
+					
+					//SessionCheck
+					String user = session("connected"); 
+					if (sessionCheck(user)) {
+						return ok(login.render());
+						}else{
+						return redirect(routes.Application.login());
+					}
+					
 				} else {
 					return redirect(routes.Application.registrierung());
 				}
@@ -66,6 +73,8 @@ public class Application extends Controller {
 
 	// Rendert die login Seite
 	public static Result login() {
+		//SessionDiscard
+		session().clear();
 		return ok(login.render());
 	}
 
@@ -80,6 +89,7 @@ public class Application extends Controller {
 		for (Student student : studenten) {
 			if (email.equals(student.getEmail())
 					&& student.getPass().equals(passwort)) {
+				session("connected", email);
 				return ok(home.render());
 			} else {
 				return redirect(routes.Application.login());
@@ -90,22 +100,33 @@ public class Application extends Controller {
 
 	// Rendert die ProfilAnzeigen Seite
 	public static Result profilAnzeigen() {
+		String user = session("connected"); 
+
 		for (Student student : studenten) {
 			if (temp.equals(student.getEmail()))
-
-				return ok(profilAnzeigen.render(student));
+				//SessionCheck
+				if (sessionCheck(user)) {
+					return ok(profilAnzeigen.render(student));
+					}else{
+					return redirect(routes.Application.login());
+				}	
 		}
-		return redirect(routes.Application.registrierung());
+		return redirect(routes.Application.login());
 	}
 
 	// Rendert die ProfilBearbeiten Seite
 	public static Result profilBearbeiten() {
+		String user = session("connected"); 
 		for (Student student : studenten) {
 			if (temp.equals(student.getEmail()))
-
-				return ok(profilBearbeiten.render(student));
+				//SessionCheck
+				if (sessionCheck(user)) {
+					return ok(profilBearbeiten.render(student));
+					}else{
+					return redirect(routes.Application.login());
+				}
 		}
-		return ok(profilBearbeiten.render(student));
+		return redirect(routes.Application.login());
 
 	}
 
@@ -132,22 +153,39 @@ public class Application extends Controller {
 				if (!(parameters.get("infos")[0].isEmpty())) {
 					student.setInfos(parameters.get("infos")[0]);
 				}
-				return ok(profilAnzeigen.render(student));
+				//SessionCheck
+				String user = session("connected"); 
+				if (sessionCheck(user)) {
+					return ok(profilAnzeigen.render(student));
+					}else{
+					return redirect(routes.Application.login());
+				}
 			}
 		}
-		return redirect(routes.Application.profilBearbeiten());
+		return redirect(routes.Application.login());
 	}
 
 
 	// Rendert die TutorWerden Seite
 	public static Result tutorWerden() {
-		return ok(tutorWerden.render());
+		//SessionCheck
+		String user = session("connected"); 
+		if (sessionCheck(user)) {
+			return ok(tutorWerden.render());
+			}else{
+			return redirect(routes.Application.login());
+		}
 	}
 
 
 	// Rendert die Suchen Seite
 	public static Result suchen() {
-		return ok(suchen.render());
+		String user = session("connected"); 
+		if (sessionCheck(user)) {
+			return ok(suchen.render());
+			}else{
+			return redirect(routes.Application.login());
+		}
 		// POST kriterien =>per Ajax
 		// SuchKriterien unten Anzeigen: verlinkung durch Button an die Profile
 
@@ -155,26 +193,40 @@ public class Application extends Controller {
 
 	// Rendert die Home Seite
 	public static Result home() {
+		//SessionCheck
 		String user = session("connected"); 
-		if(user != null) {
+		if (sessionCheck(user)) {
 			return ok(home.render());
-		     } else {
-		    	 return redirect(routes.Application.login());
-		     }
+		}else{
+			return redirect(routes.Application.login());
+		}
 	}
 
 	// Rendert die UeberUns Seite
-	public static Result ueberUns() {
-		return ok(ueberUns.render());
-	}
+		public static Result ueberUns() {
+			//SessionCheck
+			String user = session("connected"); 
+			if (sessionCheck(user)) {
+				return ok(ueberUns.render());
+			}else{
+				return redirect(routes.Application.login());
+			}
+		}
 
+		//SessionCheck
+		public static boolean sessionCheck(String s){
+			if(s != null) {
+				return true;
+			     } else {
+			    	 return false;
+			     }
+		}
 	public static boolean mailCheck(String email) {
 		return email
 				.matches("\\w*\\-*\\w*\\.*\\w*@\\D+\\w*\\-?\\w*\\.*\\w*\\-*\\w*\\.(de|info|org|com|net)");
 	}
 
 	public static Result stelleAnbieten() {
-
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		// Parameteruebergaben werden ueberprueft
 		if (parameters.get("fach")[0].isEmpty()
@@ -192,7 +244,14 @@ public class Application extends Controller {
 							parameters.get("zeit")[0],
 							parameters.get("geld")[0]));
 					student.setCountStellen(student.getCountStellen()+1);
-					return ok(profilAnzeigen.render(student));
+					
+					//SessionCheck
+					String user = session("connected"); 
+					if (sessionCheck(user)) {
+						return ok(profilAnzeigen.render(student));
+					}else{
+						return redirect(routes.Application.login());
+					}
 				}
 			}
 
@@ -210,7 +269,13 @@ public class Application extends Controller {
 			}
 				
 				}
-				return ok(profilAnzeigen.render(student));
+					//SessionCheck
+					String user = session("connected"); 
+					if (sessionCheck(user)) {
+						return ok(profilAnzeigen.render(student));
+						}else{
+						return redirect(routes.Application.login());
+					}
 		}
 		
 
