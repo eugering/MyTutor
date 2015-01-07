@@ -16,7 +16,12 @@ import play.twirl.api.Html;
 import views.html.*;
 import models.Student;
 
+import play.db.*;
+import java.sql.*;
+
+
 public class Application extends Controller {
+	
 
 	private static ArrayList<Student> studenten = new ArrayList<Student>();
 	static Student student;
@@ -75,6 +80,7 @@ public class Application extends Controller {
 	public static Result login() {
 		//SessionDiscard
 		session().clear();
+		Connection connection = DB.getConnection();
 		return ok(login.render());
 	}
 
