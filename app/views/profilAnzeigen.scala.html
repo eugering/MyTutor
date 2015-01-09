@@ -1,4 +1,4 @@
-@(s: Student)
+@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String)
 @Main1() {
 
 <div class="col-xs-12">
@@ -10,31 +10,31 @@
 			<table class="table table-hover">
 				<tr>
 					<td>Vorname:</td>
-					<td>@s.getVorname</td>
+					<td>@vorname</td>
 				</tr>
 				<tr>
 					<td>Nachname:</td>
-					<td>@s.getNachname</td>
+					<td>@nachname</td>
 				</tr>
 				<tr>
 					<td>Geburtsdatum:</td>
-					<td>@s.getBday</td>
+					<td>@bday</td>
 				</tr>
 				<tr>
 					<td>E-Mail:</td>
-					<td>@s.getEmail</td>
+					<td>@email</td>
 					
 				</tr>
 				<tr>
-						<td>Studiengang:</td>
-						<td>@s.getStudiengang</td>
+					<td>Studiengang:</td>
+					<td>@studiengang</td>
 				</tr>
 			</table>
 
 	
 	<div class="row">
 		<div class="col-xs-2">
-			<form action="mailto:@s.getEmail">
+			<form action="mailto:@email">
 				<button type="submit" class="btn btn-primary btn-sm">
 					<span class="glyphicon glyphicon-envelope"></span>
 						e-Mail</button>
@@ -55,7 +55,7 @@
 				</br>
 				<h3>Weitere Informationen</h3>
 				<div>
-					 @s.getInfos
+					 @infos
 				</div>
 				</br>
 				</br>
@@ -85,17 +85,6 @@
 					
 
 				</tr>
-				@for((key, stelle) <- s.getStellen()){
-				<tr>
-					<td>@s.getStudiengang()</td>
-					<td>@stelle.getFach()</td>
-					<td>@stelle.getTag()</td>
-					<td>@stelle.getZeiten()</td>
-					<td>@stelle.getStundenLohn() €</td>
-
-				</tr>
-				
-				}
 				
 
 			</table>

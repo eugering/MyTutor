@@ -10,7 +10,7 @@ POST	 /registrierung/addStudent			controllers.Application.addStudent()
 
 #Login
 POST	/login/einloggen					controllers.Application.einloggen()
-
+GET		/login								controllers.Application.login()
 #bearbeiten
 GET     /profilBearbeiten					controllers.Application.profilBearbeiten()
 POST	/bearbeiten							controllers.Application.bearbeiten()

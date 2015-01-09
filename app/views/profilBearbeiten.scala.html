@@ -1,4 +1,4 @@
-@(s: Student)
+@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String)
 @Main1() {
 
 <div class="col-xs-12">
@@ -6,28 +6,30 @@
 		<div class="jumbotron">
 			<h2 align="center">-Profil bearbeiten-</h2>
 			</br> 
-			<form class="form-horizontal" role="form" method="post" name="form"
-					action=@routes.Application.bearbeiten()>
 			<img src=@routes.Assets.at( "images/login.jpg") alt="Bild"
 				class="img-rounded"> </br> </br> <a href="#" class="btn btn-primary btn-xs">Profilbild
 				ändern</a>
 			
-
+			
+			
+			
+			<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.bearbeiten()>
 			<h3>Persönliche Daten</h3>
 			</br>
 			<!--Datepicker mit Jquery-->
 			<table class="table table-hover">
 				<tr>
 					<td>Vorname:</td>
-					<td><div class="col-lg-6"><input type = "text" class="form-control" name ="vorname" placeholder = "@s.getVorname"></div></td>
+					<td><div class="col-lg-6"><input type = "text" class="form-control" name ="vorname" placeholder = "@vorname"></div></td>
 				</tr>
 				<tr>
 					<td>Nachname:</td>
-					<td><div class="col-lg-6"><input type = "text" class="form-control" name="nachname" placeholder = "@s.getNachname"></div></td>
+					<td><div class="col-lg-6"><input type = "text" class="form-control" name="nachname" placeholder = "@nachname"></div></td>
 				</tr>
 				<tr>
 					<td>Geburtsdatum:</td>
-					<td><div class="col-lg-6"><input type="date" class="form-control" placeholder="Geburtsdatum" name="bday" id="datepicker" /></div></td>
+					<td><div class="col-lg-6"><input type="date" class="form-control" placeholder="Geburtsdatum" name="bday" placeholder ="@bday" id="datepicker" /></div></td>
 				</tr>
 				
 			</table>
@@ -41,7 +43,7 @@
 				<div class="col-md-12">
 				<label for="sel1"></label> 
 				<select class="form-control " name="studiengang" id="sel1" >
-								<option selected>@s.getStudiengang</option>
+								<option selected>@studiengang</option>
 								<option>Angewandte Informatik</option>
 								<option>Architektur</option>
 								<option>Automobilinformationstechnik</option>
@@ -97,21 +99,7 @@
 				</tr>
 				
 				
-				@for((key, stelle) <- s.getStellen){
-					
-					
-					<tr>
-					<td>@s.getStudiengang()</td>
-					<td>@stelle.getFach()</td>
-					<td>@stelle.getTag()</td>
-					<td>@stelle.getZeiten()</td>
-					<td>@stelle.getStundenLohn() €</td>
-					<input type="hidden" name="stelle" value="@key" />
-					<td><input type="submit" class="btn btn-primary btn-xs" name="buttonlöschen" value="Löschen" /></td>
-					</tr>
-					
-					
-				}
+			
 				
 
 			</table>
