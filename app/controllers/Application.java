@@ -1,7 +1,9 @@
 package controllers;
 
 
+import java.lang.reflect.Array;
 import java.util.Map;
+
 import models.*;
 import play.mvc.*;
 import views.html.*;
@@ -27,34 +29,48 @@ public class Application extends Controller {
 				|| parameters.get("passwortWiederholen")[0].isEmpty()) {
 			return redirect(routes.Application.registrierung());
 		} else {
+			String[] student = db.studentSuchen(parameters.get("mail")[0]);
+			System.out.println(student [3]);
+			String a = student[3];
+			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4), bday(5),
+			// infos(6), bild(7)
+			if (!(parameters.get("mail")[0].equals(a))) {
+				if (mailCheck(parameters.get("mail")[0])) {
+					if (parameters.get("pass")[0].equals(parameters
+							.get("passwortWiederholen")[0])) {
+						// Daten befüllen
+						String vorname = parameters.get("vorname")[0];
+						String nachname = parameters.get("nachname")[0];
+						String pass = parameters.get("pass")[0];
+						String email = parameters.get("mail")[0];
+						String studiengang = parameters.get("studiengang")[0];
 
-			if (mailCheck(parameters.get("mail")[0])) {
-				if (parameters.get("pass")[0].equals(parameters
-						.get("passwortWiederholen")[0])) {
-					// Daten befüllen
-					String vorname = parameters.get("vorname")[0];
-					String nachname = parameters.get("nachname")[0];
-					String pass = parameters.get("pass")[0];
-					String email = parameters.get("mail")[0];
-					String studiengang = parameters.get("studiengang")[0];
-					db.insertIntoStudent(vorname, nachname, pass, email,
-							studiengang);
+						db.insertIntoStudent(vorname, nachname, pass, email,
+								studiengang);
 
-					// SessionCheck
-					String user = session("connected");
-					if (sessionCheck(user)) {
-						return ok(login.render());
+						// SessionCheck
+						String user = session("connected");
+						if (sessionCheck(user)) {
+							return ok(login.render());
+						} else {
+							return redirect(routes.Application.login());
+						}
+
 					} else {
-						return redirect(routes.Application.login());
+						return redirect(routes.Application.registrierung());
 					}
 
 				} else {
 					return redirect(routes.Application.registrierung());
 				}
-
-			} else {
+			}else {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!");
 				return redirect(routes.Application.registrierung());
 			}
+			
+
+			
+			
 		}
 	}
 
@@ -76,8 +92,7 @@ public class Application extends Controller {
 		// Student wird in der Datenbank gesucht
 		// Schema vorname(0), nachname(1), pass(2), email(3), sg(4), bday(5),
 		// infos(6), bild(7)
-		String[] student = new String[8];
-		student = db.studentSuchen(parameters.get("mail")[0]);
+		String[] student = db.studentSuchen(parameters.get("mail")[0]);
 		if (parameters.get("pass")[0].equals(student[2])) {
 			session("connected", parameters.get("mail")[0]);
 			System.out.println("Eingeloggt!");
@@ -92,9 +107,8 @@ public class Application extends Controller {
 		String user = session("connected");
 		// SessionCheck
 		if (sessionCheck(user)) {
-			String[] student = new String[8];
-			student = db.studentSuchen(user);
-
+			String[] student= db.studentSuchen(user);
+			
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
 					student[3], student[4], student[6]));
 		} else {
