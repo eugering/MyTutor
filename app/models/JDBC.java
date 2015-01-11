@@ -285,6 +285,152 @@ public class JDBC {
 		System.out.println("Records created successfully");
 	}
 
+	public void alleStellenSuchen(String fach2) {
+		Connection c = null;
+		Statement stmt = null;
+		Application.getStellen().clear();
+		try {
+			c = DB.getConnection();
+			stmt = c.createStatement();
+			String strStelleSuchen = "SELECT * " + " FROM Stelle"
+					+ " WHERE fach LIKE '%" + fach2 + "%';";
+			System.out.println(strStelleSuchen);
+			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+			while (rs.next()) {
+				String fach = rs.getString("fach");
+				String tag = rs.getString("tag");
+				String zeit = rs.getString("zeit");
+				String stundenlohn = rs.getString("stundenlohn");
+				String id = rs.getString("id");
+				System.out.println(fach);
+				if (fach != null) {
+					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					System.out.println(stelle.getTag());
+					Application.getStellen().add(stelle);
+				}
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+
+		}
+		System.out.println("Records created successfully");
+	}
+	
+	public void alleStellenSuchen(String fach2, String studiengang) {
+		Connection c = null;
+		Statement stmt = null;
+		Application.getStellen().clear();
+		try {
+			c = DB.getConnection();
+			stmt = c.createStatement();
+			String strStelleSuchen = "SELECT stelle * " + " FROM Stelle stelle, Student student"
+					+ " WHERE student.email = stelle.email"
+					+ " AND student.studiengang = '" + studiengang +"'"
+					+ " AND stelle.fach LIKE '%" + fach2 + "%';";
+			System.out.println(strStelleSuchen);
+			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+			while (rs.next()) {
+				String fach = rs.getString("fach");
+				String tag = rs.getString("tag");
+				String zeit = rs.getString("zeit");
+				String stundenlohn = rs.getString("stundenlohn");
+				String id = rs.getString("id");
+				System.out.println(fach);
+				if (fach != null) {
+					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					System.out.println(stelle.getTag());
+					Application.getStellen().add(stelle);
+				}
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+
+		}
+		System.out.println("Records created successfully");
+	}
+	
+	public void alleStellenSuchenOhneFach(String studiengang) {
+		Connection c = null;
+		Statement stmt = null;
+		Application.getStellen().clear();
+		try {
+			c = DB.getConnection();
+			stmt = c.createStatement();
+			String strStelleSuchen = "SELECT stelle * " + " FROM Stelle stelle, Student student"
+					+ " WHERE student.email = stelle.email"
+					+ " AND student.studiengang = '" + studiengang +"';";
+			System.out.println(strStelleSuchen);
+			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+			while (rs.next()) {
+				String fach = rs.getString("fach");
+				String tag = rs.getString("tag");
+				String zeit = rs.getString("zeit");
+				String stundenlohn = rs.getString("stundenlohn");
+				String id = rs.getString("id");
+				System.out.println(fach);
+				if (fach != null) {
+					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					System.out.println(stelle.getTag());
+					Application.getStellen().add(stelle);
+				}
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+
+		}
+		System.out.println("Records created successfully");
+	}
+	
+	public void alleStellenSuchen() {
+		Connection c = null;
+		Statement stmt = null;
+		Application.getStellen().clear();
+		try {
+			c = DB.getConnection();
+			stmt = c.createStatement();
+			String strStelleSuchen = "SELECT * FROM Stelle;";
+			System.out.println(strStelleSuchen);
+			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+			while (rs.next()) {
+				String fach = rs.getString("fach");
+				String tag = rs.getString("tag");
+				String zeit = rs.getString("zeit");
+				String stundenlohn = rs.getString("stundenlohn");
+				String id = rs.getString("id");
+				System.out.println(fach);
+				if (fach != null) {
+					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					System.out.println(stelle.getTag());
+					Application.getStellen().add(stelle);
+				}
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+
+		}
+		System.out.println("Records created successfully");
+	}
+	
 	public void studentÄndern(String email, String stelle, String wert) {
 		Connection c = null;
 		Statement stmt = null;

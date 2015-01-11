@@ -32,7 +32,8 @@ public class Application extends Controller {
 				|| parameters.get("mail")[0].isEmpty()
 				|| parameters.get("pass")[0].isEmpty()
 				|| parameters.get("passwortWiederholen")[0].isEmpty()) {
-			return redirect(routes.Application.registrierung("Bitte alle Felder ausfüllen!"));
+			return redirect(routes.Application
+					.registrierung("Bitte alle Felder ausfüllen!"));
 		} else {
 			String[] student = db.studentSuchen(parameters.get("mail")[0]);
 			System.out.println(student[3]);
@@ -191,6 +192,17 @@ public class Application extends Controller {
 
 	}
 
+	// Rendert die Suchen Seite
+	public static Result suchen() {
+		String user = session("connected");
+		if (sessionCheck(user)) {
+			stellen.clear();
+			return ok(suchen.render(stellen));
+		} else {
+			return redirect(routes.Application.login());
+		}
+	}
+
 	// Rendert die TutorWerden Seite
 	public static Result tutorWerden() {
 		// SessionCheck
@@ -203,10 +215,25 @@ public class Application extends Controller {
 	}
 
 	// Rendert die Suchen Seite
-	public static Result suchen() {
+	public static Result tutorSuchen() {
+		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		String user = session("connected");
 		if (sessionCheck(user)) {
-			return ok(suchen.render());
+			if (parameters.get("studiengang")[0].equals("-Tutoren im Bereich-")
+					&& parameters.get("fach")[0].equals("")) {
+				db.alleStellenSuchen();
+			} else {
+				if (parameters.get("studiengang")[0]
+						.equals("-Tutoren im Bereich-")
+						&& !(parameters.get("fach")[0].equals(""))) {
+					db.alleStellenSuchen(parameters.get("fach")[0]);
+				} else {
+					db.alleStellenSuchen(parameters.get("studiengang")[0],
+							parameters.get("fach")[0]);
+				}
+
+			}
+			return ok(suchen.render(stellen));
 		} else {
 			return redirect(routes.Application.login());
 		}

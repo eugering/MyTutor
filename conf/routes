@@ -26,7 +26,7 @@ POST	/stelleAnbieten						controllers.Application.stelleAnbieten()
 
 
 GET     /suchen								controllers.Application.suchen()
-
+POST	/suchen/tutorSuchen					controllers.Application.tutorSuchen()
 GET     /ueberUns							controllers.Application.ueberUns()
 
 GET     /home								controllers.Application.home()

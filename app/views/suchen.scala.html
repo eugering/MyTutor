@@ -1,94 +1,96 @@
-@Main1() {
+@(stellen: List[Stelle]) @Main1() {
 
 <div class="col-xs-12">
 	<div class="container">
 		<div class="jumbotron">
 			<h3>Suche</h3>
-			<div class="form-group">
-				<select class="form-control" id="sel1">
-					<option>-Tutoren im Bereich-</option>
-					<option>Angewandte Informatik</option>
-					<option>Architektur</option>
-					<option>Automobilinformationstechnik</option>
-					<option>Bauingenieurwesen</option>
-					<option>Betriebswirtschaftslehre</option>
-					<option>Wirtschafts- und Sozialwissenschaften</option>
-					<option>Elektrotechnik und Informationstechnik</option>
-					<option>Gesundheitsinformatik</option>
-					<option>Kommunikationsdesign</option>
-					<option>Maschinenbau Konstruktion und Entwicklung</option>
-					<option>Maschinenbau Entwicklung und Produktion</option>
-					<option>Umwelttechnik und Ressourcenmanagement</option>
-					<option>Verfahrens- und Umwelttechnik</option>
-					<option>Wirtschaftsinformatik</option>
-					<option>Wirtschaftsingenieurwesen Bau</option>
-					<option>Wirtschaftsingenieurwesen Elektro-
-						undInformationstechnik</option>
-					<option>Wirtschaftsingenieurwesen Maschinenbau</option>
-					<option>Wirtschaftsrecht</option>
-					<option>Wirtschaftssprachen Asien und Management China</option>
-					<option>Wirtschaftssprache Deutsch und Tourismusmanagement</option>
-				</select>
-			</div>
-			<div class="col-xs">
-				<input type="text" class="form-control" id="Fach" placeholder="Fach">
-			</div>
-			</br>
-			<div class="form-group">
-				<select class="form-control" id="sel1">
-					<option>-Tag-</option>
-					<option>Montag</option>
-					<option>Dienstag</option>
-					<option>Mittwoch</option>
-					<option>Donnerstag</option>
-					<option>Freitag</option>
-					<option>Samstag</option>
-				</select>
-			</div>
-			<!-- Suche starten per AJAX =>Button dafür
-			</br> <a href="#" class="btn btn-primary btn-lg">Suche starten</a>
+			<form class="form-horizontal" role="form" method="post" name="form"
+				action=@routes.Application.tutorSuchen()>
+				<div class="form-group">
+					<select class="form-control" id="sel1" name="studiengang">
+						<option>-Tutoren im Bereich-</option>
+						<option>Angewandte Informatik</option>
+						<option>Architektur</option>
+						<option>Automobilinformationstechnik</option>
+						<option>Bauingenieurwesen</option>
+						<option>Betriebswirtschaftslehre</option>
+						<option>Wirtschafts- und Sozialwissenschaften</option>
+						<option>Elektrotechnik und Informationstechnik</option>
+						<option>Gesundheitsinformatik</option>
+						<option>Kommunikationsdesign</option>
+						<option>Maschinenbau Konstruktion und Entwicklung</option>
+						<option>Maschinenbau Entwicklung und Produktion</option>
+						<option>Umwelttechnik und Ressourcenmanagement</option>
+						<option>Verfahrens- und Umwelttechnik</option>
+						<option>Wirtschaftsinformatik</option>
+						<option>Wirtschaftsingenieurwesen Bau</option>
+						<option>Wirtschaftsingenieurwesen
+							Elektro-undInformationstechnik</option>
+						<option>Wirtschaftsingenieurwesen Maschinenbau</option>
+						<option>Wirtschaftsrecht</option>
+						<option>Wirtschaftssprachen Asien und Management China</option>
+						<option>Wirtschaftssprache Deutsch und
+							Tourismusmanagement</option>
+					</select>
+				</div>
+				<div class="col-xs">
+					<input type="text" class="form-control" name="fach"
+						placeholder="Fach">
+				</div>
+				</br>
 			
-			<input type="Button" onclick="slideup()" class="btn btn-primary btn-lg" id="suche" value="Suche starten">-->
-			
-			<input type="button" id="ergebnis" class="btn btn-primary btn-lg" value="Suche starten" />
-			
+
+			<input type="submit" id="ergebnis" class="btn btn-primary btn-md"
+				value="Suche starten" />
+	</form>
 		</div>
 
 	</div>
 </div>
 
-	<!-- Hier wird JSON Geladen -->
-	<script>
-		$("#ergebnis").click(function(){
-			$.ajax(
-			 	{
-					url: "@routes.Assets.at("Daten/Tutor.json")",
-					dataType: "json",
-					success: function(json) {
-						var html = "<div class='col-xs-12'>"+"<div class='container'>"+"<div class='jumbotron'>"+"<div class='table-responsive'>"+"<h3>"+"Tutoren"+"</h3>"+"<table class='table table-hover'>"+"<tr>"+
-						"<th>"+"Vorname"+"</th>"+"<th>"+"Nachname"+"</th>"+"<th>"+"studiert"+"</th>"+"<th>"+"Fach"+"</th>"+"<th>"+"Tag"+"</th>"+"<th>"+"Zeiten"+"</th>"+"<th>"+"Geld"+"</th>"+"<th>"+"</th>"+
-						"</tr>"+"<tr>";
-						$.each(json.Tutoren, function(){
-							html += "<td>" + this['vorname'] + "</td>";
-							html += "<td>" + this['nachname'] + "</td>";
-							html += "<td>" + this['studiengang'] + "</td>";
-							html += "<td>" + this['fach'] + "</td>";
-							html += "<td>" + this['tag'] + "</td>";
-							html += "<td>" + this['zeiten'] + "</td>";
-							html += "<td>" + this['stundenLohn'] + "</td>"+"</tr>"+"<tr>";
-						});
-						html += "</tr>"+"</table>"+"</div>"+"</div>"+"</div>"+"</div>";
-						$("#tabelle").html(html);
-					}
-				
-			});
-			}
-		);
-		</script>
-		
-		
 
-<div id="tabelle">
+
+<div class="col-xs-12">
+	<div class="container">
+		<div class="jumbotron">
+
+
+			<h3>-Suchergebnis-</h3>
+			</br>
+			<form class="form-horizontal" role="form" method="post" name="form"
+				action=@routes.Application.profil()>
+
+				<div class="table-responsive">
+					<table class="table table-hover">
+
+						<tr>
+
+							<th>Fach</th>
+							<th>Tag</th>
+							<th>Zeiten</th>
+							<th>Stundenlohn</th>
+							<th></th>
+						</tr>
+
+						@for(stelle <- stellen){
+						<tr>
+
+							<td>@stelle.getFach()</td>
+							<td>@stelle.getTag()</td>
+							<td>@stelle.getZeit()</td>
+							<td>@stelle.getStundenlohn() €</td>
+							<td><input type="radio" name="id" value="@stelle.getID()" /></td>
+						</tr>
+						</tr>
+						}
+
+					</table>
+					<input type="submit" class="btn btn-primary btn-md" name="anzeigen"
+						value="Anzeigen" />
+				</div>
+			</form>
+			</br> }
+
+		</div>
+	</div>
 </div>
-
-}
