@@ -1,7 +1,7 @@
 package controllers;
 
-
-import java.lang.reflect.Array;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import models.*;
@@ -11,10 +11,15 @@ import views.html.*;
 public class Application extends Controller {
 
 	static JDBC db = new JDBC();
+	public static List<Stelle> stellen = new LinkedList<Stelle>();
+
+	public static List<Stelle> getStellen() {
+		return stellen;
+	}
 
 	// Rendert die Registrierung Seite
-	public static Result registrierung() {
-		return ok(registrierung.render());
+	public static Result registrierung(String meldung) {
+		return ok(registrierung.render(meldung));
 	}
 
 	// Daten rauslesen
@@ -27,12 +32,13 @@ public class Application extends Controller {
 				|| parameters.get("mail")[0].isEmpty()
 				|| parameters.get("pass")[0].isEmpty()
 				|| parameters.get("passwortWiederholen")[0].isEmpty()) {
-			return redirect(routes.Application.registrierung());
+			return redirect(routes.Application.registrierung("Bitte alle Felder ausfüllen!"));
 		} else {
 			String[] student = db.studentSuchen(parameters.get("mail")[0]);
-			System.out.println(student [3]);
+			System.out.println(student[3]);
 			String a = student[3];
-			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4), bday(5),
+			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
+			// bday(5),
 			// infos(6), bild(7)
 			if (!(parameters.get("mail")[0].equals(a))) {
 				if (mailCheck(parameters.get("mail")[0])) {
@@ -57,26 +63,26 @@ public class Application extends Controller {
 						}
 
 					} else {
-						return redirect(routes.Application.registrierung());
+						return redirect(routes.Application
+								.registrierung("Passwörter stimmen nicht überein!"));
 					}
 
 				} else {
-					return redirect(routes.Application.registrierung());
+					return redirect(routes.Application
+							.registrierung("Bitte gebe eine gültige Email-Adresse ein!"));
 				}
-			}else {
-				System.out.println("!!!!!!!!!!!!!!!!!!!!");
-				return redirect(routes.Application.registrierung());
+			} else {
+				return redirect(routes.Application
+						.registrierung("Mit dieser E-Mail hat sich schon jemand registriert!"));
 			}
-			
 
-			
-			
 		}
 	}
 
 	// Rendert die login Seite
 	public static Result login() {
 		// SessionDiscard
+		stellen.clear();
 		session().clear();
 		// db.dropTable();
 		// db.createTable();
@@ -96,7 +102,7 @@ public class Application extends Controller {
 		if (parameters.get("pass")[0].equals(student[2])) {
 			session("connected", parameters.get("mail")[0]);
 			System.out.println("Eingeloggt!");
-			return ok(home.render());
+			return ok(home.render(student[0], student[1]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -107,10 +113,12 @@ public class Application extends Controller {
 		String user = session("connected");
 		// SessionCheck
 		if (sessionCheck(user)) {
-			String[] student= db.studentSuchen(user);
-			
+			String[] student = db.studentSuchen(user);
+			System.out.println("Versuch Stellen suchen!");
+			db.stellenSuchen(user);
+			System.out.println("Vor dem rendern");
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6]));
+					student[3], student[4], student[6], stellen));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -123,11 +131,10 @@ public class Application extends Controller {
 		if (sessionCheck(user)) {
 			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
 			// bday(5), infos(6), bild(7)
-			String[] student = new String[8];
-			student = db.studentSuchen(user);
-
-			return ok(profilBearbeiten.render(student[0], student[1], student[5],
-					student[3], student[4], student[6]));
+			String[] student = db.studentSuchen(user);
+			db.stellenSuchen(user);
+			return ok(profilBearbeiten.render(student[0], student[1],
+					student[5], student[3], student[4], student[6], stellen));
 
 		} else {
 			return redirect(routes.Application.login());
@@ -174,12 +181,11 @@ public class Application extends Controller {
 
 			}
 			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
-						// bday(5), infos(6), bild(7)
-						String[] student = new String[8];
-						student = db.studentSuchen(user);
-			
-				return ok(profilAnzeigen.render(student[0], student[1], student[5],
-						student[3], student[4], student[6]));
+			// bday(5), infos(6), bild(7)
+			String[] student = db.studentSuchen(user);
+			db.stellenSuchen(user);
+			return ok(profilAnzeigen.render(student[0], student[1], student[5],
+					student[3], student[4], student[6], stellen));
 		}
 		return redirect(routes.Application.login());
 
@@ -214,7 +220,10 @@ public class Application extends Controller {
 		// SessionCheck
 		String user = session("connected");
 		if (sessionCheck(user)) {
-			return ok(home.render());
+			String[] student = new String[8];
+			student = db.studentSuchen(user);
+
+			return ok(home.render(student[0], student[1]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -229,6 +238,16 @@ public class Application extends Controller {
 		} else {
 			return redirect(routes.Application.login());
 		}
+	}
+
+	// Rendert die profil Seite
+	public static Result profil() {
+		// SessionCheck
+		String user = session("connected");
+		String[] student = db.studentSuchen(user);
+
+		return ok(profil.render(student[0], student[1], student[5], student[3],
+				student[4], student[6]));
 	}
 
 	// SessionCheck
@@ -262,13 +281,11 @@ public class Application extends Controller {
 						parameters.get("stundenlohn")[0]);
 				// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
 				// bday(5), infos(6), bild(7)
-				String[] student = new String[8];
-				student = db.studentSuchen(user);
-				
+				String[] student = db.studentSuchen(user);
+				db.stellenSuchen(user);
 
-				return ok(profilAnzeigen.render(student[0], student[1], student[5],
-						student[3], student[4], student[6]));
-				
+				return redirect(routes.Application.home());
+
 			} else {
 				return redirect(routes.Application.login());
 			}
@@ -279,12 +296,14 @@ public class Application extends Controller {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		String user = session("connected");
 		if (sessionCheck(user)) {
-			db.stelleLöschen(user,
-					Integer.parseInt(parameters.get("stelle")[0]));
+			db.stelleLöschen(user, Integer.parseInt(parameters.get("id")[0]));
+			String[] student = db.studentSuchen(user);
+			db.stellenSuchen(user);
+			return ok(profilBearbeiten.render(student[0], student[1],
+					student[5], student[3], student[4], student[6], stellen));
 		} else {
 			return redirect(routes.Application.login());
 		}
-		return redirect(routes.Application.login());
 
 	}
 

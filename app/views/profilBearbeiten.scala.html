@@ -1,4 +1,4 @@
-@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String)
+@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String, stellen: List[Stelle])
 @Main1() {
 
 <div class="col-xs-12">
@@ -7,9 +7,8 @@
 			<h2 align="center">-Profil bearbeiten-</h2>
 			</br> 
 			<img src=@routes.Assets.at( "images/login.jpg") alt="Bild"
-				class="img-rounded"> </br> </br> <a href="#" class="btn btn-primary btn-xs">Profilbild
-				ändern</a>
-			
+			<input id="input-700" name="kartik-input-700" type="file" multiple=true class="file-loading" data-upload-url="@routes.Assets.at( "images/login.jpg")" data-max-file-count="10">
+			<input id="input-1" type="file" class="file">
 			
 			
 			
@@ -76,8 +75,8 @@
 			</div>
 			</div>
 			</br>
-		<input type="submit" class="btn btn-primary btn-lg" name="name" value="Änderung Speichern" />
-				</form>
+		<input type="submit" class="btn btn-primary btn-md" name="name" value="Änderung Speichern" />
+	</form>
 			</br>
 				
 				<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
@@ -95,14 +94,23 @@
 					<th>Tag</th>
 					<th>Zeiten</th>
 					<th>Stundenlohn</th>
-					<th></th>
+					<th>Löschen</th>
 				</tr>
 				
-				
-			
-				
+				@for(stelle <- stellen){
+					<tr>
+					<td>@studiengang</td>
+					<td>@stelle.getFach()</td>
+					<td>@stelle.getTag()</td>
+					<td>@stelle.getZeit()</td>
+					<td>@stelle.getStundenlohn() €</td>
+					<td><input type="radio" name="id" value="@stelle.getID()" /></td>
+					</tr>
+					</tr>
+				}
 
 			</table>
+			<input type="submit" class="btn btn-primary btn-md" name="löschen" value="Stelle löschen" />
 			</div>
 			</form>
 			</br>			

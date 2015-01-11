@@ -1,8 +1,8 @@
 package models;
 
 import java.sql.*;
-
 import play.db.*;
+import controllers.*;
 
 public class JDBC {
 
@@ -247,32 +247,35 @@ public class JDBC {
 		System.out.println("Records created successfully");
 		return null;
 	}
-//TODO
-	public String[] stellenSuchen(String mail) {
+
+	// TODO
+	public void stellenSuchen(String mail) {
 		Connection c = null;
 		Statement stmt = null;
+		Application.getStellen().clear();
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
 			String strStelleSuchen = "SELECT * " + "FROM Stelle"
-					+ " WHERE student = '" + mail + "';";
+					+ " WHERE email = '" + mail + "';";
 			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
-
-			String[] stellen = new String[8];
 			while (rs.next()) {
-				stellen[0] = rs.getString("student");
-				stellen[1] = rs.getString("fach");
-				stellen[2] = rs.getString("tag");
-				stellen[3] = rs.getString("zeit");
-				stellen[4] = rs.getString("stundenlohn");
-				stellen[5] = rs.getString("id");
-			
+				String fach = rs.getString("fach");
+				String tag = rs.getString("tag");
+				String zeit = rs.getString("zeit");
+				String stundenlohn = rs.getString("stundenlohn");
+				String id = rs.getString("id");
+				System.out.println(fach);
+				if (fach != null) {
+					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					System.out.println(stelle.getTag());
+					Application.getStellen().add(stelle);
+				}
 			}
 			rs.close();
 			stmt.close();
 			c.close();
-			return stellen;
 
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -280,10 +283,8 @@ public class JDBC {
 
 		}
 		System.out.println("Records created successfully");
-		return null;
 	}
 
-	
 	public void studentÄndern(String email, String stelle, String wert) {
 		Connection c = null;
 		Statement stmt = null;
@@ -314,8 +315,9 @@ public class JDBC {
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
-			String strStelleLöschen = "DELETE" + "FROM Stelle"
-					+ " WHERE student = " + email + " AND id = " + id + ";";
+			String strStelleLöschen = "DELETE" + " FROM Stelle"
+					+ " WHERE email = '" + email + "' AND id = " + id + ";";
+			System.out.println(strStelleLöschen);
 			stmt.executeUpdate(strStelleLöschen);
 
 			stmt.close();

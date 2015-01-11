@@ -1,27 +1,31 @@
+ @Main2() {
+</br>
+</br>
+</br>
 
-@Main2() {
-</br>
-</br>
-</br>
-  
-<div class= container-fluid container-fixed-top>
-<div class="container">
-	<div class="row">
-    	<div class="col-sm-6 col-md-4 col-md-offset-4">
-        	<h2 class="text-center login-title">Anmelden zum Fortfahren</h2>
-            	<div class="account-wall">
-                <img class="profile-img" src=@routes.Assets.at("images/login.jpg")
+<div class=container-fluid container-fixed-top>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<h2 class="text-center login-title">Anmelden zum Fortfahren</h2>
+				<div class="account-wall">
+					<img class="profile-img" src=@routes.Assets.at(
+						"images/login.jpg")
                     alt="">
-                <form class="form-signin" method="POST"
-					action=@routes.Application.einloggen()>
-                <input type="text" class="form-control" name="mail" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" name="pass" placeholder="Password" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                </form>
-            	</div>
-            	<a href=@routes.Application.registrierung class="text-center new-account">Noch nicht registriert ? </a>
-        </div>
+					<form class="form-signin" method="POST"
+						action=@routes.Application.einloggen()>
+						<input type="text" class="form-control" name="mail"
+							placeholder="Email" required autofocus> <input
+							type="password" class="form-control" name="pass"
+							placeholder="Password" required>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+							in</button>
+					</form>
+				</div>
+				<a href=@routes.Application.registrierung(
+					" ") class="text-center new-account">Noch nicht registriert ? </a>
+			</div>
+		</div>
 	</div>
-</div>	
-</div>		
+</div>
 }
