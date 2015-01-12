@@ -1,0 +1,21 @@
+{
+	"Entwickler":[	{
+					"vorname": "Metehan",
+					"nachname": "Kilin",
+					"studiengang": "Wirtschaftsinformatik",
+					"semester":	"6",
+					"Wohnort": "Mühlacker"
+
+					
+				  	
+				}, 
+				{
+					"vorname": "Eugen",
+					"nachname": "Gering",
+					"studiengang":"Wirtschaftsinformatik",
+					"semester": "6",
+					"Wohnort": "Konstanz"
+
+			    	
+				}]
+}

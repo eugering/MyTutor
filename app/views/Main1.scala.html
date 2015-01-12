@@ -21,6 +21,8 @@
     <link rel="stylesheet" type="text/css" href= @routes.Assets.at("stylesheets/jquery-uiDatePicker.min.css")>   
     <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script> 
     
+    	<!--Google fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <!-- DatePicker -->
     <link rel="stylesheet" type="text/css" href= @routes.Assets.at("DatePicker/css/theme.css")>    
 
@@ -100,9 +102,10 @@
 		</div><!-- /.container-fluid -->
 		</nav>
 
+
 	
     @content
-	
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -119,10 +122,19 @@
 		});
 	});
 	</script>
+	<script>
+		$(function() {
+		  $( "#hallo" ).hide();
+		  $( "#mouse" ).mouseover(function() {
+			 $( "#hallo" ).show ("explode",  1000);
+		  });   
+		  
+			
+		});
+	</script>
     <script src= @routes.Assets.at("javascripts/jqueryDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/jquery-uiDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
-    
     
 </body>
 </html>

@@ -339,6 +339,7 @@ public class Application extends Controller {
 
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		// Parameteruebergaben werden ueberprueft
+		
 		if (parameters.get("id")[0].isEmpty()) {
 			return redirect(routes.Application.suchen());
 		} else {

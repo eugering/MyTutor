@@ -1,31 +1,61 @@
 @Main1() {
+<style type="text/css">
+#GF1{
+	font-family: 'Lobster', cursiv;
+	font-size: xx-large;
+	}
+</style>
 
 	<div class="col-xs-12">
 	<div class="container">
       <div class="jumbotron">    
     	<h2 align="center">-Web-Technologien-</h2>
       </br>
+	</br>
+	</br>
+	<p align="center"><span id="GF1">if you want to know, who developed this page</span></p>
+	<div align="center">
+	<input  type="button" id="ergebnis" class="btn btn-primary btn-lg" value="press the Button" />
+	</div>
+	</br >
 
 	
-	<p>An diesem Projekt hat gearbeitet:</p>
-	<ul>
-	<li>Eugen Gering</li>
-	<li>Metehan Kilin</li>
-	</ul>
-	<p>
-	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-
-At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-
- 	 
- 	 	 
-Deutsch
-"Das höchste Gut und Uebel" Cicero
-Absatz 1.10.32 - 1.10.33
-
-Damit Ihr indess erkennt, woher dieser ganze Irrthum gekommen ist, und weshalb man die Lust anklagt und den Schmerz lobet, so will ich Euch Alles eröffnen und auseinander setzen, was jener Begründer der Wahrheit und gleichsam Baumeister des glücklichen Lebens selbst darüber gesagt hat. Niemand, sagt er, verschmähe, oder hasse, oder fliehe die Lust als solche, sondern weil grosse Schmerzen ihr folgen, wenn man nicht mit Vernunft ihr nachzugehen verstehe. Ebenso werde der Schmerz als solcher von Niemand geliebt, gesucht und verlangt, sondern weil mitunter solche Zeiten eintreten, dass man mittelst Arbeiten und Schmerzen eine grosse Lust sich zu verschaften suchen müsse. Um hier gleich bei dem Einfachsten stehen zu bleiben, so würde Niemand von uns anstrengende körperliche Uebungen vornehmen, wenn er nicht einen Vortheil davon erwartete. Wer dürfte aber wohl Den tadeln, der nach einer Lust verlangt, welcher keine Unannehmlichkeit folgt, oder der einem Schmerze ausweicht, aus dem keine Lust hervorgeht?
-	</p>
 	</div>
 	</div>
 	</div>
+	
+	
+	<!-- Hier wird JSON Geladen -->
+	<script>
+		$("#ergebnis").click(function(){
+			$.ajax(
+			 	{
+					url: "@routes.Assets.at("Daten/Entwickler.json")",
+					dataType: "json",
+					success: function(json) {
+						var html = "<div class='col-xs-12'>"+"<div class='container'>"+"<div class='jumbotron'>"+"<div class='table-responsive'>"+"<h3>"+"Developer"+"</h3>"+"<table class='table table-hover'>"+"<tr>"+
+						"<th>"+"Vorname"+"</th>"+"<th>"+"Nachname"+"</th>"+"<th>"+"studiert"+"</th>"+"<th>"+"Semester"+"</th>"+"<th>"+"Wohnort"+"</th>"+
+						"</tr>"+"<tr>";
+						$.each(json.Entwickler, function(){
+							html += "<td>" + this['vorname'] + "</td>";
+							html += "<td>" + this['nachname'] + "</td>";
+							html += "<td>" + this['studiengang'] + "</td>";
+							html += "<td>" + this['semester'] + "</td>";
+							html += "<td>" + this['Wohnort'] + "</td>"+"</tr>"+"<tr>";
+
+						});
+						html += "</tr>"+"</table>"+"</div>"+"</div>"+"</div>"+"</div>";
+						$("#tabelle").html(html);
+					}
+				
+			});
+			}
+		);
+		</script>
+
+<div id="tabelle">
+</div>
+	
+	
+	
 }
