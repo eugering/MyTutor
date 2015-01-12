@@ -1,6 +1,7 @@
 package models;
 
 public class Stelle {
+	private String name;
 	private String fach;
 	private String tag;
 	private String zeit;
@@ -8,7 +9,8 @@ public class Stelle {
 	private String id;
 	
 	
-	public Stelle(String fach, String tag, String zeit, String stundenlohn, String id) {
+	public Stelle(String name, String fach, String tag, String zeit, String stundenlohn, String id) {
+		this.name = name;
 		this.fach = fach;
 		this.tag = tag;
 		this.zeit = zeit;
@@ -36,6 +38,10 @@ public class Stelle {
 	
 	public String getID() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 }

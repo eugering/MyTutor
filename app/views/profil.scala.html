@@ -1,4 +1,4 @@
-@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String)
+@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String, stellen: List[Stelle])
 @Main1() {
 
 <div class="col-xs-12">
@@ -79,10 +79,17 @@
 					<th>Zeiten</th>
 					<th>Stundenlohn</th>
 					
-
 				</tr>
 				
-				
+				@for(stelle <- stellen){
+					<tr>
+					<td>@studiengang</td>
+					<td>@stelle.getFach()</td>
+					<td>@stelle.getTag()</td>
+					<td>@stelle.getZeit()</td>
+					<td>@stelle.getStundenlohn() €</td>
+					</tr>
+				}
 				
 			</table>
 		</div>

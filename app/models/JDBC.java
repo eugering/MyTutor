@@ -256,8 +256,9 @@ public class JDBC {
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
-			String strStelleSuchen = "SELECT * " + "FROM Stelle"
-					+ " WHERE email = '" + mail + "';";
+			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname FROM Stelle stelle, Student student"
+					+ " WHERE stelle.email = '" + mail + "'"
+					+ " AND stelle.email = student.email;";
 			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
@@ -266,9 +267,11 @@ public class JDBC {
 				String zeit = rs.getString("zeit");
 				String stundenlohn = rs.getString("stundenlohn");
 				String id = rs.getString("id");
+				String vorname = rs.getString("vorname");
+				String nachname = rs.getString("nachname");
 				System.out.println(fach);
 				if (fach != null) {
-					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
@@ -292,8 +295,11 @@ public class JDBC {
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
-			String strStelleSuchen = "SELECT * " + " FROM Stelle"
-					+ " WHERE fach LIKE '%" + fach2 + "%';";
+			String strStelleSuchen = "SELECT stelle.* , student.vorname, student.nachname" + " FROM Stelle stelle "
+					+ ", Student student"
+					+ " WHERE fach LIKE '%" + fach2 + "%'"
+					+ " AND stelle.email = student.email;";
+			
 			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
@@ -302,9 +308,12 @@ public class JDBC {
 				String zeit = rs.getString("zeit");
 				String stundenlohn = rs.getString("stundenlohn");
 				String id = rs.getString("id");
+				String vorname = rs.getString("vorname");
+				String nachname = rs.getString("nachname");
+
 				System.out.println(fach);
 				if (fach != null) {
-					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
@@ -321,14 +330,14 @@ public class JDBC {
 		System.out.println("Records created successfully");
 	}
 	
-	public void alleStellenSuchen(String fach2, String studiengang) {
+	public void alleStellenSuchen(String studiengang, String fach2) {
 		Connection c = null;
 		Statement stmt = null;
 		Application.getStellen().clear();
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
-			String strStelleSuchen = "SELECT stelle * " + " FROM Stelle stelle, Student student"
+			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname" + " FROM Stelle stelle, Student student"
 					+ " WHERE student.email = stelle.email"
 					+ " AND student.studiengang = '" + studiengang +"'"
 					+ " AND stelle.fach LIKE '%" + fach2 + "%';";
@@ -340,9 +349,11 @@ public class JDBC {
 				String zeit = rs.getString("zeit");
 				String stundenlohn = rs.getString("stundenlohn");
 				String id = rs.getString("id");
+				String vorname = rs.getString("vorname");
+				String nachname = rs.getString("nachname");
 				System.out.println(fach);
 				if (fach != null) {
-					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
@@ -366,7 +377,7 @@ public class JDBC {
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
-			String strStelleSuchen = "SELECT stelle * " + " FROM Stelle stelle, Student student"
+			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname " + " FROM Stelle stelle, Student student"
 					+ " WHERE student.email = stelle.email"
 					+ " AND student.studiengang = '" + studiengang +"';";
 			System.out.println(strStelleSuchen);
@@ -377,9 +388,11 @@ public class JDBC {
 				String zeit = rs.getString("zeit");
 				String stundenlohn = rs.getString("stundenlohn");
 				String id = rs.getString("id");
+				String vorname = rs.getString("vorname");
+				String nachname = rs.getString("nachname");
 				System.out.println(fach);
 				if (fach != null) {
-					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
@@ -403,7 +416,8 @@ public class JDBC {
 		try {
 			c = DB.getConnection();
 			stmt = c.createStatement();
-			String strStelleSuchen = "SELECT * FROM Stelle;";
+			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname FROM Stelle stelle, Student student"
+					+ " WHERE stelle.email = student.email;";
 			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
@@ -412,9 +426,11 @@ public class JDBC {
 				String zeit = rs.getString("zeit");
 				String stundenlohn = rs.getString("stundenlohn");
 				String id = rs.getString("id");
+				String vorname = rs.getString("vorname");
+				String nachname = rs.getString("nachname");
 				System.out.println(fach);
 				if (fach != null) {
-					Stelle stelle = new Stelle(fach, tag, zeit, stundenlohn, id);
+					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
@@ -474,4 +490,50 @@ public class JDBC {
 		}
 		System.out.println("If did not exist: Table created successfully");
 	}
+
+	public String[] tutorSuchen(String id) {
+		Connection c = null;
+		Statement stmt = null;
+		try {
+			c = DB.getConnection();
+			stmt = c.createStatement();
+			String strTutorSuchen = "SELECT student.* FROM Student student, Stelle stelle"
+					+ " WHERE stelle.id = '" + id + "'"
+					+ " AND stelle.email = student.email"
+					+ " ORDER BY student.email ASC LIMIT 1;";
+			System.out.println(strTutorSuchen);
+			ResultSet rs = stmt.executeQuery(strTutorSuchen);
+
+			String[] student = new String[8];
+			while (rs.next()) {
+				student[0] = rs.getString("vorname");
+				student[1] = rs.getString("nachname");
+				student[2] = rs.getString("pass");
+				student[3] = rs.getString("email");
+				student[4] = rs.getString("studiengang");
+				student[5] = rs.getString("bday");
+				student[6] = rs.getString("infos");
+				student[7] = rs.getString("bild");
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+			return student;
+
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+
+		}
+		System.out.println("Records created successfully");
+		return null;
+	}
+
+
+
+
+
+
+
+
 }

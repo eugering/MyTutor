@@ -219,17 +219,26 @@ public class Application extends Controller {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		String user = session("connected");
 		if (sessionCheck(user)) {
+			//Beide leer
 			if (parameters.get("studiengang")[0].equals("-Tutoren im Bereich-")
 					&& parameters.get("fach")[0].equals("")) {
 				db.alleStellenSuchen();
 			} else {
+				//sg leer fach voll
 				if (parameters.get("studiengang")[0]
 						.equals("-Tutoren im Bereich-")
-						&& !(parameters.get("fach")[0].equals(""))) {
+						&& (!(parameters.get("fach")[0].equals("")))) {
 					db.alleStellenSuchen(parameters.get("fach")[0]);
 				} else {
-					db.alleStellenSuchen(parameters.get("studiengang")[0],
-							parameters.get("fach")[0]);
+					//sg voll fach leer
+					if (!(parameters.get("studiengang")[0].equals("-Tutoren im Bereich-"))
+							&& parameters.get("fach")[0].equals("")) {
+						db.alleStellenSuchenOhneFach(parameters.get("studiengang")[0]);
+					}else{
+						db.alleStellenSuchen(parameters.get("studiengang")[0],
+								parameters.get("fach")[0]);
+					}
+					
 				}
 
 			}
@@ -268,14 +277,6 @@ public class Application extends Controller {
 	}
 
 	// Rendert die profil Seite
-	public static Result profil() {
-		// SessionCheck
-		String user = session("connected");
-		String[] student = db.studentSuchen(user);
-
-		return ok(profil.render(student[0], student[1], student[5], student[3],
-				student[4], student[6]));
-	}
 
 	// SessionCheck
 	public static boolean sessionCheck(String s) {
@@ -334,4 +335,21 @@ public class Application extends Controller {
 
 	}
 
+	public static Result tutorProfil() {
+
+		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
+		// Parameteruebergaben werden ueberprueft
+		if (parameters.get("id")[0].isEmpty()) {
+			return redirect(routes.Application.suchen());
+		} else {
+			String[] student = db.tutorSuchen(parameters.get("id")[0]);
+			db.stellenSuchen(student[3]);
+			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
+			// bday(5),
+			// infos(6), bild(7)
+
+				return ok(profil.render(student[0], student[1], student[5], student[3], student[4], student[6], stellen));
+		}}
+
+	
 }
