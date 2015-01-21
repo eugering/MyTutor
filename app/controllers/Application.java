@@ -362,5 +362,13 @@ public class Application extends Controller {
 
 	}
 	
+	public static WebSocket<String> sockets(){
+		WebSocket<String> ws = null;
+		ws = new WebSocket<String>() {
+		public void onReady(WebSocket.In<String> in, final WebSocket.Out<String> out) {}
+		
+				};
+		    return ws;
+	}
 	
 }
