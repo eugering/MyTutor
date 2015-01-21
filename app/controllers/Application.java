@@ -8,6 +8,7 @@ import models.*;
 import play.mvc.*;
 import views.html.*;
 
+
 public class Application extends Controller {
 
 	static JDBC db = new JDBC();
@@ -190,8 +191,8 @@ public class Application extends Controller {
 
 	}
 
-	//Upload
-	public static Result upload(){
+	// Upload
+	public static Result upload() {
 		String user = session("connected");
 		// SessionCheck
 		if (sessionCheck(user)) {
@@ -204,7 +205,7 @@ public class Application extends Controller {
 		}
 
 	}
-	
+
 	// Rendert die Suchen Seite
 	public static Result suchen() {
 		String user = session("connected");
@@ -227,47 +228,50 @@ public class Application extends Controller {
 		}
 	}
 
-	//Rendert die Profilseite des Tutors
-		public static Result tutorProfil() {
-			Map<String, String[]> parameters = request().body().asFormUrlEncoded();
-			// Parameteruebergaben werden ueberprueft
-			if (parameters.get("id")[0].isEmpty()) {
-				return redirect(routes.Application.suchen());
-			} else {
-				String[] student = db.tutorSuchen(parameters.get("id")[0]);
-				db.stellenSuchen(student[3]);
-				// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
-				// bday(5),
-				// infos(6), bild(7)
-					return ok(profil.render(student[0], student[1], student[5], student[3], student[4], student[6], stellen));
-			}}
+	// Rendert die Profilseite des Tutors
+	public static Result tutorProfil() {
+		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
+		// Parameteruebergaben werden ueberprueft
+		if (parameters.get("id")[0].isEmpty()) {
+			return redirect(routes.Application.suchen());
+		} else {
+			String[] student = db.tutorSuchen(parameters.get("id")[0]);
+			db.stellenSuchen(student[3]);
+			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
+			// bday(5),
+			// infos(6), bild(7)
+			return ok(profil.render(student[0], student[1], student[5],
+					student[3], student[4], student[6], stellen));
+		}
+	}
 
-	
 	// Rendert die Suchen Seite
 	public static Result tutorSuchen() {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		String user = session("connected");
 		if (sessionCheck(user)) {
-			//Beide leer
+			// Beide leer
 			if (parameters.get("studiengang")[0].equals("-Tutoren im Bereich-")
 					&& parameters.get("fach")[0].equals("")) {
 				db.alleStellenSuchen();
 			} else {
-				//sg leer fach voll
+				// sg leer fach voll
 				if (parameters.get("studiengang")[0]
 						.equals("-Tutoren im Bereich-")
 						&& (!(parameters.get("fach")[0].equals("")))) {
 					db.alleStellenSuchen(parameters.get("fach")[0]);
 				} else {
-					//sg voll fach leer
-					if (!(parameters.get("studiengang")[0].equals("-Tutoren im Bereich-"))
+					// sg voll fach leer
+					if (!(parameters.get("studiengang")[0]
+							.equals("-Tutoren im Bereich-"))
 							&& parameters.get("fach")[0].equals("")) {
-						db.alleStellenSuchenOhneFach(parameters.get("studiengang")[0]);
-					}else{
+						db.alleStellenSuchenOhneFach(parameters
+								.get("studiengang")[0]);
+					} else {
 						db.alleStellenSuchen(parameters.get("studiengang")[0],
 								parameters.get("fach")[0]);
 					}
-					
+
 				}
 
 			}
@@ -313,12 +317,14 @@ public class Application extends Controller {
 			return false;
 		}
 	}
-	//mailCheck
+
+	// mailCheck
 	public static boolean mailCheck(String email) {
 		return email
 				.matches("\\w*\\-*\\w*\\.*\\w*@\\D+\\w*\\-?\\w*\\.*\\w*\\-*\\w*\\.(de|info|org|com|net)");
 	}
-	//stelleAnbieten
+
+	// stelleAnbieten
 	public static Result stelleAnbieten() {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		// Parameteruebergaben werden ueberprueft
@@ -334,9 +340,6 @@ public class Application extends Controller {
 				db.insertIntoStelle(user, parameters.get("fach")[0],
 						parameters.get("tag")[0], parameters.get("zeit")[0],
 						parameters.get("stundenlohn")[0]);
-				// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
-				// bday(5), infos(6), bild(7)
-				String[] student = db.studentSuchen(user);
 				db.stellenSuchen(user);
 
 				return redirect(routes.Application.home());
@@ -346,7 +349,8 @@ public class Application extends Controller {
 			}
 		}
 	}
-	//stelleLoeschen
+
+	// stelleLoeschen
 	public static Result stelleLoeschen() {
 		Map<String, String[]> parameters = request().body().asFormUrlEncoded();
 		String user = session("connected");
@@ -361,14 +365,20 @@ public class Application extends Controller {
 		}
 
 	}
-	
-	public static WebSocket<String> sockets(){
-		WebSocket<String> ws = null;
-		ws = new WebSocket<String>() {
-		public void onReady(WebSocket.In<String> in, final WebSocket.Out<String> out) {}
+
+	public static WebSocket<String> websocket() {
+		System.out.println("Websocket!!!!!!");
+		String[] neuster = db.neustenTutorSuchen();
+		String neusterTutor = neuster[0] + " " + neuster[1] + " bietet " + neuster[2] + " an";
 		
-				};
-		    return ws;
-	}
+		    return WebSocket.whenReady((in, out) -> {
+		       out.write(neusterTutor);
+		        // When the socket is closed.
+		        in.onClose(() -> System.out.println("Disconnected"));
+
+		        
+		    });
+		}
 	
+
 }

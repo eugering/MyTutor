@@ -530,6 +530,38 @@ public class JDBC {
 	}
 
 
+	public String[] neustenTutorSuchen() {
+		Connection c = null;
+		Statement stmt = null;
+		try {
+			c = DB.getConnection();
+			stmt = c.createStatement();
+			String strTutorSuchen = "SELECT student.vorname, student.nachname, stelle.fach FROM Student student, Stelle stelle"
+					+ " WHERE stelle.email = student.email"
+					+ " AND stelle.id = (SELECT MAX(stelle2.id) FROM Stelle stelle2);";
+			System.out.println(strTutorSuchen);
+			ResultSet rs = stmt.executeQuery(strTutorSuchen);
+
+			String[] student = new String[3];
+			while (rs.next()) {
+				student[0] = rs.getString("vorname");
+				student[1] = rs.getString("nachname");
+				student[2] = rs.getString("fach");
+				
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+			return student;
+
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+
+		}
+		System.out.println("Records created successfully");
+		return null;
+	}
 
 
 

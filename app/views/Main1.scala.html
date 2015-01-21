@@ -111,6 +111,22 @@
 	</br>
 	</br>
 	
+<script type="text/javascript">
+
+  var webSocket;
+  $(function() {
+    var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+    webSocket = new WS("@routes.Application.websocket().webSocketURL(request)");
+    webSocket.onmessage = receiveEvent;
+   })
+  
+   function receiveEvent(event) {
+    $("#output").html(event.data);
+  };
+  
+  
+</script>
+
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script>
@@ -127,7 +143,7 @@
   
   		<div id="footer">
  			<div class="navbar navbar-inverse  navbar-fixed-bottom" >
-   			 <p class="muted credit"><center id="foot">News: WEBSOCKET</center></p>
+   			 <p class="muted credit"><center id="foot">News: <span id="output" /></center></p>
  		</div>
 
 </body>

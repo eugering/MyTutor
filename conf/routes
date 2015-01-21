@@ -3,6 +3,7 @@
 # ~~~~
 # index
 GET     /									controllers.Application.login()
+GET 	/socket 							controllers.Application.websocket()
 
 #Registrierung
 GET      /registrierung                 	controllers.Application.registrierung(meldung)
