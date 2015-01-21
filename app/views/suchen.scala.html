@@ -60,8 +60,7 @@
 
 			<h3>-Suchergebnis-</h3>
 			</br>
-			<form class="form-horizontal" role="form" method="post" name="form"
-				action=@routes.Application.tutorProfil()>
+			
 
 				<div class="table-responsive">
 					<table class="table table-hover">
@@ -73,25 +72,30 @@
 							<th>Zeiten</th>
 							<th>Stundenlohn</th>
 							<th></th>
+							<th>Löschen</th>
 						</tr>
 
 						@for(stelle <- stellen){
 						<tr>
+						<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.tutorProfil()>
 							<td>@stelle.getName()</td>
 							<td>@stelle.getFach()</td>
 							<td>@stelle.getTag()</td>
 							<td>@stelle.getZeit()</td>
 							<td>@stelle.getStundenlohn() €</td>
-							<td><input type="radio" name="id" required value="@stelle.getID()" /></td>
+							<td><input type="hidden" name="id" required value="@stelle.getID()" /></td>
+							<td><input type="submit" class="btn btn-primary btn-md" id="ergebnis" name="anzeigen"
+						value="Anzeigen" /></td>
+						</form>
 						</tr>
 						</tr>
 						}
 
 					</table>
-					<input type="submit" class="btn btn-primary btn-md" id="ergebnis" name="anzeigen"
-						value="Anzeigen" />
+				
 				</div>
-			</form>
+			
 			</br> 
 
 		</div>

@@ -14,6 +14,7 @@ GET		/login								controllers.Application.login()
 #bearbeiten
 GET     /profilBearbeiten					controllers.Application.profilBearbeiten()
 POST	/bearbeiten							controllers.Application.bearbeiten()
+POST	/upload								controllers.Application.upload()
 
 GET     /profilAnzeigen						controllers.Application.profilAnzeigen()
 

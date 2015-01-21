@@ -59,7 +59,10 @@
 		    padding: 15px;
 		    margin: 0 auto;
 		}
-		
+		#foot{
+			color: white;
+			font-weight: bold;
+		}
 		
 	</style>
     <!--DatePicker-->
@@ -102,10 +105,13 @@
 		</div><!-- /.container-fluid -->
 		</nav>
 
-
 	
     @content
 
+	</br>
+	</br>
+	
+	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src= @routes.Assets.at("jquery/jquery.2.1.1.js")></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -113,28 +119,16 @@
     <!--DatePicker-->
     <script src= @routes.Assets.at("Datepicker/js/jquery-ui-1.10.4.custom.js")></script>
 	<script src= @routes.Assets.at("Datepicker/js/jquery-1.11.js")></script>
-    <script>
-	$(function() {
-		$( "#datepicker" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			maxDate: "-216M"
-		});
-	});
-	</script>
-	<script>
-		$(function() {
-		  $( "#hallo" ).hide();
-		  $( "#mouse" ).mouseover(function() {
-			 $( "#hallo" ).show ("explode",  1000);
-		  });   
-		  
-			
-		});
-	</script>
+  
     <script src= @routes.Assets.at("javascripts/jqueryDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/jquery-uiDatePicker.min.js")></script>
     <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
     
+  
+  		<div id="footer">
+ 			<div class="navbar navbar-inverse  navbar-fixed-bottom" >
+   			 <p class="muted credit"><center id="foot">News: WEBSOCKET</center></p>
+ 		</div>
+
 </body>
 </html>

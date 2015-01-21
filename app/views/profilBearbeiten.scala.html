@@ -6,10 +6,91 @@
 		<div class="jumbotron">
 			<h2 align="center">-Profil bearbeiten-</h2>
 			</br> 
-			<img src=@routes.Assets.at( "images/login.jpg") alt="Bild"
+			<img src=@routes.Assets.at( "images/login.jpg") alt="Bild">
+						
+							<!-- jQuery
+						====================================================================== -->
+						<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+						
+						<!-- Fine Uploader JS
+						====================================================================== -->
+						<script src="assets/fine-uploader.js"></script>
+						<script>
+						  $(document).ready(function() {
+						    $('#restricted-fine-uploader').fineUploader({
+						      request: {
+						        endpoint: 'server/success.html'
+						      },
+						      multiple: false,
+						      validation: {
+						        allowedExtensions: ['jpeg', 'jpg', 'txt'],
+						        sizeLimit: 51200 // 50 kB = 50 * 1024 bytes
+						      },
+						      showMessage: function(message) {
+						        // Using Bootstrap's classes
+						        $('#restricted-fine-uploader').append('<div class="alert alert-error">' + message + '</div>');
+						      }
+						    });
+						  });
+						</script>
+						
+						<!-- Fine Uploader CSS
+						====================================================================== -->
+						<link href="assets/fine-uploader.css" rel="stylesheet">
+						
+						<!-- Fine Uploader DOM Element
+						====================================================================== -->
+						<div id="restricted-fine-uploader"></div>
+						
+						<!-- Fine Uploader template
+						====================================================================== -->
+						<script type="text/template" id="qq-template">
+  <div class="qq-uploader-selector qq-uploader">
+    <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+      <span>Drop files here to upload</span>
+    </div>
+    <div class="qq-upload-button-selector qq-upload-button">
+      <div>Upload a file</div>
+    </div>
+    <span class="qq-drop-processing-selector qq-drop-processing">
+      <span>Processing dropped files...</span>
+      <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+    </span>
+    <ul class="qq-upload-list-selector qq-upload-list">
+      <li>
+        <div class="qq-progress-bar-container-selector">
+          <div class="qq-progress-bar-selector qq-progress-bar"></div>
+        </div>
+        <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+        <span class="qq-edit-filename-icon-selector qq-edit-filename-icon"></span>
+        <span class="qq-upload-file-selector qq-upload-file"></span>
+        <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+        <span class="qq-upload-size-selector qq-upload-size"></span>
+        <a class="qq-upload-cancel-selector qq-upload-cancel" href="#">Cancel</a>
+        <a class="qq-upload-retry-selector qq-upload-retry" href="#">Retry</a>
+        <a class="qq-upload-delete-selector qq-upload-delete" href="#">Delete</a>
+        <span class="qq-upload-status-text-selector qq-upload-status-text"></span>
+      </li>
+    </ul>
+  </div>
+	</script>
+			</br>
+		<!-- 
+		<form class="form-horizontal" role="form" method="post" name="form"	action=@routes.Application.upload() enctype="multipart/form-data">
+		<input id="input-700" name="kartik-input-700" type="file" multiple=true class="file-loading" data-upload-url="@routes.Assets.at( "images/login.jpg")" data-max-file-count="10">
+		<input type="submit" class="btn btn-primary btn-md" name="löschen" value="Upload" />
+		
+			
+			
+			
+			
+			
+			
 			<input id="input-700" name="kartik-input-700" type="file" multiple=true class="file-loading" data-upload-url="@routes.Assets.at( "images/login.jpg")" data-max-file-count="10">
 			<input id="input-1" type="file" class="file">
+					-->
 			
+		</form>	
 			
 			
 			<form class="form-horizontal" role="form" method="post" name="form"
@@ -33,7 +114,15 @@
 				
 			</table>
 			
-			
+			  <script>
+			$(function() {
+				$( "#datepicker" ).datepicker({
+					changeMonth: true,
+					changeYear: true,
+					maxDate: "-216M"
+				});
+			});
+			</script>
 
 			</br>
 			<h3>Studiengang ändern</h3>
@@ -82,9 +171,7 @@
 				<!-- Suche starten per AJAX =>auf der Seite unten erscheinen die Ergebnisse -->
 			<h3>Deine angebotenen Stellen</h3>
 			
-			<form class="form-horizontal" role="form" method="post" name="form"
-					action=@routes.Application.stelleLoeschen()>
-		
+			
 			<div class="table-responsive">
 				<table class="table table-hover">
 	
@@ -94,25 +181,29 @@
 					<th>Tag</th>
 					<th>Zeiten</th>
 					<th>Stundenlohn</th>
+					<th></th>
 					<th>Löschen</th>
 				</tr>
 				
 				@for(stelle <- stellen){
 					<tr>
+					<form class="form-horizontal" role="form" method="post" name="form"
+					action=@routes.Application.stelleLoeschen()>
 					<td>@studiengang</td>
 					<td>@stelle.getFach()</td>
 					<td>@stelle.getTag()</td>
 					<td>@stelle.getZeit()</td>
 					<td>@stelle.getStundenlohn() €</td>
-					<td><input type="radio" name="id" value="@stelle.getID()" /></td>
+					<td><input type="hidden" name="id" value="@stelle.getID()" /></td>
+					<td><input type="submit" class="btn btn-primary btn-md" name="löschen" value="Stelle löschen" /></td>
+					</form>
 					</tr>
 					</tr>
 				}
 
 			</table>
-			<input type="submit" class="btn btn-primary btn-md" name="löschen" value="Stelle löschen" />
+			
 			</div>
-			</form>
 			</br>			
 		</div>
 	</div>
