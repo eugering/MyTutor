@@ -85,6 +85,9 @@ public class Application extends Controller {
 	public static Result login() {
 		// SessionDiscard
 		stellen.clear();
+		db.dropTable();
+		db.createTable();
+		db.insertInto();
 		session().clear();
 		// db.dropTable();
 		// db.createTable();
