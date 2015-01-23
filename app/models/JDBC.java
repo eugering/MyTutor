@@ -335,13 +335,12 @@ public class JDBC extends Observable{
 		Application.getStellen().clear();
 		try {
 			c = DB.getConnection();
-			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname" + " FROM Stelle stelle, Student student"
-					+ " WHERE student.email = stelle.email AND student.studiengang =? AND stelle.fach LIKE ?;";
+			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname FROM Stelle stelle, Student student"
+					+ " WHERE student.email = stelle.email AND student.studiengang = ? AND stelle.fach LIKE ? ;";
 			
 			ps = c.prepareStatement(strStelleSuchen);
 			
 			ps.setString(1, studiengang);
-			System.out.println("___________________________" + studiengang);
 			ps.setString(2, "%" + fach2 + "%");
 
 			
@@ -378,11 +377,12 @@ public class JDBC extends Observable{
 		try {
 			c = DB.getConnection();
 			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname " + " FROM Stelle stelle, Student student"
-					+ " WHERE student.email = stelle.email AND student.studiengang =?;";
+					+ " WHERE student.email = stelle.email AND student.studiengang = ? ;";
 			
 			ps = c.prepareStatement(strStelleSuchen);
 
 			ps.setString(1, studiengang);
+			
 			System.out.println(strStelleSuchen);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -393,7 +393,6 @@ public class JDBC extends Observable{
 				String id = rs.getString("id");
 				String vorname = rs.getString("vorname");
 				String nachname = rs.getString("nachname");
-				System.out.println(fach);
 				if (fach != null) {
 					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
@@ -430,10 +429,8 @@ public class JDBC extends Observable{
 				String id = rs.getString("id");
 				String vorname = rs.getString("vorname");
 				String nachname = rs.getString("nachname");
-				System.out.println(fach);
 				if (fach != null) {
 					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
-					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
 			}
