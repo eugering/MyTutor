@@ -125,6 +125,7 @@ public class Application extends Controller {
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
+			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4), bday(5), infos(6), bild(7)
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
 					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {

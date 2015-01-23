@@ -15,7 +15,7 @@ import controllers.*;
 public class JDBC extends Observable{
     
     public JDBC(){
-        dropTable();
+    	dropTable();
         createTable();
         insertInto();
     }
@@ -32,8 +32,7 @@ public class JDBC extends Observable{
 	 + "pass  VARCHAR(255) NOT NULL,"
 	 + "email VARCHAR(255) PRIMARY KEY,"
 	 + "studiengang  VARCHAR(255) NOT NULL,"
-	 + "bday VARCHAR(255)," + "infos VARCHAR(255) ,"
-	 + "bild VARCHAR(255) NOT NULL"
+	 + "bday VARCHAR(255)," + "infos VARCHAR(255) "
 	 + ");";
 	
 	 stmt.executeUpdate(strCreateStudent);
@@ -70,20 +69,16 @@ public class JDBC extends Observable{
 	 // Insert Student
 	 stmt = c.createStatement();
 	 String strInsertIntoStudent =
-	 "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bday, infos, bild) "
+	 "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bday, infos) "
 	 +
-	 "VALUES ('Metehan', 'Kilin', '123', 'metehan.kilin@htwg-konstanz.de', 'Wirschaftsinformatik', '28.01.1990', "
-	 + "'Hallo ich heiße Methe', '/play/public/images/login.jpg'"
-	 + ");";
+	 "VALUES ('Metehan', 'Kilin', '123', 'metehan.kilin@htwg-konstanz.de', 'Wirschaftsinformatik', '28.01.1990', 'Hallo ich heiße Methe');";
 	 stmt.executeUpdate(strInsertIntoStudent);
 	
 	 stmt = c.createStatement();
 	 strInsertIntoStudent =
-	 "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bday, infos, bild) "
+	 "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bday, infos) "
 	 +
-	 "VALUES ('Eugen', 'Gering', '123', 'eugen.gering@htwg-konstanz.de', 'Wirschaftsinformatik', '22.11.1992', "
-	 + "'Hallo ich heiße Eugen', '/play/public/images/login.jpg'"
-	 + ");";
+	 "VALUES ('Eugen', 'Gering', '123', 'eugen.gering@htwg-konstanz.de', 'Wirschaftsinformatik', '22.11.1992', 'Hallo ich heiße Eugen');";
 	 stmt.executeUpdate(strInsertIntoStudent);
 	
 	 // Insert Stelle
@@ -147,26 +142,21 @@ public class JDBC extends Observable{
 	public void insertIntoStudent(String vorname, String nachname, String pass,
 			String email, String studiengang) {
 		Connection c = null;
-		Statement stmt = null;
-
+		PreparedStatement ps = null;
 		try {
 			c = DB.getConnection();
-
-			// Insert Student
-			stmt = c.createStatement();
-			String strInsertIntoStudent = "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bild) VALUES ('"
-					+ vorname
-					+ "','"
-					+ nachname
-					+ "','"
-					+ pass
-					+ "','"
-					+ email
-					+ "','" + studiengang + "','" + "images/login.jpg');";
-			System.out.println(strInsertIntoStudent);
-			stmt.executeUpdate(strInsertIntoStudent);
-
-			stmt.close();
+			String strInsertIntoStudent = "INSERT INTO Student (vorname, nachname, pass, email, studiengang) VALUES (?,?,?,?,?);";
+			ps = c.prepareStatement(strInsertIntoStudent);
+			
+			ps.setString(1, vorname);
+			ps.setString(2, nachname);
+			ps.setString(3, pass);
+			ps.setString(4, email);
+			ps.setString(5, studiengang);
+			
+			ps.executeUpdate();
+			
+			ps.close();
 			c.close();
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -177,18 +167,19 @@ public class JDBC extends Observable{
 
 	public void insertIntoStudent(String email, String bday, String infos) {
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement ps = null;
 		try {
 			c = DB.getConnection();
+			String strInsertIntoStudent = "UPDATE Student SET bday ='?', infos ='?' WHERE email = '?';";
+			ps = c.prepareStatement(strInsertIntoStudent);
+			
+			ps.setString(1, bday);
+			ps.setString(2, infos);
+			ps.setString(3, email);
+			
+			ps.executeUpdate();
 
-			// Insert Student
-			stmt = c.createStatement();
-			String strInsertIntoStudent = "UPDATE Student" + " SET bday ='"
-					+ bday + "', infos ='" + infos + "'" + "WHERE email = '"
-					+ email + "';";
-			stmt.executeUpdate(strInsertIntoStudent);
-
-			stmt.close();
+			ps.close();
 			c.close();
 
 		} catch (Exception e) {
@@ -201,23 +192,22 @@ public class JDBC extends Observable{
 	public void insertIntoStelle(String email, String fach, String tag,
 			String zeit, String stundenlohn) {
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement ps = null;
+
 		try {
 			c = DB.getConnection();
+			String strInsertIntoStelle = "INSERT INTO Stelle (email, fach, tag, zeit, stundenlohn) VALUES (?,?,?,?,?);";
+			ps = c.prepareStatement(strInsertIntoStelle);
+			
+			ps.setString(1, email);
+			ps.setString(2, fach);
+			ps.setString(3, tag);
+			ps.setString(4, zeit);
+			ps.setString(5, stundenlohn);
+			
+			ps.executeUpdate();
 
-			stmt = c.createStatement();
-			String strInsertIntoStelle = "INSERT INTO Stelle (email, fach, tag, zeit, stundenlohn) "
-					+ "VALUES ('"
-					+ email
-					+ "','"
-					+ fach
-					+ "','"
-					+ tag
-					+ "','"
-					+ zeit + "','" + stundenlohn + "');";
-			stmt.executeUpdate(strInsertIntoStelle);
-
-			stmt.close();
+			ps.close();
 			c.close();
 			setChanged();
 			notifyObservers();
@@ -247,7 +237,6 @@ public class JDBC extends Observable{
 				student[4] = rs.getString("studiengang");
 				student[5] = rs.getString("bday");
 				student[6] = rs.getString("infos");
-				student[7] = rs.getString("bild");
 			}
 			rs.close();
 			stmt.close();
@@ -263,7 +252,6 @@ public class JDBC extends Observable{
 		return null;
 	}
 
-	// TODO
 	public void stellenSuchen(String mail) {
 		Connection c = null;
 		Statement stmt = null;
@@ -283,7 +271,6 @@ public class JDBC extends Observable{
 				String id = rs.getString("id");
 				String vorname = rs.getString("vorname");
 				String nachname = rs.getString("nachname");
-				System.out.println(fach);
 				if (fach != null) {
 					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
 					System.out.println(stelle.getTag());
@@ -304,17 +291,16 @@ public class JDBC extends Observable{
 
 	public void alleStellenSuchen(String fach2) {
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement ps = null;
 		Application.getStellen().clear();
 		try {
 			c = DB.getConnection();
-			stmt = c.createStatement();
-			String strStelleSuchen = "SELECT stelle.* , student.vorname, student.nachname" + " FROM Stelle stelle "
-					+ ", Student student"
-					+ " WHERE fach LIKE '%" + fach2 + "%'"
-					+ " AND stelle.email = student.email;";
+			String strStelleSuchen = "SELECT stelle.* , student.vorname, student.nachname FROM Stelle stelle, Student student WHERE fach LIKE ? AND stelle.email = student.email;";
+			ps = c.prepareStatement(strStelleSuchen);
 			
-			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+			ps.setString(1, "%" + fach2 + "%");
+			
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String fach = rs.getString("fach");
 				String tag = rs.getString("tag");
@@ -332,7 +318,7 @@ public class JDBC extends Observable{
 				}
 			}
 			rs.close();
-			stmt.close();
+			ps.close();
 			c.close();
 
 		} catch (Exception e) {
@@ -345,16 +331,20 @@ public class JDBC extends Observable{
 	
 	public void alleStellenSuchen(String studiengang, String fach2) {
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement ps = null;
 		Application.getStellen().clear();
 		try {
 			c = DB.getConnection();
-			stmt = c.createStatement();
 			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname" + " FROM Stelle stelle, Student student"
-					+ " WHERE student.email = stelle.email"
-					+ " AND student.studiengang = '" + studiengang +"'"
-					+ " AND stelle.fach LIKE '%" + fach2 + "%';";
-			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+					+ " WHERE student.email = stelle.email AND student.studiengang = ? AND stelle.fach LIKE ?;";
+			
+			ps = c.prepareStatement(strStelleSuchen);
+			
+			ps.setString(1, studiengang);
+			ps.setString(2, "%" + fach2 + "%");
+
+			
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String fach = rs.getString("fach");
 				String tag = rs.getString("tag");
@@ -371,7 +361,7 @@ public class JDBC extends Observable{
 				}
 			}
 			rs.close();
-			stmt.close();
+			ps.close();
 			c.close();
 
 		} catch (Exception e) {
@@ -384,15 +374,18 @@ public class JDBC extends Observable{
 	
 	public void alleStellenSuchenOhneFach(String studiengang) {
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement ps = null;
 		Application.getStellen().clear();
 		try {
 			c = DB.getConnection();
-			stmt = c.createStatement();
 			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname " + " FROM Stelle stelle, Student student"
-					+ " WHERE student.email = stelle.email"
-					+ " AND student.studiengang = '" + studiengang +"';";
-			ResultSet rs = stmt.executeQuery(strStelleSuchen);
+					+ " WHERE student.email = stelle.email AND student.studiengang = ?;";
+			
+			ps = c.prepareStatement(strStelleSuchen);
+
+			ps.setString(1, studiengang);
+			
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String fach = rs.getString("fach");
 				String tag = rs.getString("tag");
@@ -409,7 +402,7 @@ public class JDBC extends Observable{
 				}
 			}
 			rs.close();
-			stmt.close();
+			ps.close();
 			c.close();
 
 		} catch (Exception e) {
