@@ -71,14 +71,14 @@ public class JDBC extends Observable{
 	 String strInsertIntoStudent =
 	 "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bday, infos) "
 	 +
-	 "VALUES ('Metehan', 'Kilin', '123', 'metehan.kilin@htwg-konstanz.de', 'Wirschaftsinformatik', '28.01.1990', 'Hallo ich heiße Methe');";
+	 "VALUES ('Metehan', 'Kilin', '202cb962ac59075b964b07152d234b70', 'metehan.kilin@htwg-konstanz.de', 'Wirschaftsinformatik', '28.01.1990', 'Hallo ich heiße Methe');";
 	 stmt.executeUpdate(strInsertIntoStudent);
 	
 	 stmt = c.createStatement();
 	 strInsertIntoStudent =
 	 "INSERT INTO Student (vorname, nachname, pass, email, studiengang, bday, infos) "
 	 +
-	 "VALUES ('Eugen', 'Gering', '123', 'eugen.gering@htwg-konstanz.de', 'Wirschaftsinformatik', '22.11.1992', 'Hallo ich heiße Eugen');";
+	 "VALUES ('Eugen', 'Gering', '202cb962ac59075b964b07152d234b70', 'eugen.gering@htwg-konstanz.de', 'Wirschaftsinformatik', '22.11.1992', 'Hallo ich heiße Eugen');";
 	 stmt.executeUpdate(strInsertIntoStudent);
 	
 	 // Insert Stelle

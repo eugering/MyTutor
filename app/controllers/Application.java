@@ -51,10 +51,11 @@ public class Application extends Controller {
 				if (mailCheck(parameters.get("mail")[0])) {
 					if (parameters.get("pass")[0].equals(parameters
 							.get("passwortWiederholen")[0])) {
-						// Daten befüllen
-						String vorname = parameters.get("vorname")[0];
-						String nachname = parameters.get("nachname")[0];
-						String pass = parameters.get("pass")[0];
+                        //passwort Hashen
+                        String hashPass = getSecurePassword(parameters.get("pass")[0]);
+                        String vorname = parameters.get("vorname")[0];
+                        String nachname = parameters.get("nachname")[0];
+                        String pass = hashPass;
 						String email = parameters.get("mail")[0];
 						String studiengang = parameters.get("studiengang")[0];
 
@@ -106,7 +107,7 @@ public class Application extends Controller {
 		// Schema vorname(0), nachname(1), pass(2), email(3), sg(4), bday(5),
 		// infos(6), bild(7)
 		String[] student = db.studentSuchen(parameters.get("mail")[0]);
-		if (parameters.get("pass")[0].equals(student[2])) {
+		if ((getSecurePassword(parameters.get("pass")[0])).equals((student[2]))) {
 			session("connected", parameters.get("mail")[0]);
 			neusterTutor = db.neustenTutorSuchen();
 			return ok(home.render(student[0], student[1], neusterTutor[0], neusterTutor[1], neusterTutor[2]));
@@ -403,6 +404,35 @@ public class Application extends Controller {
 		
 		return ws;
 	}
+    
+    
+    // Methode für das Passwort-Hashing
+        public static String getSecurePassword(String passwordToHash)
+        {
+                String generatedPassword = null;
+               try {
+                        // Create MessageDigest instance for MD5
+                        MessageDigest md = MessageDigest.getInstance("MD5");
+                        //Add password bytes to digest
+                        md.update(passwordToHash.getBytes());
+                        //Get the hash's bytes
+                        byte[] bytes = md.digest();
+                        //This bytes[] has bytes in decimal format;
+                        //Convert it to hexadecimal format
+                        StringBuilder sb = new StringBuilder();
+                        for(int i=0; i< bytes.length ;i++)
+                            {
+                                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                                }
+                        //Get complete hashed password in hex format
+                        generatedPassword = sb.toString();
+                    }
+                catch (NoSuchAlgorithmException e)
+                {
+                        e.printStackTrace();
+                    }
+                return generatedPassword;
+            }
 	
 
 }
