@@ -407,8 +407,7 @@ public class Application extends Controller {
     
     
     // Methode für das Passwort-Hashing
-        public static String getSecurePassword(String passwordToHash)
-        {
+public static String getSecurePassword(String passwordToHash){
                 String generatedPassword = null;
                try {
                         // Create MessageDigest instance for MD5
@@ -417,12 +416,11 @@ public class Application extends Controller {
                         md.update(passwordToHash.getBytes());
                         //Get the hash's bytes
                         byte[] bytes = md.digest();
-                        //This bytes[] has bytes in decimal format;
+                        //This bytes[] has bytes in decimal format
                         //Convert it to hexadecimal format
                         StringBuilder sb = new StringBuilder();
-                        for(int i=0; i< bytes.length ;i++)
-                            {
-                                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                        for(int i=0; i< bytes.length ;i++){
+                                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
                                 }
                         //Get complete hashed password in hex format
                         generatedPassword = sb.toString();
