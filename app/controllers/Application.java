@@ -15,12 +15,11 @@ import play.libs.F.Callback0;
 import play.mvc.*;
 import views.html.*;
 
-
 public class Application extends Controller {
 
 	static JDBC db = new JDBC();
 	public static List<Stelle> stellen = new LinkedList<Stelle>();
-	static String [] neusterTutor = null;
+	static String[] neusterTutor = null;
 
 	public static List<Stelle> getStellen() {
 		return stellen;
@@ -53,11 +52,12 @@ public class Application extends Controller {
 				if (mailCheck(parameters.get("mail")[0])) {
 					if (parameters.get("pass")[0].equals(parameters
 							.get("passwortWiederholen")[0])) {
-                        //passwort Hashen
-                        String hashPass = getSecurePassword(parameters.get("pass")[0]);
-                        String vorname = parameters.get("vorname")[0];
-                        String nachname = parameters.get("nachname")[0];
-                        String pass = hashPass;
+						// passwort Hashen
+						String hashPass = getSecurePassword(parameters
+								.get("pass")[0]);
+						String vorname = parameters.get("vorname")[0];
+						String nachname = parameters.get("nachname")[0];
+						String pass = hashPass;
 						String email = parameters.get("mail")[0];
 						String studiengang = parameters.get("studiengang")[0];
 
@@ -112,7 +112,8 @@ public class Application extends Controller {
 		if ((getSecurePassword(parameters.get("pass")[0])).equals((student[2]))) {
 			session("connected", parameters.get("mail")[0]);
 			neusterTutor = db.neustenTutorSuchen();
-			return ok(home.render(student[0], student[1], neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+			return ok(home.render(student[0], student[1], neusterTutor[0],
+					neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -126,9 +127,11 @@ public class Application extends Controller {
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
-			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4), bday(5), infos(6), bild(7)
+			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
+			// bday(5), infos(6), bild(7)
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+					student[3], student[4], student[6], stellen,
+					neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -145,7 +148,8 @@ public class Application extends Controller {
 			db.stellenSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilBearbeiten.render(student[0], student[1],
-					student[5], student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+					student[5], student[3], student[4], student[6], stellen,
+					neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 
 		} else {
 			return redirect(routes.Application.login());
@@ -190,7 +194,8 @@ public class Application extends Controller {
 			db.stellenSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+					student[3], student[4], student[6], stellen,
+					neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		}
 		return redirect(routes.Application.login());
 
@@ -205,7 +210,8 @@ public class Application extends Controller {
 			db.stellenSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+					student[3], student[4], student[6], stellen,
+					neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -218,7 +224,8 @@ public class Application extends Controller {
 		if (sessionCheck(user)) {
 			stellen.clear();
 			neusterTutor = db.neustenTutorSuchen();
-			return ok(suchen.render(stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+			return ok(suchen.render(stellen, neusterTutor[0], neusterTutor[1],
+					neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -230,7 +237,8 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (sessionCheck(user)) {
 			neusterTutor = db.neustenTutorSuchen();
-			return ok(tutorWerden.render(neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+			return ok(tutorWerden.render(neusterTutor[0], neusterTutor[1],
+					neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -250,7 +258,8 @@ public class Application extends Controller {
 			// infos(6), bild(7)
 			neusterTutor = db.neustenTutorSuchen();
 			return ok(profil.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+					student[3], student[4], student[6], stellen,
+					neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		}
 	}
 
@@ -285,7 +294,8 @@ public class Application extends Controller {
 
 			}
 			neusterTutor = db.neustenTutorSuchen();
-			return ok(suchen.render(stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+			return ok(suchen.render(stellen, neusterTutor[0], neusterTutor[1],
+					neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -300,9 +310,10 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (sessionCheck(user)) {
 			String[] student = new String[8];
-			student = db.studentSuchen(user);	
+			student = db.studentSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
-			return ok(home.render(student[0], student[1], neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+			return ok(home.render(student[0], student[1], neusterTutor[0],
+					neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -314,7 +325,8 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (sessionCheck(user)) {
 			neusterTutor = db.neustenTutorSuchen();
-			return ok(ueberUns.render(neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+			return ok(ueberUns.render(neusterTutor[0], neusterTutor[1],
+					neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -371,99 +383,91 @@ public class Application extends Controller {
 			db.stellenSuchen(user);
 			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilBearbeiten.render(student[0], student[1],
-					student[5], student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
+					student[5], student[3], student[4], student[6], stellen,
+					neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
 
 	}
 
-	public static WebSocket<JsonNode> neusterTutor() throws SQLException{
+	public static WebSocket<JsonNode> neusterTutor() throws SQLException {
 		WebSocket<JsonNode> ws = null;
-			ws = new WebSocket<JsonNode>() {
-				public void onReady(WebSocket.In<JsonNode> in, final WebSocket.Out<JsonNode> out) {
-					final MyObserver obs = new MyObserver();
-					System.out.println("++++++++++  angelegt " + obs);
-					obs.stelle = out;
-					
-					
-					in.onMessage(new Callback<JsonNode>() {
-						@Override
-						public void invoke(JsonNode event) throws Throwable {
-							System.out.println("Versuch json auszugeben");
-							db.erzeugeJSON();
-						}
-					});
-					in.onClose(new Callback0() {
-						public void invoke() {
-							
-							db.deleteObserver(obs);
-							System.out.println("Disconnected!");
-						}
-					});
-				}
-			};
-		
+		ws = new WebSocket<JsonNode>() {
+			public void onReady(WebSocket.In<JsonNode> in,
+					final WebSocket.Out<JsonNode> out) {
+				final MyObserver obs = new MyObserver();
+				System.out.println("++++++++++  angelegt " + obs);
+				obs.stelle = out;
+
+				in.onMessage(new Callback<JsonNode>() {
+					@Override
+					public void invoke(JsonNode event) throws Throwable {
+						System.out.println("Versuch json auszugeben");
+						db.erzeugeJSON();
+					}
+				});
+				in.onClose(new Callback0() {
+					public void invoke() {
+
+						db.deleteObserver(obs);
+						System.out.println("Disconnected!");
+					}
+				});
+			}
+		};
+
 		return ws;
 	}
-    
-    
-<<<<<<< HEAD
+
 	// Methode für das Passwort-Hashing
-    public static String getSecurePassword(String passwordToHash)
-    {
-        String generatedPassword = null;
-       try {
-            // Create MessageDigest instance for MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            //Add password bytes to digest
-            md.update(passwordToHash.getBytes());
-            //Get the hash's bytes
-            byte[] bytes = md.digest();
-            //This bytes[] has bytes in decimal format;
-            //Convert it to hexadecimal format
-            StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            //Get complete hashed password in hex format
-            generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
+//	public static String getSecurePassword(String passwordToHash) {
+//		String generatedPassword = null;
+//		try {
+//			// Create MessageDigest instance for MD5
+//			MessageDigest md = MessageDigest.getInstance("MD5");
+//			// Add password bytes to digest
+//			md.update(passwordToHash.getBytes());
+//			// Get the hash's bytes
+//			byte[] bytes = md.digest();
+//			// This bytes[] has bytes in decimal format;
+//			// Convert it to hexadecimal format
+//			StringBuilder sb = new StringBuilder();
+//			for (int i = 0; i < bytes.length; i++) {
+//				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+//						.substring(1));
+//			}
+//			// Get complete hashed password in hex format
+//			generatedPassword = sb.toString();
+//		} catch (NoSuchAlgorithmException e) {
+//			e.printStackTrace();
+//		}
+//		return generatedPassword;
+//	}
 
-=======
-    // Methode für das Passwort-Hashing
-public static String getSecurePassword(String passwordToHash){
-                String generatedPassword = null;
-               try {
-                        // Create MessageDigest instance for MD5
-                        MessageDigest md = MessageDigest.getInstance("MD5");
-                        //Add password bytes to digest
-                        md.update(passwordToHash.getBytes());
-                        //Get the hash's bytes
-                        byte[] bytes = md.digest();
-                        //This bytes[] has bytes in decimal format
-                        //Convert it to hexadecimal format
-                        StringBuilder sb = new StringBuilder();
-                        for(int i=0; i< bytes.length ;i++){
-                                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-                                }
-                        //Get complete hashed password in hex format
-                        generatedPassword = sb.toString();
-                    }
-                catch (NoSuchAlgorithmException e)
-                {
-                        e.printStackTrace();
-                    }
-                return generatedPassword;
-            }
->>>>>>> 404950c82a8aa17a84f43c589349dfa1b30cf701
-	
+	// Methode für das Passwort-Hashing
+	public static String getSecurePassword(String passwordToHash) {
+		String generatedPassword = null;
 
+		try {
+			// Create MessageDigest instance for MD5 
+			MessageDigest md =MessageDigest.getInstance("MD5");
+			// Add password bytes to digest
+			md.update(passwordToHash.getBytes());
+			// Get the hash's bytes
+			byte[] bytes = md.digest();
+			// This bytes[] has bytes in decimal format;
+			// Convert it to hexadecimal format
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+						.substring(1));
+			}
+			// Get complete hashed password in hexformat 
+			generatedPassword = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return generatedPassword;
+	}
 }
