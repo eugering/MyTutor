@@ -431,6 +431,7 @@ public class JDBC extends Observable{
 				String nachname = rs.getString("nachname");
 				if (fach != null) {
 					Stelle stelle = new Stelle((vorname + " " + nachname), fach, tag, zeit, stundenlohn, id);
+					System.out.println(stelle.getTag());
 					Application.getStellen().add(stelle);
 				}
 			}
@@ -525,7 +526,7 @@ public class JDBC extends Observable{
 	}
 
 
-	public static String[] neustenTutorSuchen() {
+	public String[] neustenTutorSuchen() {
 		Connection c = null;
 		Statement stmt = null;
 		try {
