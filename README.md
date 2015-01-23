@@ -39,10 +39,10 @@ Registrierung wird man wieder auf diese Login-Maske zurückgeleitet.
 Nach dem Einloggen wird die Session gestartet, die bei dem betätigen der Logout taste beendet wird.
 
 ![Login]
-(https://github.com/eugering/MyTutor/Dokumentation/2.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/2.png)
 
 ![Realisierung]
-(https://github.com/eugering/MyTutor/Dokumentation/3.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/3.png)
 
 Tutor werden:
 Hier gibt es die Möglichkeit sich als Tutor einzuschreiben. Bei der Realisierung ist uns aufgefallen, 
@@ -52,10 +52,10 @@ Bearbeiten. Den Eintrag zum Semester und den Textfeld haben wir im Nachhinein al
 angesehen.
 
 ![Tutor werden]
-(https://github.com/eugering/MyTutor/Dokumentation/4.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/4.png)
 
 ![Realisierung]
-(https://github.com/eugering/MyTutor/Dokumentation/5.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/5.png)
 
 Tutor suchen:
 Hier hat man die Möglichkeit die Suche nach einem Tutorium, entweder zu Filtern oder nach allen 
@@ -64,10 +64,10 @@ das Fach. Bei der Realisierung haben wir noch einen zusätzlichen Button, welch
 Tutoren verlinkt, hinzugefügt.
 
 ![Tutor suchen]
-(https://github.com/eugering/MyTutor/Dokumentation/6.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/6.png)
 
 ![Realisierung]
-(https://github.com/eugering/MyTutor/Dokumentation/7.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/7.png)
 
 
 
@@ -89,16 +89,16 @@ der Datenbank durch die Einstimmung des Primary Key (email) mit seinem Passwort 
 Abschließend wird alles über Heroku Deployed.
 
 ![jQuery]
-(https://github.com/eugering/MyTutor/Dokumentation/8.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/8.png)
 
 ![Websockets]
-(https://github.com/eugering/MyTutor/Dokumentation/9.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/9.png)
 
 ![Bootstrap]
-(https://github.com/eugering/MyTutor/Dokumentation/10.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/10.png)
 
 ![Ajax & JSON]
-(https://github.com/eugering/MyTutor/Dokumentation/11.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/11.png)
 
 
 ##### What you have learned
@@ -123,16 +123,16 @@ nicht perfektionieren. Sich mit jeder Technologie intensiv zu beschäftigen ist
 ##### Important code snippets
 
 ![Views_Main]
-(https://github.com/eugering/MyTutor/Dokumentation/12.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/12.png)
 
 ![Views_ProfilAnzeigen]
-(https://github.com/eugering/MyTutor/Dokumentation/13.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/13.png)
 
 ![Routes]
-(https://github.com/eugering/MyTutor/Dokumentation/14png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/14.png)
 
 ![Application]
-(https://github.com/eugering/MyTutor/Dokumentation/15.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/15.png)
 
 ##### Zukunft
 
