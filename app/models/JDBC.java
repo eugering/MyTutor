@@ -1,10 +1,24 @@
 package models;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.Observable;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import play.db.*;
 import controllers.*;
 
-public class JDBC {
+public class JDBC extends Observable{
+    
+    public JDBC(){
+        dropTable();
+        createTable();
+        insertInto();
+    }
 
 	 public void createTable() {
 	
@@ -205,6 +219,8 @@ public class JDBC {
 
 			stmt.close();
 			c.close();
+			setChanged();
+			notifyObservers();
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
@@ -220,7 +236,6 @@ public class JDBC {
 			stmt = c.createStatement();
 			String strStudentSuchen = "SELECT * " + "FROM Student"
 					+ " WHERE email = '" + mail + "';";
-			System.out.println(strStudentSuchen);
 			ResultSet rs = stmt.executeQuery(strStudentSuchen);
 
 			String[] student = new String[8];
@@ -259,7 +274,6 @@ public class JDBC {
 			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname FROM Stelle stelle, Student student"
 					+ " WHERE stelle.email = '" + mail + "'"
 					+ " AND stelle.email = student.email;";
-			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
 				String fach = rs.getString("fach");
@@ -300,7 +314,6 @@ public class JDBC {
 					+ " WHERE fach LIKE '%" + fach2 + "%'"
 					+ " AND stelle.email = student.email;";
 			
-			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
 				String fach = rs.getString("fach");
@@ -341,7 +354,6 @@ public class JDBC {
 					+ " WHERE student.email = stelle.email"
 					+ " AND student.studiengang = '" + studiengang +"'"
 					+ " AND stelle.fach LIKE '%" + fach2 + "%';";
-			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
 				String fach = rs.getString("fach");
@@ -380,7 +392,6 @@ public class JDBC {
 			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname " + " FROM Stelle stelle, Student student"
 					+ " WHERE student.email = stelle.email"
 					+ " AND student.studiengang = '" + studiengang +"';";
-			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
 				String fach = rs.getString("fach");
@@ -418,7 +429,6 @@ public class JDBC {
 			stmt = c.createStatement();
 			String strStelleSuchen = "SELECT stelle.*, student.vorname, student.nachname FROM Stelle stelle, Student student"
 					+ " WHERE stelle.email = student.email;";
-			System.out.println(strStelleSuchen);
 			ResultSet rs = stmt.executeQuery(strStelleSuchen);
 			while (rs.next()) {
 				String fach = rs.getString("fach");
@@ -479,9 +489,7 @@ public class JDBC {
 			stmt = c.createStatement();
 			String strStelleLöschen = "DELETE" + " FROM Stelle"
 					+ " WHERE email = '" + email + "' AND id = " + id + ";";
-			System.out.println(strStelleLöschen);
 			stmt.executeUpdate(strStelleLöschen);
-
 			stmt.close();
 			c.close();
 		} catch (Exception e) {
@@ -501,7 +509,6 @@ public class JDBC {
 					+ " WHERE stelle.id = '" + id + "'"
 					+ " AND stelle.email = student.email"
 					+ " ORDER BY student.email ASC LIMIT 1;";
-			System.out.println(strTutorSuchen);
 			ResultSet rs = stmt.executeQuery(strTutorSuchen);
 
 			String[] student = new String[8];
@@ -530,7 +537,7 @@ public class JDBC {
 	}
 
 
-	public String[] neustenTutorSuchen() {
+	public static String[] neustenTutorSuchen() {
 		Connection c = null;
 		Statement stmt = null;
 		try {
@@ -549,6 +556,7 @@ public class JDBC {
 				student[2] = rs.getString("fach");
 				
 			}
+			System.out.println(student[2]);
 			rs.close();
 			stmt.close();
 			c.close();
@@ -564,7 +572,36 @@ public class JDBC {
 	}
 
 
-
+	public JsonNode erzeugeJSON(){
+		System.out.println("json wird erzeugt");
+		String jsonText = "";
+			String[] neu = neustenTutorSuchen();
+			jsonText += "{";
+			jsonText += "\"vorname\": " + "\"" + neu[0]+ "\",";
+			jsonText += "\"nachname\": " + "\"" + neu[1] + "\",";
+			jsonText += "\"fach\": " + "\"" + neu[2] + "\"";
+			jsonText += "}";
+		
+		
+		System.out.println("JSON: " + jsonText);
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode node = null;
+		try {
+			node = mapper.readValue(jsonText, JsonNode.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("RETURN NODE");
+		System.out.println(node);
+		return node;
+	}
 
 
 

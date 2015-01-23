@@ -1,3 +1,4 @@
+@(v: String, n: String, f: String)
 @Main1() {
 
 <div class="col-xs-12">
@@ -5,7 +6,7 @@
 		<div class="jumbotron">
 			<h3>-Trage hier ein was du anbieten möchtest-</h3>
 			</br>
-			<form class="form-horizontal" role="form" method="post" name="form"
+			<form class="form-horizontal" role="form" method="POST" name="form"
 					action=@routes.Application.stelleAnbieten()>
 			<div class="form-group">
 				<input class="form-control" id="fach" name = "fach" placeholder="Fach"></input>
@@ -37,11 +38,28 @@
 
 			</br> 
 			<div class = "form-group">
-			<input type="submit" class="btn btn-primary btn-lg" name="tutorWerdenButton" value="Deine Stelle online stellen"  />
+			<input type="submit" class="btn btn-primary btn-lg" name="tutorWerdenButton" value="Deine Stelle online stellen" onclick="neustenTutorSenden()"  />
 			</div>
 			</form>
+			
+			<script type="text/javascript">
+						var webSocket;
+						$(function() {
+							var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+							webSocket = new WS("@routes.Application.neusterTutor().webSocketURL(request)");
+							webSocket.onmessage = receiveEvent;
+						})
+						function neustenTutorSenden() {
+							var test = null;
+							webSocket.send(test);
+						};
+			</script>
 			
 		</div>
 	</div>
 </div>
+<div id="footer">
+ 			<div class="navbar navbar-inverse  navbar-fixed-bottom" >
+   			 <p class="muted credit"><center id="foot">News: <span id="output" />@v @n bietet @f an.</center></p>
+ 		</div>
 }

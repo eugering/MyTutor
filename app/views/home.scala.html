@@ -1,4 +1,5 @@
-@(vorname: String, nachname: String) @Main1() {
+@(vorname: String, nachname: String, v: String, n: String, f: String) 
+@Main1() {
 <div id="mouse">
 </br>
 </br>
@@ -19,11 +20,16 @@
 		$(function() {
 		  $( "#hallo" ).hide();
 		  $( "#mouse" ).mouseover(function() {
-			 $( "#hallo" ).show ("explode",  1000);
+			 $( "#hallo" ).show ("explode",  8);
 		  });   
 		  
 			
 		});
 </script>
 
+<div id="footer">
+ 			<div class="navbar navbar-inverse  navbar-fixed-bottom" >
+   			 <p class="muted credit"><center id="foot">News: <span id="output" />@v @n bietet @f an.</center></p>
+ 		</div>
+			
 }

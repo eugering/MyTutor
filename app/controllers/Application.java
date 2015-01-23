@@ -1,10 +1,17 @@
 package controllers;
 
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import models.*;
+import play.libs.F.Callback;
+import play.libs.F.Callback0;
 import play.mvc.*;
 import views.html.*;
 
@@ -13,6 +20,7 @@ public class Application extends Controller {
 
 	static JDBC db = new JDBC();
 	public static List<Stelle> stellen = new LinkedList<Stelle>();
+	static String [] neusterTutor = null;
 
 	public static List<Stelle> getStellen() {
 		return stellen;
@@ -37,7 +45,6 @@ public class Application extends Controller {
 					.registrierung("Bitte alle Felder ausfüllen!"));
 		} else {
 			String[] student = db.studentSuchen(parameters.get("mail")[0]);
-			System.out.println(student[3]);
 			String a = student[3];
 			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
 			// bday(5),
@@ -85,9 +92,6 @@ public class Application extends Controller {
 	public static Result login() {
 		// SessionDiscard
 		stellen.clear();
-		db.dropTable();
-		db.createTable();
-		db.insertInto();
 		session().clear();
 		// db.dropTable();
 		// db.createTable();
@@ -106,8 +110,8 @@ public class Application extends Controller {
 		String[] student = db.studentSuchen(parameters.get("mail")[0]);
 		if (parameters.get("pass")[0].equals(student[2])) {
 			session("connected", parameters.get("mail")[0]);
-			System.out.println("Eingeloggt!");
-			return ok(home.render(student[0], student[1]));
+			neusterTutor = db.neustenTutorSuchen();
+			return ok(home.render(student[0], student[1], neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -120,8 +124,9 @@ public class Application extends Controller {
 		if (sessionCheck(user)) {
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
+			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen));
+					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -136,8 +141,9 @@ public class Application extends Controller {
 			// bday(5), infos(6), bild(7)
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
+			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilBearbeiten.render(student[0], student[1],
-					student[5], student[3], student[4], student[6], stellen));
+					student[5], student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 
 		} else {
 			return redirect(routes.Application.login());
@@ -155,40 +161,34 @@ public class Application extends Controller {
 			System.out.println("session checked");
 
 			if (parameters.get("vorname")[0] != "") {
-				System.out.println(" versuch vorname geändert");
 				db.studentÄndern(user, "vorname", parameters.get("vorname")[0]);
-				System.out.println("vorname geändert");
 
 			}
 			if (parameters.get("nachname")[0] != "") {
 				db.studentÄndern(user, "nachname",
 						parameters.get("nachname")[0]);
-				System.out.println("nachname geändert");
 
 			}
 			if (parameters.get("bday")[0] != "") {
 				db.studentÄndern(user, "bday", parameters.get("bday")[0]);
-				System.out.println("bday geändert");
 
 			}
 			if (parameters.get("studiengang")[0] != "") {
-				System.out.println("versuch sg zu ändern");
 				db.studentÄndern(user, "studiengang",
 						parameters.get("studiengang")[0]);
-				System.out.println("sg geändert");
 
 			}
 			if (parameters.get("infos")[0] != "") {
 				db.studentÄndern(user, "infos", parameters.get("infos")[0]);
-				System.out.println("infos geändert");
 
 			}
 			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
 			// bday(5), infos(6), bild(7)
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
+			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen));
+					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		}
 		return redirect(routes.Application.login());
 
@@ -201,8 +201,9 @@ public class Application extends Controller {
 		if (sessionCheck(user)) {
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
+			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilAnzeigen.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen));
+					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -214,7 +215,8 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (sessionCheck(user)) {
 			stellen.clear();
-			return ok(suchen.render(stellen));
+			neusterTutor = db.neustenTutorSuchen();
+			return ok(suchen.render(stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -225,7 +227,8 @@ public class Application extends Controller {
 		// SessionCheck
 		String user = session("connected");
 		if (sessionCheck(user)) {
-			return ok(tutorWerden.render());
+			neusterTutor = db.neustenTutorSuchen();
+			return ok(tutorWerden.render(neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -243,8 +246,9 @@ public class Application extends Controller {
 			// Schema vorname(0), nachname(1), pass(2), email(3), sg(4),
 			// bday(5),
 			// infos(6), bild(7)
+			neusterTutor = db.neustenTutorSuchen();
 			return ok(profil.render(student[0], student[1], student[5],
-					student[3], student[4], student[6], stellen));
+					student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		}
 	}
 
@@ -278,7 +282,8 @@ public class Application extends Controller {
 				}
 
 			}
-			return ok(suchen.render(stellen));
+			neusterTutor = db.neustenTutorSuchen();
+			return ok(suchen.render(stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -293,9 +298,9 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (sessionCheck(user)) {
 			String[] student = new String[8];
-			student = db.studentSuchen(user);
-
-			return ok(home.render(student[0], student[1]));
+			student = db.studentSuchen(user);	
+			neusterTutor = db.neustenTutorSuchen();
+			return ok(home.render(student[0], student[1], neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -306,7 +311,8 @@ public class Application extends Controller {
 		// SessionCheck
 		String user = session("connected");
 		if (sessionCheck(user)) {
-			return ok(ueberUns.render());
+			neusterTutor = db.neustenTutorSuchen();
+			return ok(ueberUns.render(neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
@@ -361,27 +367,43 @@ public class Application extends Controller {
 			db.stelleLöschen(user, Integer.parseInt(parameters.get("id")[0]));
 			String[] student = db.studentSuchen(user);
 			db.stellenSuchen(user);
+			neusterTutor = db.neustenTutorSuchen();
 			return ok(profilBearbeiten.render(student[0], student[1],
-					student[5], student[3], student[4], student[6], stellen));
+					student[5], student[3], student[4], student[6], stellen, neusterTutor[0], neusterTutor[1], neusterTutor[2]));
 		} else {
 			return redirect(routes.Application.login());
 		}
 
 	}
 
-	public static WebSocket<String> websocket() {
-		System.out.println("Websocket!!!!!!");
-		String[] neuster = db.neustenTutorSuchen();
-		String neusterTutor = neuster[0] + " " + neuster[1] + " bietet " + neuster[2] + " an";
+	public static WebSocket<JsonNode> neusterTutor() throws SQLException{
+		WebSocket<JsonNode> ws = null;
+			ws = new WebSocket<JsonNode>() {
+				public void onReady(WebSocket.In<JsonNode> in, final WebSocket.Out<JsonNode> out) {
+					final MyObserver obs = new MyObserver();
+					System.out.println("++++++++++  angelegt " + obs);
+					obs.stelle = out;
+					
+					
+					in.onMessage(new Callback<JsonNode>() {
+						@Override
+						public void invoke(JsonNode event) throws Throwable {
+							System.out.println("Versuch json auszugeben");
+							db.erzeugeJSON();
+						}
+					});
+					in.onClose(new Callback0() {
+						public void invoke() {
+							
+							db.deleteObserver(obs);
+							System.out.println("Disconnected!");
+						}
+					});
+				}
+			};
 		
-		    return WebSocket.whenReady((in, out) -> {
-		       out.write(neusterTutor);
-		        // When the socket is closed.
-		        in.onClose(() -> System.out.println("Disconnected"));
-
-		        
-		    });
-		}
+		return ws;
+	}
 	
 
 }

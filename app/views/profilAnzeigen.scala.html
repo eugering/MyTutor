@@ -1,4 +1,4 @@
-@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String, stellen: List[Stelle])
+@(vorname: String, nachname: String, bday: String, email: String, studiengang: String, infos: String, stellen: List[Stelle], v: String, n: String, f: String)
 @Main1() {
 
 <div class="col-xs-12">
@@ -90,5 +90,8 @@
 		</div>
 	</div>
 </div>
-
+<div id="footer">
+ 			<div class="navbar navbar-inverse  navbar-fixed-bottom" >
+   			 <p class="muted credit"><center id="foot">News: <span id="output" />@v @n bietet @f an.</center></p>
+ 		</div>
 }

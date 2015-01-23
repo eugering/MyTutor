@@ -110,22 +110,29 @@
 
 	</br>
 	</br>
-	
-<script type="text/javascript">
+	<script type="text/javascript">
+			var webSocket;
+			$(function() {
+				var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+				webSocket = new WS("@routes.Application.neusterTutor().webSocketURL(request)");
+				webSocket.onmessage = receiveEvent;
+			})
+			
+			function receiveEvent(event) {
+				
+				var jsonObj = JSON.parse(event.data);
+				var vorname = jsonObj.vorname;
+				var nachname = jsonObj.nachname;
+				var fach = jsonObj.fach;
+				var	html = vorname + " " + nachname + " bietet " + fach + " an.";
+					
 
-  var webSocket;
-  $(function() {
-    var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
-    webSocket = new WS("@routes.Application.websocket().webSocketURL(request)");
-    webSocket.onmessage = receiveEvent;
-   })
-  
-   function receiveEvent(event) {
-    $("#output").html(event.data);
-  };
-  
-  
-</script>
+				
+				document.getElementById("output").innerHTML = html;
+			};
+		</script>
+	
+
 
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -141,10 +148,7 @@
     <script src= @routes.Assets.at("javascripts/bootstrap.min.js")></script>
     
   
-  		<div id="footer">
- 			<div class="navbar navbar-inverse  navbar-fixed-bottom" >
-   			 <p class="muted credit"><center id="foot">News: <span id="output" /></center></p>
- 		</div>
-
+  		
+	
 </body>
 </html>
