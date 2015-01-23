@@ -513,7 +513,6 @@ public class JDBC extends Observable{
 				student[4] = rs.getString("studiengang");
 				student[5] = rs.getString("bday");
 				student[6] = rs.getString("infos");
-				student[7] = rs.getString("bild");
 			}
 			rs.close();
 			stmt.close();

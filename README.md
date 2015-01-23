@@ -29,7 +29,7 @@ Technologien, konnten wir uns schnell in unser Thema einarbeiten. In dieser Doku
 
 ###### Use-Case
 ![Use-Case]
-(https://github.com/eugering/MyTutor/Dokumentation/1.png)
+(https://github.com/eugering/MyTutor/blob/master/Dokumentation/1.png)
 
 
 ##### First idea (mockups / wireframes)
